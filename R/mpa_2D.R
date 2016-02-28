@@ -1,19 +1,29 @@
-#======PART 2====================================================
-#Creates a simple MPA model with logistic growth
-#r=rate of increase, K=carrying capacity, u.out=harvest rate outside MPA,
-#ncells=number of cells for model, nsteps=number of time periods,
-#MPA.width=number of cells in MPA, mrate=movement rate
-#===================================================================
+#' Spatial MPA simulation
+#'
+#' @description Simulates MPA and surrounding fishing grounds.
+#'
+#' @param area an N by M matrix with harvesting rates for fishing grounds (0 < harvesting rate <= 1) and MPAs (harvesting rate = 0) for the simulated area.
+#' @param nsteps Number of steps to run the simulation.
+#' @param r Intrinsic population growth rate.
+#' @param pop0 Initial population size. If single, assumes equal population size across all cells in area. If a matrix, it must have the same dimensions as area.
+#' @param K Carrying capacity
+#' @param mrate Movement rate expressed as a proportion (relative to 1). Indicates the proportion of organisms that will move out of a cell in one timestep.
+#'
+#' @return results A list containing pop: a matrix of size N by M (same dimensions as area, above) with population size within each cell; and timeseries: a dataframe with 4 columns and nstep rows. The columns contain time (timeseries$time), population size inside the MPA (timeseries$pop.in), population size outside the MPA (timeseries$pop.out) and yearly total catches (timeseries$total.catches).
+#'
+#' @author Villasenor-Derbez, J.C.
+#'
+#'
+#' @export
 
-mpa_2D=function(r, pop0, K, area, nsteps, mrate) {
 
-   # First we call calc.harvest, that returns a vectos whic is our simulated MPA. 0=mpa, number=rate of harvest.
+mpa_2D=function(area, nsteps, r, pop0, K, mrate) {
 
-   # u.vec <- calc.harvest.vec(u.out=u.out, ncells=ncells, MPA.width=MPA.width)
+  # Making sure all inputs are correct
+  # check=check_param(area, nsteps, r, pop0, K, mrate)
+  # if (check==0){stop}
 
-  # This will be removed and put into another function that stands alone
-  # area is a matrix of 3 by 3. Every cell has a value of 0.1 (harvest rate) except for the one in the middle (area[2,2]) which is 0 (i.e. that cell is the MPA).
-u.vec=area
+  u.vec=area
 
   size=dim(u.vec)
 

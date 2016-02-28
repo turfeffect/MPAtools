@@ -1,4 +1,4 @@
-Package: TR.tools
+Package: MPA.tools
 Type: Package
 Title: Tools to simulate TURF-reserves
 Version: 0.1.0
@@ -7,3 +7,4 @@ Maintainer: Villasenor-Derbez, J.C. <jvillasenor@bren.ucsb.edu>
 Description: More about what it does (maybe more than one line)
 License: What license is it under?
 LazyData: TRUE
+RoxygenNote: 5.0.1
