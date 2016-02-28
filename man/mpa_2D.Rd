@@ -4,7 +4,7 @@
 \alias{mpa_2D}
 \title{Spatial MPA simulation}
 \usage{
-mpa_2D(area, nsteps, r, pop0, K, mrate)
+mpa_2D(area, nsteps, r, pop0, K, mrate, op = FALSE)
 }
 \arguments{
 \item{area}{an N by M matrix with harvesting rates for fishing grounds (0 < harvesting rate <= 1) and MPAs (harvesting rate = 0) for the simulated area.}
@@ -18,12 +18,14 @@ mpa_2D(area, nsteps, r, pop0, K, mrate)
 \item{K}{Carrying capacity}
 
 \item{mrate}{Movement rate expressed as a proportion (relative to 1). Indicates the proportion of organisms that will move out of a cell in one timestep.}
+
+\item{op}{A logical value that indicates if a filled.contour is to be created. WARNING: op = TRUE may make the simulation slow.}
 }
 \value{
 results A list containing pop: a matrix of size N by M (same dimensions as area, above) with population size within each cell; and timeseries: a dataframe with 4 columns and nstep rows. The columns contain time (timeseries$time), population size inside the MPA (timeseries$pop.in), population size outside the MPA (timeseries$pop.out) and yearly total catches (timeseries$total.catches).
 }
 \description{
-Simulates MPA and surrounding fishing grounds.
+Simulates MPA and surrounding fishing grounds. Growth is modeled with a discrete logistic growth model. This version assumes a closed population. Organisms leaving the area through the right margin reincorporate the population through the left margin; same happens for uppper and lower margins.
 }
 \author{
 Villasenor-Derbez, J.C.
