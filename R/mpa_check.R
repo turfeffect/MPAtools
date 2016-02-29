@@ -1,5 +1,23 @@
+#' mpa_sim input validator
+#'
+#' @description Validates the inputs passed to mpa_2D().
+#'
+#' @param area an N by M matrix with harvesting rates for fishing grounds (0 < harvesting rate <= 1) and MPAs (harvesting rate = 0) for the simulated area.
+#' @param nsteps Number of steps to run the simulation.
+#' @param r Intrinsic population growth rate.
+#' @param pop0 Initial population size. If single, assumes equal population size across all cells in area. If a matrix, it must have the same dimensions as area.
+#' @param K Carrying capacity
+#' @param mrate Movement rate expressed as a proportion (relative to 1). Indicates the proportion of organisms that will move out of a cell in one timestep.
+#' @param op A logical value that indicates if a filled.contour is to be created. WARNING: op = TRUE may make the simulation slow.
+#'
+#' @return check an object of type list containing elemetns result and message. Result is a logical that indicates if the inputs to mpa_2d() are correct. If they are not, message contains the error message to be displayed in the Console.
+#'
+#' @author Villasenor-Derbez, J.C.
+#'
+#'
+#' @export
 
-check_param=function(area, nsteps, r, pop0, K, mrate){
+mpa_check=function(area, nsteps, r, pop0, K, mrate){
 
   # Checking that area has no values larger than 1 or smaller than 0
   area.dim=dim(area) #To be used later, when checking if dim(pop0)==dim(area) when pop0 is not a single value

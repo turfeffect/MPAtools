@@ -18,10 +18,10 @@
 #' @export
 
 
-mpa_2D=function(area, nsteps, r, pop0, K, mrate, op=FALSE) {
+mpa_sim=function(area, nsteps, r, pop0, K, mrate, op=FALSE) {
 
   #Making sure allinputs are correct
-  check=check_param(area, nsteps, r, pop0, K, mrate)
+  check=mpa_check(area, nsteps, r, pop0, K, mrate)
   if (check$result==0){stop(check$message)}
 
   u.vec=area
@@ -34,31 +34,21 @@ mpa_2D=function(area, nsteps, r, pop0, K, mrate, op=FALSE) {
    pop <- matrix(nrow=nrows, ncol=ncols)
 
    #set starting population in vector pop in each cell equal to K
-
    pop[]=pop0
 
    #vector left.cells storing the position of cells to the left
-
    left.cells=c(ncols, 1:(ncols-1))
 
    #vector right.cells storing the position of cells to the right
-
    right.cells=c(2:ncols,1)
 
    #vector up.cells storing the positon of cells up
-
    up.cells=c(nrows,1:(nrows-1))
 
    #vector down.cells storing the position of cells down
-
    down.cells=c(2:nrows, 1)
 
-   # These keep track of total population size in MPAs (pop.in) and
-   # total population size in fishing grounds (pop.out).
-   # ones is a matrix of size pop, that is used to normalize population by
-   # number of cells (i.e. population size/number of cells) later in the
-   # final plot of pop vs time.
-
+   # These keep track of total population size in MPAs (pop.in) and total population size in fishing grounds (pop.out). ones is a matrix of size pop, that is used to normalize population by number of cells (i.e. population size/number of cells) later in the final plot of pop vs time.
    inside=u.vec==0
    outside=u.vec>0
    ones=matrix(1,nrow=nrows, ncol=ncols)
@@ -67,62 +57,48 @@ mpa_2D=function(area, nsteps, r, pop0, K, mrate, op=FALSE) {
    pob=sum(pop, na.rm=TRUE)
    total.catches=sum(u.vec*pop, na.rm=TRUE)
 
-   #This plots the "gaussian shaped" thing, across time, for a vector mpa. I will coment it to change a plot for contour, so we can see our 2D MPA.
-   #plot the initial numbers
-   #plot(x=1:ncells, y=pop, xlab="Cell number", lwd=3, ylab="Population size", ylim=c(0, 1.05*max(pop)), type="l", yaxs="i", xaxs="i")
-
    if (op==TRUE){
      windows()
-     filled.contour(pop, color=terrain.colors, asp=1, main="0")
-     }
+     filled.contour(pop, color=terrain.colors, asp=1, main="0", key.title=title(main="Density\n(Org/cell)"))
+   }
+
    #loop through the time steps
    for (i in 1:nsteps) {
-      #Vector "leaving" of number leaving each cell
-      #is population size times diffusion rate
 
+      #Vector "leaving" of number leaving each cell is population size times diffusion rate
      leaving=pop*mrate
 
       #The number of immigrants is 1/4 those leaving cells to the
       #left, 1/4 those leaving cells to the right, 1/4 those leaving up
       #and 1/4 those leaving down. This is a complicated expression
       #take a minute to think it through!
-
      arriving=0.25*leaving[left.cells]+
        0.25*leaving[right.cells]+
        0.25*leaving[up.cells]+
        0.25*leaving[down.cells]
 
       #surplus production from the logistic model
-
-     surplus=(r*pop)*(1-(pop/K))
-
+      surplus=(r*pop)*(1-(pop/K))
 
       #catches = harvest rate in each cell times the population size
-
       catches=u.vec*pop
 
       #update the population numbers
-
       pop=pop+surplus-catches-leaving+arriving
 
-      #Also save two vectors containing population size inside MPA (pop.in)
-      #and population size outside MPA (pop.out), as well as total population
-      #size, and total catches.
+      #Also save two vectors containing population size inside MPA (pop.in) and population size outside MPA (pop.out), as well as total population size, and total catches.
       pop.in[i+1]=sum(pop[inside], na.rm=TRUE)/sum(ones[inside], na.rm=TRUE)
       pop.out[i+1]=sum(pop[outside], na.rm=TRUE)/sum(ones[outside], na.rm=TRUE)
       pob[i+1]=sum(pop, na.rm=TRUE)
       total.catches[i+1]=sum(catches, na.rm=TRUE)
 
-
-      #plot the population in each cell. It is comented because that is for 1D
-      #lines(x=1:ncells, y=pop, lwd=(nsteps-i+1)/nsteps*3)
-
-      #Plot population in each cell, for a 2D MPA
+      #continue plotting pop at time i if op=TRUE
       if (op==TRUE){
-      filled.contour(pop, col=rainbow(100), asp=1, main=i)
+      filled.contour(pop, col=rainbow(100), asp=1, main=i, key.title=title(main="Density\n(Org/cell)"))
       }
    }
 
+   #Create a list of results
    results=list(pop=pop, time.series=data.frame(time=seq(0:nsteps), pop=pob, pop.in, pop.out, total.catches))
 
    return(results)
