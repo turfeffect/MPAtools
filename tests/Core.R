@@ -7,59 +7,46 @@ area=matrix(0.4,nrow=50, ncol=50)
 # Area 1, a single large MPA
 
 area1=area
-area1[23:27,23:27]=0
+area1[16:32,16:32]=0
 
-# Area 2, a single large MPA with a smaller perimeter / area ratio
+# Area 2, a single large MPA with fishing the line effect
 
 area2=area
-area2[13:37,25]=0
+area2[23:27,23:27]=0
+for (i in 1:23){
+  area2[,23-i]=0.4/i
+  area2[,27+i]=0.4/i
+  area2[23-i,]=0.4/i
+  area2[27+i,]=0.4/i
+}
 
-# Area 3, a single large MPA with fishing the line effect
+# Area 3, a singe large MPA with a smaller permiter / area ratio AND fishing the line effect
 
 area3=area
-area3[23:27,23:27]=0
-for (i in 1:23){
-  area3[,23-i]=0.4/i
-  area3[,27+i]=0.4/i
-  area3[23-i,]=0.4/i
-  area3[27+i,]=0.4/i
+area3[13:37,25]=0
+for (i in 1:24){
+  area3[,24-i]=0.4/i
+  area3[,26+i]=0.4/i
 }
 
-# Area 4, a singe large MPA with a smaller permiter / area ratio AND fishing the line effect
+area3[1:11,21:29]=t(area4[21:29,12:22])
+area3[39:50,21:29]=t(area4[21:29,28:39])
+
+
+# Area 4, Several small MPAs
 
 area4=area
-area4[13:37,25]=0
-for (i in 1:24){
-  area4[,24-i]=0.4/i
-  area4[,26+i]=0.4/i
-}
 
-area4[1:11,21:29]=t(area4[21:29,12:22])
-area4[39:50,21:29]=t(area4[21:29,28:39])
+area4[10:12,10:11]=0
+area4[38:40,39:40]=0
+area4[10:12,39:40]=0
+area4[38:40,10:11]=0
+area4[25,25]=0
 
-
-# Area 5, Several small MPA
-
-area5=area
-
-area5[10:12,10:11]=0
-area5[38:40,39:40]=0
-area5[10:12,39:40]=0
-area5[38:40,10:11]=0
-area5[25,25]=0
-
-# Area 6, a Several small MPA with a smaller perimeter / area ratio
-
-area6=area
-area6[10:12,10:11]=0
-area6[14:16,10:11]=0
-area6[18:20,10:11]=0
-area6[22:24,10:11]=0
-
-# Area 7, a Several small MPA with fishing the line effect
+# Area 5, a Several small MPA with fishing the line effect
 
 
-# Area 8, a Several small MPA with a smaller permiter / area ratio AND fishing the line effect
+# Area 6, a Several small MPA with a smaller permiter / area ratio AND fishing the line effect
 
 
 # All scenarios
