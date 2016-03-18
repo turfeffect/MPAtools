@@ -4,14 +4,15 @@
 \alias{mpa_sim}
 \title{Spatial MPA simulation}
 \usage{
-mpa_sim(area, nsteps, r, pop0, K, mrate, op = FALSE)
+mpa_sim(area, nsteps, r, pop0, K, mrate, op = FALSE, cf = NULL,
+  closure.vec = NULL)
 }
 \arguments{
 \item{area}{an N by M matrix with harvesting rates for fishing grounds (0 < harvesting rate <= 1) and MPAs (harvesting rate = 0) for the simulated area.}
 
 \item{nsteps}{Number of steps to run the simulation.}
 
-\item{r}{Intrinsic population growth rate.}
+\item{r}{Population growth rate.}
 
 \item{pop0}{Initial population size. If single, assumes equal population size across all cells in area. If a matrix, it must have the same dimensions as area.}
 
@@ -19,7 +20,11 @@ mpa_sim(area, nsteps, r, pop0, K, mrate, op = FALSE)
 
 \item{mrate}{Movement rate expressed as a proportion (relative to 1). Indicates the proportion of organisms that will move out of a cell in one timestep.}
 
-\item{op}{A logical value that indicates if a filled.contour is to be created. WARNING: op = TRUE may make the simulation slow.}
+\item{op}{A logical value that indicates if a filled.contour is to be created. WARNING: op = TRUE may make the simulation slow. Alternatively, see closure.vec.}
+
+\item{cf}{A single integer that indicates the frequency (how many n steps) in which a closure to fishing occurs (i.e. no fishing).}
+
+\item{closure.vec}{a vector that contains all nsteps in which a closure must occur. For example, closure.vec=c(1,2,3,10) will close the fishery in yers 1,2,3 consecutively, and then again on nstep 10.}
 }
 \value{
 results A list containing pop: a matrix of size N by M (same dimensions as area, above) with population size within each cell; and timeseries: a dataframe with 5 columns and nstep rows. The columns contain time (timeseries$time), population SIZE at each timestep (timeseries$pop), population DENSITY inside the MPA (timeseries$pop.in), population DENSITY outside the MPA (timeseries$pop.out) and yearly total catches (timeseries$total.catches).
