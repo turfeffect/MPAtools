@@ -34,6 +34,7 @@ mpa_sim=function(area, nsteps, r, pop0, K, mrate, op=FALSE, cf=NULL, closure.vec
   ncols=size[2]
 
   pop <- matrix(nrow=nrows, ncol=ncols)
+  popi=array(NA,dim=c(nrows,ncols,nsteps))
 
   #set starting population in vector pop in each cell equal to K
   pop[]=pop0
@@ -104,6 +105,7 @@ mpa_sim=function(area, nsteps, r, pop0, K, mrate, op=FALSE, cf=NULL, closure.vec
 
     #update the population numbers
     pop=pop+surplus-catches-leaving+arriving
+    popi[,,i]=pop
 
     #Also save two vectors containing population size inside MPA (pop.in) and population size outside MPA (pop.out), as well as total population size, and total catches.
     pop.in[i+1]=sum(pop[inside], na.rm=TRUE)/sum(ones[inside], na.rm=TRUE)
@@ -118,7 +120,8 @@ mpa_sim=function(area, nsteps, r, pop0, K, mrate, op=FALSE, cf=NULL, closure.vec
   }
 
   #Create a list of results
-  results=list(pop=pop, time.series=data.frame(time=seq(0:nsteps), pop=pob, pop.in, pop.out, total.catches))
+  results=list(time.series=data.frame(time=seq(0:nsteps), pop=pob, pop.in, pop.out, total.catches),
+               pop=popi)
 
   return(results)
 }
