@@ -1,3 +1,6 @@
+#' mpa_xls2Rdata converter
+#' @description Convertes xls data to R data
+
 mpa_xls2Rdata=function(a=1){
 library(readxl)
 
