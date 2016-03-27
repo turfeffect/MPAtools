@@ -120,7 +120,11 @@ mpa_sim=function(area, nsteps, r, pop0, K, mrate, op=FALSE, cf=NULL, closure.vec
   }
 
   #Create a list of results
-  results=list(time.series=data.frame(time=seq(0:nsteps), pop=pob, pop.in, pop.out, total.catches),
+  results=list(time.series=data.frame(time=seq(0:nsteps)-1,
+                                      pop=pob/(nrows*ncols),
+                                      pop.in,
+                                      pop.out,
+                                      catches=total.catches),
                pop=popi)
 
   return(results)
