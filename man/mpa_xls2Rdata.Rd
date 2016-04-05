@@ -2,7 +2,7 @@
 % Please edit documentation in R/mpa_xls2Rdata.R
 \name{mpa_xls2Rdata}
 \alias{mpa_xls2Rdata}
-\title{mpa_xls2Rdata converter}
+\title{*.xls to .Rdata converter}
 \usage{
 mpa_xls2Rdata(a = 1)
 }

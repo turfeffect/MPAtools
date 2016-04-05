@@ -1,4 +1,4 @@
-#' mpa_compare
+#' Scneario concatenator
 #'
 #' @description Creates a list containing results from multiple scenarios ran in mpa_sim
 #'

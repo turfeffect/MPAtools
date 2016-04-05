@@ -1,16 +1,14 @@
-#' mpa_plot Plots results of mpa_sim
+#' Plots results of mpa_sim
+#'
+#' @description Plots results of mpa_sim
 #'
 #' @seealso mpa_sim
 #' @seealso mpa_compare
 #'
-#'
+#' @author Villasenor-Derbez, J.C.
 
 # agregar leyendas a cada caso
-# Cambiar scenarios=X a algo más descriptivbo (one or many)
-
-library(ggplot2)
-library(dplyr)
-library(tidyr)
+# Cambiar scenarios=X a algo mas descriptivbo (one or many)
 
 mpa_plot=function(data, type="io",
                   in.col="blue", in.type="b",
@@ -19,6 +17,10 @@ mpa_plot=function(data, type="io",
                   catch.col="magenta", catch.type="b",
                   other=NULL,
                   ...){
+
+  library(ggplot2)
+  library(dplyr)
+  library(tidyr)
 
   results=data
   multiple=is.data.frame(results)
