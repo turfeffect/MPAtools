@@ -1,6 +1,6 @@
 #' Spatial MPA simulation
 #'
-#' @description Simulates MPA and surrounding fishing grounds. Growth is modeled with a discrete logistic growth model. This version assumes a closed population. Organisms leaving the area through the right margin reincorporate the population through the left margin; same happens for uppper and lower margins.
+#' @description Simulates MPA and surrounding fishing grounds. Growth is modeled with a discrete logistic growth model. This version assumes a closed population and no age structure. Organisms leaving the area through the right margin reincorporate the population through the left margin; same happens for uppper and lower margins.
 #'
 #' @param area an N by M matrix with harvesting rates for fishing grounds (0 < harvesting rate <= 1) and MPAs (harvesting rate = 0) for the simulated area.
 #' @param nsteps Number of steps to run the simulation.

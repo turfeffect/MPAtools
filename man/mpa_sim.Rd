@@ -30,7 +30,7 @@ mpa_sim(area, nsteps, r, pop0, K, mrate, op = FALSE, cf = NULL,
 results A list containing pop: a matrix of size N by M (same dimensions as area, above) with population size within each cell; and timeseries: a dataframe with 5 columns and nstep rows. The columns contain time (timeseries$time), population SIZE at each timestep (timeseries$pop), population DENSITY inside the MPA (timeseries$pop.in), population DENSITY outside the MPA (timeseries$pop.out) and yearly total catches (timeseries$total.catches).
 }
 \description{
-Simulates MPA and surrounding fishing grounds. Growth is modeled with a discrete logistic growth model. This version assumes a closed population. Organisms leaving the area through the right margin reincorporate the population through the left margin; same happens for uppper and lower margins.
+Simulates MPA and surrounding fishing grounds. Growth is modeled with a discrete logistic growth model. This version assumes a closed population and no age structure. Organisms leaving the area through the right margin reincorporate the population through the left margin; same happens for uppper and lower margins.
 }
 \author{
 Villasenor-Derbez, J.C.
