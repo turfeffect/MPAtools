@@ -8,7 +8,7 @@ mpa_sim(area, nsteps, r, pop0, K, mrate, op = FALSE, cf = NULL,
   closure.vec = NULL)
 }
 \arguments{
-\item{area}{an N by M matrix with harvesting rates for fishing grounds (0 < harvesting rate <= 1) and MPAs (harvesting rate = 0) for the simulated area.}
+\item{area}{An N by M matrix with harvesting rates for fishing grounds (0 < harvesting rate <= 1) and MPAs (harvesting rate = 0) for the simulated area.}
 
 \item{nsteps}{Number of steps to run the simulation.}
 
