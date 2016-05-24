@@ -4,17 +4,19 @@
 \alias{did}
 \title{Perform Difference-in-Difference analysis}
 \usage{
-did(data, year.imp)
+did(data, year.imp, year.int = NULL)
 }
 \arguments{
 \item{data}{A dataframe that has been created with any of the following functions: richness(), density(), fish_biomass(), fish_size(), trophic(). All these functions are part of this package.}
 
 \item{year.imp}{An integer that indicates the year when the reserve was first implemented.}
+
+\item{year.int}{An integer that indicates the year of interest to perform the DiD analysis}
 }
 \value{
 Returns a linear model, where the value of the interactive term between Zone and Year is the difference in difference value.
 }
 \description{
-Performs a difference-in-difference analysis on a series of data and compares the effect of the reserve.
+Performs a difference-in-difference analysis on a series of data and compares the effect of the reserve. It is based on a linear model, where the variable of interest is regressed on dummy variables composed by Year and Zone, and an interaction term between both. The model is OutcomeVariable = b0 + b1*Year + b2*Zone + b3(Year*Zone). Here, Year indicates pre and post implementation of the reserve. Zone serves as a a way to compare a trend and allows to compare between the reserve and control sites. The DD value is indicated by the coefficient of the interaction term b3.
 }
 

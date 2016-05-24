@@ -9,23 +9,30 @@
 #'@return D A dataframe with columns for Year, Zone (inside outside the reserve), Transect Number, Species, and Density (org/m2).
 
 density=function(data, site, species=NULL){
-  library(dplyr)
-  library(tidyr)
+  library(dplyr)  # Load dplyr
+  library(tidyr)  # Load tidyr
 
+  # Evaluate if it must calculate density ofr a single species or for all species
   if(is.null(species)){
-    D=data %>%
-      filter(Site==site) %>%
-      group_by(Year, Zone, TransectNumber, GeneroEspecie) %>%
-      summarize(D=n()) %>%
-      mutate(D=D/60)
-  } else {
-    D=data %>%
-      filter(Site==site) %>%
-      filter(GeneroEspecie==species) %>%
-      group_by(Year, Zone, TransectNumber, GeneroEspecie) %>%
-      summarize(D=n()) %>%
-      mutate(D=D/60)
+    D=data %>%                    #Set D equal to data
+      filter(Site==site) %>%      # filter by site
+      group_by(Year,
+               Zone,
+               TransectNumber,
+               GeneroEspecie) %>% #Group by year, zone, transect number and species
+      summarize(D=n()) %>%        #Calculate abundance by species by transect
+      mutate(D=D/60)              #Divide by 60 (transects aer 30 m long and 2 m wide).
+  } else { #Else indicates that a single species has been selected
+    D=data %>%                    #Set D equal to data
+      filter(Site==site) %>%      #Filter by site
+      filter(GeneroEspecie==species) %>% #Filter by species
+      group_by(Year,
+               Zone,
+               TransectNumber,
+               GeneroEspecie) %>% #Group by year, zone, transect number and species
+      summarize(D=n()) %>%        #Calculate abundance
+      mutate(D=D/60)              #Calculate density
   }
 
-  return(D)
+  return(D)                       #Return D
 }

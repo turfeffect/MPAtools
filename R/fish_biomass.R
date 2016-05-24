@@ -9,29 +9,35 @@
 #' @return size A dataframe containing year, zone (insido or outside the reserve), transect number, species, and the statistic required.
 
 fish_biomass=function(data, site, species=NULL){
-  library(dplyr)
-  library(tidyr)
-  library(reshape)
+  library(dplyr)   #Load dplyr package
+  library(tidyr)   #Load tidyr package
+  library(reshape) #Load reshape package
 
-  data(abtl)
+  data(abtl)       #Load the database of allometric  cgrowth parameters and trophic level
 
-  data=untable(df=data, n=data$Abundancia) %>%
-    left_join(abtl, by="GeneroEspecie") %>%
-    mutate(W=a*(SizeClass^b))
+  data=untable(df=data, n=data$Abundancia) %>% #Untable the data based on Abundance (one line per organism)
+    left_join(abtl, by="GeneroEspecie") %>%   #Join data with the database that as a, b and TL values
+    mutate(W=a*(SizeClass^b))                 #Create Weight variable
 
-  if(is.null(species)){
-    B=data %>%
-      filter(Site==site) %>%
-      group_by(Year, Zone, TransectNumber, GeneroEspecie) %>%
-      summarize(sum(W))
-  } else {
-    B=data %>%
-      filter(Site==site) %>%
-      filter(GeneroEspecie==species) %>%
-      group_by(Year, Zone, TransectNumber, GeneroEspecie) %>%
-      summarize(sum(W))
+  if(is.null(species)){ #If a single species is not targeted, calculates biomass for all species
+    B=data %>% #Set b equals to data
+      filter(Site==site) %>%                #Filter by site
+      group_by(Year,
+               Zone,
+               TransectNumber,
+               GeneroEspecie) %>%          #Group by Year, Zone, Transect, and GenusSpeices
+      summarize(sum(W))                    #Create a sum of weight by species
+  } else {                                 #If a species is selected
+    B=data %>%                             #Set B equals to data
+      filter(Site==site) %>%               #Filter by side
+      filter(GeneroEspecie==species) %>%   #Filter by species
+      group_by(Year,
+               Zone,
+               TransectNumber,
+               GeneroEspecie) %>%         #Group by year, zone, transect number, and species
+      summarize(sum(W))                   #Create a sum of the weight for selected species
   }
 
-  return(B)
+  return(B)                               #Return B
 
 }
