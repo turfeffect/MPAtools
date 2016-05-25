@@ -7,6 +7,8 @@
 #' @param species A quoted string that indicates a species for which density should be calulated. Common cases include "Paralabrax clathratus", "Semicossipjus pulcher", or "Anisotremus davidsonii".
 #'
 #' @return size A dataframe containing year, zone (insido or outside the reserve), transect number, species, and the statistic required.
+#'
+#' @export
 
 fish_biomass=function(data, site, species=NULL){
   library(dplyr)   #Load dplyr package

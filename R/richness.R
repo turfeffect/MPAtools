@@ -6,16 +6,23 @@
 #' @param site A quoted string that indicates the site. Options are "Rosario", "IslaNatividad", "IslaMagdalena".
 #'
 #'@return S A dataframe with columns for Year, Zone (inside outside the reserve), Transect Number, and Species richness (S).
+#'
+#'@export
 
 richness=function(data,site){
-  library(dplyr)
-  library(tidyr)
+  library(dplyr) #Load dplyr
+  library(tidyr) #Load tidyr
 
-  S=data %>%
-    filter(Site=="IslaNatividad") %>%
-    group_by(Year, Zone, TransectNumber, GeneroEspecie) %>%
+  S=data %>% #Set S equal to data
+    filter(Site==site) %>% #Filter by site
+    group_by(Year,
+             Zone,
+             TransectNumber,
+             GeneroEspecie) %>%
     summarize(N=n()) %>%
-    group_by(Year, Zone, TransectNumber) %>%
+    group_by(Year,
+             Zone,
+             TransectNumber) %>%
     summarize(S=n())
 
   return(S)

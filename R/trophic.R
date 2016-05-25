@@ -6,6 +6,8 @@
 #' @param site A quoted string that indicates the site. Options are "Rosario", "IslaNatividad", "IslaMagdalena".
 #'
 #' @return size A dataframe containing year, zone (insido or outside the reserve), transect number, species, and the statistic required.
+#'
+#' @export
 
 trophic=function(data, site){
   library(dplyr)

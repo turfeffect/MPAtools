@@ -5,6 +5,8 @@
 #' @seealso mpa_sim
 #' @seealso mpa_compare
 #'
+#' @export
+#'
 #' @author Villasenor-Derbez, J.C.
 
 # agregar leyendas a cada caso

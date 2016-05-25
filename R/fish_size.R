@@ -8,6 +8,8 @@
 #' @param stat A quoted string that indicates which statistic should be calculated. Options include "max", "min", "mean", and "median". User can also use "all" to calculate all of the above.
 #'
 #' @return size A dataframe containing year, zone (insido or outside the reserve), transect number, species, and the statistic required.
+#'
+#' @export
 
 fish_size=function(data, site, stat="mean", species=NULL){
   library(dplyr)

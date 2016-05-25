@@ -7,6 +7,8 @@
 #' @param year.int An integer that indicates the year of interest to perform the DiD analysis
 #'
 #' @return Returns a linear model, where the value of the interactive term between Zone and Year is the difference in difference value.
+#'
+#' @export
 
 did=function(data, year.imp, year.int=NULL){
   library(dplyr) #Load dplyr
