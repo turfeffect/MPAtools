@@ -15,6 +15,6 @@ richness(data, site)
 S A dataframe with columns for Year, Zone (inside outside the reserve), Transect Number, and Species richness (S).
 }
 \description{
-Calculates species density, by transect, for a specific location.
+Calculates species richness, by transect, for a specific location.
 }
 

@@ -1,6 +1,6 @@
 #' Calculate species richness
 #'
-#' @description Calculates species density, by transect, for a specific location.
+#' @description Calculates species richness, by transect, for a specific location.
 #'
 #' @param data A dataframe that contains at least columns of Year, Zone (e.g. reserve or control site), Transect Number, GenusSpecies.
 #' @param site A quoted string that indicates the site. Options are "Rosario", "IslaNatividad", "IslaMagdalena".

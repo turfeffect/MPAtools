@@ -107,7 +107,6 @@ mpa_plot=function(data, type="io",
         labs(x="Time", y="Population (Org/patch)")
 
     }
-
     p
   }
 }
