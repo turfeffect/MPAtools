@@ -1,0 +1,150 @@
+---
+title: "MPA tools"
+author: "Juan Carlos Villaseñor-Derbez"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{MPA tools}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+## Eventual introduction here
+
+Tha package must be installed with `devtools::install_github("turfeffect/MPAtools", force=T)`.
+
+We do not need an intro now, but we can (must) develop it later. Now I just provide you with some examples on how to use the MPAtools package. As a short background, the MPAtools package has, as of now, 12 different functions that do very different things. I will try to work on the relevant ones first, but may include some additional info on other ones.
+
+Vignettes are long form documentation commonly included in packages. Because they are part of the distribution of the package, they need to be as compact as possible. The `html_vignette` output type provides a custom style sheet (and tweaks some options) to ensure that the resulting html is as small as possible. The `html_vignette` format:
+
+- Never uses retina figures
+- Has a smaller default figure size
+- Uses a custom CSS stylesheet instead of the default Twitter Bootstrap style
+
+## Biophysical indicator functions
+
+These functions were developed to work on **Biophysical** indicators. Given our data, some of these functions work for both fish and invertebrates or only for fish (functions that need information that is only recorded for fish). For both types of data we can calculate species richness, density, and mean trophic level. For fish data we can also calculate fish biomass and fish size. Below I provide examples for each one of these functions.
+
+Since the entire database has not yet been standarized, we will work now with what the final database will look like, using the baja_fish.csv database. The column names in this file are the closest to the final, huge, entire, finalized, perfect, nice database. You can find this file in Data/Biophys/Raw/baja_fish.csv. Additionally, I have included it in this package in the data folder (in *.Rdata format). You can load this data directly with `data("baja_fish")`.
+
+Ok, straight to the tutorial now. I will asume that you have downloaded the latest version of the package with `devtools::install_github("turfeffect/MPAtools", force=T)`.
+
+### Calculate speies richness with `richness()`
+
+This function calculates species richness by transect and year, spliting locations into "fished" and "reserves". Eventually we will identify each reserve with a control site, but lets not worry about that now.
+
+First, we must load the MPAtools package and look at the documentation of `richness()` with `?richness()`. You may get some warning messages, this is OK. R is just letting you know that some functions in `MPAtools` have the same name as other functions in other packages.
+
+```{r, load library, warning=F, message=F}
+library(MPAtools) #Load the MPAtools package
+```
+
+We now know that `richness()` takes two things as inputs. First, it takes an object called *data*. this must be a data.frame. In our case, the function is designed to take the monitoring database as an input (i.e. baja_fish file we loaded). The other thing that it takes is a site name. Sites are above locations; Site could be Natividad Island, and locations are individual reserves. So far, we do the analysis at "Site level". **There is nothing to worry about, I will change this in the future.**
+
+To use the function, we will first load our dataset:
+
+```{r}
+data("baja_fish") # We load data from the data included in the package. It takes a bit to load the first time. It will create a variable called baja_fish
+```
+
+And we can look at the first rows to see how it looks like:
+
+```{r}
+head(baja_fish) #Show first rows of baja_fish
+```
+
+If we wanted to calculate species richness for Isla Natividad, we woul then set `site="IslaNatividad"` in the arguments to `richness()`. **Note that there is no space in the site string of characters.**
+
+```{r, species richness, warning=FALSE, message=FALSE}
+s=richness(data=baja_fish, site="IslaNatividad") #Calculate species richness for Natividad
+```
+
+Values are now sotred in `s`. We can look at the first rows with `head(s)`:
+
+```{r}
+head(s)
+```
+
+We can use this directly to plot it with either `ggplot2` for custom representation, or `mpa_plot2()`, a function that is part of this package.
+
+```{r, fig.show="hold", warning=False, message=False}
+library(ggplot2)
+
+ggplot(s, aes(x=Year, y=S, color=Zone))+
+  geom_point()+
+  stat_summary(fun.y="mean", geom="line")+
+  theme_bw()+
+  scale_color_brewer(palette="Set1")
+
+mpa_plot2(data=s, type="s")
+
+```
+
+Note that the plots look the same, but `mpa_plot2()`makes it in just one line of code, with no need to be a `ggplot2` master.
+
+### Calculate mean trophic level with `trophic()`
+
+Since we already loaded the `MPAtools`package, we can now just use `?trophic` to look at the documentation for this function. This function requires two arguments *data* and *site*. It works the same as `richness`, and calculates mean trophic level by year and transect for each site. It uses a built-in database of values with trophic levels for every species. **Note that this database will need to be mainained by us. We will have to gather (from literature) as much information as we can.**
+
+```{r}
+t=trophic(data=baja_fish, site="IslaNatividad")
+
+head(t)
+```
+
+```{r}
+mpa_plot2(data=t, type="t")
+```
+
+### Calculate species density with `density()`
+
+Look at the documentation for this function with `?density`. *You may get a welp window telling you to decide which documentation to show. Click the one that says "Calculate density"*.
+
+This function requires three arguments. As `richness()`, it takes *data* and *site*, but also requires a specific species to look at. This is indicated by the *species* argument, and must be a scientific name composed of Genus and species. If no species is passed to the function, it assumes a NULL value, and calculates density for all species individually.
+
+Some common species in Natividad are garibaldi (*Hypsypops rubicundus*), kelp bass (*Paralabrax clathratus*), sand bass (*Paralabrax nebulifer*), and croakers (*Anisotremus davidsonii*), or California Sheephead (*Semicossyphus pulcher*). We can evaluate density for any of them, but lets do it for *P. clatrhatus*:
+
+```{r}
+d=density(data=baja_fish, site="IslaNatividad", species="Paralabrax clathratus") #calculate density for P. clathratus in Natividad
+
+head(d) #Print the first rows
+```
+
+We can now plot the results:
+
+```{r}
+mpa_plot2(data=d, type="d")
+```
+
+
+### Calculate fish biomass with `fish_biomass()`
+
+Use `?fish_biomass` to look at the documentation for this function. Note that it works in the same way as `density()`, and requires tha same three arguments. If no specific species is passed, it will calculate biomass for all species. If we wanted to calculate the biomass of *P. clathratus* in Natividad island we would call:
+
+```{r, warning=FALSE, message=FALSE}
+b=fish_biomass(data=baja_fish, site="IslaNatividad", species="Paralabrax clathratus") #Calculate biomass for P. clathratus in Natividad
+
+head(b) #Show the first rows
+```
+
+Again, we can plot it with:
+
+```{r}
+mpa_plot2(data=b, type="b")
+```
+
+
+### Calculate fish size with `fish_size()`
+
+Look at the documentation with `?fish_size`. This is the most "complex" function in this series of functions. It takes the same three arguments as `fish_biomass()` (*data*, *site*, *species*), but also needs a *stat* argument. This argument indicates which descriptor is to be used, and include mean, median, maximum, and minimum sizes. This argument is passed as a quoted string. If no argument is specified, it defaults to calculate the mean. We have so far used the mean, but lets look at the maximum size now.
+
+```{r}
+l=fish_size(data=baja_fish, site="IslaNatividad", stat="max", species="Paralabrax clathratus")
+```
+
+And now we plot it:
+
+```{r}
+mpa_plot2(data=l, type="l")
+```
+

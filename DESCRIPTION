@@ -1,6 +1,6 @@
 Package: MPAtools
 Type: Package
-Title: Tools to simulate TURF-reserves
+Title: Tools to simulate and analyze no-take Marine Reserves
 Version: 0.1.0
 Author: Villasenor-Derbez, J.C.
 Maintainer: Villasenor-Derbez, J.C. <jvillasenor@bren.ucsb.edu>

@@ -23,13 +23,13 @@ fish_size=function(data, site, stat="mean", species=NULL){
       filter(Site==site) %>%
       group_by(Year, Zone, TransectNumber, GeneroEspecie)
     if (stat=="mean"){
-      size=summarize(size,mean=mean(SizeClass))
+      size=summarize(size,stat=mean(SizeClass))
     } else if (stat=="median"){
-      size=summarize(size, median=median(SizeClass))
+      size=summarize(size, stat=median(SizeClass))
     } else if (stat=="max"){
-      size=summarize(size, max=max(SizeClass))
+      size=summarize(size, stat=max(SizeClass))
     } else if (stat=="min"){
-      size=summarize(size, min=min(SizeClass))
+      size=summarize(size, stat=min(SizeClass))
     } else {
       size=summarize(size,
                      mean=mean(SizeClass),
@@ -44,13 +44,13 @@ fish_size=function(data, site, stat="mean", species=NULL){
       filter(GeneroEspecie==species) %>%
       group_by(Year, Zone, TransectNumber, GeneroEspecie)
     if (stat=="mean"){
-      size=summarize(size,mean=mean(SizeClass))
+      size=summarize(size,stat=mean(SizeClass))
     } else if (stat=="median"){
-      size=summarize(size, median=median(SizeClass))
+      size=summarize(size, stat=median(SizeClass))
     } else if (stat=="max"){
-      size=summarize(size, max=max(SizeClass))
+      size=summarize(size, stat=max(SizeClass))
     } else if (stat=="min"){
-      size=summarize(size, min=min(SizeClass))
+      size=summarize(size, stat=min(SizeClass))
     } else {
       size=summarize(size,
                      mean=mean(SizeClass),

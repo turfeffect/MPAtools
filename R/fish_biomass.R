@@ -1,4 +1,4 @@
-#' Calculate bbiomass
+#' Calculate biomass
 #'
 #' @description Calulates biomass for a selected species or the entire dataset, by year and transect, for each location.
 #'
@@ -28,7 +28,7 @@ fish_biomass=function(data, site, species=NULL){
                Zone,
                TransectNumber,
                GeneroEspecie) %>%          #Group by Year, Zone, Transect, and GenusSpeices
-      summarize(sum(W))                    #Create a sum of weight by species
+      summarize(B=sum(W))                    #Create a sum of weight by species
   } else {                                 #If a species is selected
     B=data %>%                             #Set B equals to data
       filter(Site==site) %>%               #Filter by side
@@ -37,7 +37,7 @@ fish_biomass=function(data, site, species=NULL){
                Zone,
                TransectNumber,
                GeneroEspecie) %>%         #Group by year, zone, transect number, and species
-      summarize(sum(W))                   #Create a sum of the weight for selected species
+      summarize(B=sum(W))                   #Create a sum of the weight for selected species
   }
 
   return(B)                               #Return B
