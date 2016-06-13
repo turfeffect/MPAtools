@@ -12,42 +12,40 @@
 
 mpa_plot2=function(data, type){
   if (type=="s"){
-    ggplot(data, aes(x=Year, y=S, color=Zone))+
+    p=ggplot(data, aes(x=Year, y=S, color=Zone))+
       geom_point()+
       stat_summary(fun.y="mean", geom="line")+
       theme_bw()+
       scale_color_brewer(palette="Set1")
   }
-
   if (type=="d"){
-    ggplot(data, aes(x=Year, y=D, color=Zone, factor=GeneroEspecie))+
+    p=ggplot(data, aes(x=Year, y=D, color=Zone, factor=GeneroEspecie))+
       geom_point()+
       stat_summary(fun.y="mean", geom="line")+
       theme_bw()+
       scale_color_brewer(palette="Set1")
   }
-
   if (type=="t"){
-    ggplot(data, aes(x=Year, y=mean, color=Zone))+
+    p=ggplot(data, aes(x=Year, y=mean, color=Zone))+
       geom_point()+
       stat_summary(fun.y="mean", geom="line")+
       theme_bw()+
       scale_color_brewer(palette="Set1")
   }
-
   if (type=="b"){
-    ggplot(data, aes(x=Year, y=B, color=Zone))+
+    p=ggplot(data, aes(x=Year, y=B, color=Zone))+
+      geom_point()+
+      stat_summary(fun.y="mean", geom="line")+
+      theme_bw()+
+      scale_color_brewer(palette="Set1")
+  }
+  if (type=="l"){
+    p=ggplot(data, aes(x=Year, y=stat, color=Zone))+
       geom_point()+
       stat_summary(fun.y="mean", geom="line")+
       theme_bw()+
       scale_color_brewer(palette="Set1")
   }
 
-  if (type=="l"){
-    ggplot(data, aes(x=Year, y=stat, color=Zone))+
-      geom_point()+
-      stat_summary(fun.y="mean", geom="line")+
-      theme_bw()+
-      scale_color_brewer(palette="Set1")
-  }
+  p
 }
