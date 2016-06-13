@@ -2,7 +2,7 @@
 % Please edit documentation in R/mpa_plot2.R
 \name{mpa_plot2}
 \alias{mpa_plot2}
-\title{Plots results from biophysical dindicator functions}
+\title{Plots results from biophysical indicator functions}
 \usage{
 mpa_plot2(data, type)
 }

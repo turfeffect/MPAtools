@@ -1,4 +1,4 @@
-#' Plots results from biophysical dindicator functions
+#' Plots results from biophysical indicator functions
 #'
 #' @description Plots results from the functions used to calculate biophysical indicators like: richness(), density(), ttrophic(), fish_biomass(), and fish_size().
 #'
