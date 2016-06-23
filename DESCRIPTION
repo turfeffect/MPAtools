@@ -9,5 +9,9 @@ License: What license is it under?
 LazyData: TRUE
 RoxygenNote: 5.0.1
 Suggests: knitr,
-    rmarkdown
+    rmarkdown,
+    ggplot2,
+    dplyr,
+    tidyr,
+    reshape
 VignetteBuilder: knitr
