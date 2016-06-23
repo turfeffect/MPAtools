@@ -19,4 +19,7 @@ D A dataframe with columns for Year, Zone (inside outside the reserve), Transect
 \description{
 Calculates species density, by year and transect, for a specific location.
 }
+\author{
+Villaseñor-Derbez, J.C. <juancarlos.villader@gmail.com>
+}
 

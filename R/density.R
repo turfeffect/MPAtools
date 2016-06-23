@@ -7,6 +7,7 @@
 #' @param species A quoted string that indicates a species for which density should be calulated. Common cases include "Paralabrax clathratus", "Semicossipjus pulcher", or "Anisotremus davidsonii".
 #'
 #'@return D A dataframe with columns for Year, Zone (inside outside the reserve), Transect Number, Species, and Density (org/m2).
+#'@author Villaseñor-Derbez, J.C. <juancarlos.villader@gmail.com>
 #'
 #'@export
 

@@ -2,7 +2,7 @@
 % Please edit documentation in R/fish_biomass.R
 \name{fish_biomass}
 \alias{fish_biomass}
-\title{Calculate bbiomass}
+\title{Calculate biomass}
 \usage{
 fish_biomass(data, site, species = NULL)
 }
