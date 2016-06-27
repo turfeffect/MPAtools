@@ -16,7 +16,7 @@ a2b=function(a){
   library(dplyr)  # Load dplyr
   library(tidyr)  # Load tidyr
 
-  colnames(a)=c('Dia',
+  colnames(a)=c('Dia', #Set column names to avoid weird characters and spaces
                 'Mes',
                 'Ano',
                 'Estado',
@@ -32,7 +32,7 @@ a2b=function(a){
                 'HoraInicialBuceo',
                 'HoraFinalBuceo',
                 'ProfundidadInicial_m',
-                'ProfundiadFinal_m',
+                'ProfundidadFinal_m',
                 'Temperatura_C',
                 'Visibilidad_m',
                 'Corriente',
@@ -50,14 +50,14 @@ a2b=function(a){
                 "Talla",
                 "Total")
 
-  b=a
-  b$row=1:nrow(b)
-  b=b%>%
-    select(-Total) %>%
-    spread(Talla, ">40") %>%
-    select(-row) %>%
-    gather(Talla, Abundancia, -c(1:25)) %>%
-    filter(Abundancia>0)
+  b=a                         #Set b equal to a
+  b$row=1:nrow(b)             #Add a column with row number. This is a hack by Hadley, it is then deleted
+  b=b%>%                      #Start piping function
+    select(-Total) %>%        #Use all columns except for "Total"
+    spread(Talla, ">40") %>%  #spread the column of fish larger than 40
+    select(-row) %>%          #delete the column created above (b$row)
+    gather(Talla, Abundancia, -c(1:25)) %>% #gather sizes into a singe column with respective abundances
+    filter(Abundancia>0)      #gather includes a bunch of 0's by default, so we filter them out
 
   #Las líneas de abajo asignan los nombres correctos a las celdas, e inlcuyen los promedios que deben de ser utilizados:
 
@@ -78,37 +78,8 @@ a2b=function(a){
   b$Talla[b$PromedioDeTalla>=41]=">40"
 
   b=b %>%
-    select(c(1:26, 28, 27))
+    select(c(1:26, 28, 27)) #We re-order columns into the proper order
 
-  colnames(b)=c('Día',
-                'Mes',
-                'Año',
-                'Estado',
-                'Comunidad',
-                'Sitio',
-                'Latitud',
-                'Longitud',
-                'Hábitat',
-                'Zonificación',
-                'Tipo de protección',
-                'ANP',
-                'Buzo Monitor',
-                'Hora inicial buceo',
-                'Hora final buceo',
-                'Profundidad inicial (m)',
-                'Profundiad final (m)',
-                'Temperatura (°C)',
-                'Visibilidad (m)',
-                'Corriente',
-                'Transecto',
-                'Género',
-                'Especie',
-                'Género + Especie',
-                'Sexo',
-                'Talla',
-                'Promedio de talla',
-                'Abundancia')
-
-  return(b)
+  return(b) #return the data.frame
 
 }

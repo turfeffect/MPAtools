@@ -13,28 +13,27 @@
 
 b2a=function(b){
 
-  library(dplyr)
-  library(tidyr)
+  library(dplyr) #Load dplyr
+  library(tidyr) #Load tidyr
 
-  a=b%>%
-    spread(Talla, Abundancia)
+  a=b%>%                      #Set a equal to b
+    spread(Talla, Abundancia) #Spread the values in Talla as indicated by Abundance
 
-  a$Talla=a$'Promedio de talla'
+  a$Talla=a$PromedioDeTalla #Set Talla equal to PromedioDeTalla, because we have lost Talla in spread. Talla now contains sizes of fish >40 cm in this weird format (line31)
 
-  a=select(a, -26)
-
-
-  a[is.na(a)]=0
-
-  a$Total=a$'0a5'+a$'6a10'+a$'11a20'+a$'21a30'+a$'31a40'+a$'>40'
-
-  a$Talla[a$Talla<41]=NA
-
-  a[a==0]=NA
-
-  a=select(a, c(1:25, 27, 31, 28:30, 26, 32, 33))
+  a=select(a, -26) #Select all columns except for column 26 (PromedioDeTalla)
 
 
-  return(a)
+  a[is.na(a)]=0 #set NA values = 0 so that we can sum properly later on
+
+  a$Total=a$'0a5'+a$'6a10'+a$'11a20'+a$'21a30'+a$'31a40'+a$'>40' #Create a column of total with abundances for each spp
+
+  a$Talla[a$Talla<41]=NA #Set values of Talla that are smaller than 41 to NA
+
+  a[a==0]=NA #Set values of 0 back to NA
+
+  a=select(a, c(1:25, 27, 31, 28:30, 26, 32, 33)) #Reorder the columns
+
+  return(a) #return the data.frame
 
 }

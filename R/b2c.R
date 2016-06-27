@@ -15,13 +15,43 @@ b2c=function(b){
 
   library(dplyr)  # Load dplyr
   library(tidyr)  # Load tidyr
-  library(reshape)
-
-  c=untable(df=b, num=b$Abundancia)
-
-  c$Abundancia=1
+  library(reshape) #load reshape
 
 
-  return(c)
+  colnames(b)=c('Dia', #Set proper column names to avoid werid characters
+                'Mes',
+                'Ano',
+                'Estado',
+                'Comunidad',
+                'Sitio',
+                'Latitud',
+                'Longitud',
+                'Habitat',
+                'Zonificacion',
+                'TipoDeProteccion',
+                'ANP',
+                'BuzoMonitor',
+                'HoraInicialBuceo',
+                'HoraFinalBuceo',
+                'ProfundidadInicial_m',
+                'ProfundidadFinal_m',
+                'Temperatura_C',
+                'Visibilidad_m',
+                'Corriente',
+                'Transecto',
+                'Genero',
+                'Especie',
+                'GeneroEspecie',
+                'Sexo',
+                'Talla',
+                'PromedioDeTalla',
+                'Abundancia')
+
+  c=untable(df=b, num=b$Abundancia) #Untable b to convert to c
+
+  c$Abundancia=1                    #Set abundances = to one
+
+
+  return(c) #return a data.frame
 
 }

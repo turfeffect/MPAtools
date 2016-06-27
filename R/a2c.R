@@ -13,16 +13,9 @@
 
 a2c=function(a){
 
-  library(dplyr)  # Load dplyr
-  library(tidyr)  # Load tidyr
-  library(reshape)
+  b=a2b(a) #we use the pre-existing function a2b to convert a format to b format
+  c=b2c(b) #We use the pre-existing function b2c to convert b format to c format
 
-  b=a2b(a)
-  c=untable(df=b, num=b$Abundancia)
-
-  c$Abundancia=1
-
-
-  return(c)
+  return(c) #Return a data.frame
 
 }
