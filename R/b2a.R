@@ -26,7 +26,7 @@ b2a=function(b){
   a=b%>%                      #Set a equal to b
     spread(Talla, Abundancia) #Spread the values in Talla as indicated by Abundance
 
-  a$Talla=a$PromedioDeTalla #Set Talla equal to PromedioDeTalla, because we have lost Talla in spread. Talla now contains sizes of fish >40 cm in this weird format (line31)
+  a$Talla=a$PromedioDeTalla #Set Talla equal to PromedioDeTalla, because we have lost Talla in spread. Talla now contains sizes of fish >40 cm in this weird format (line38)
 
   a=select(a, -26) #Select all columns except for column 26 (PromedioDeTalla)
 
