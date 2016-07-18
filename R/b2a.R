@@ -16,6 +16,13 @@ b2a=function(b){
   library(dplyr) #Load dplyr
   library(tidyr) #Load tidyr
 
+  b$Talla[b$PromedioDeTalla<=5]="0a5"
+  b$Talla[b$PromedioDeTalla>5]="6a10"
+  b$Talla[b$PromedioDeTalla>10]="11a20"
+  b$Talla[b$PromedioDeTalla>20]="21a30"
+  b$Talla[b$PromedioDeTalla>30]="31a40"
+  b$Talla[b$PromedioDeTalla>40]=">40"
+
   a=b%>%                      #Set a equal to b
     spread(Talla, Abundancia) #Spread the values in Talla as indicated by Abundance
 
