@@ -47,6 +47,8 @@ b2c=function(b){
                 'PromedioDeTalla',
                 'Abundancia')
 
+  #Set proper names to cells in Talla based on the size indicated by PromedioDeTalla
+
   b$Talla[b$PromedioDeTalla<=5]="0a5"
   b$Talla[b$PromedioDeTalla>5]="6a10"
   b$Talla[b$PromedioDeTalla>10]="11a20"
