@@ -1,5 +1,5 @@
 ---
-title: "MPA tools"
+title: "MPA tools: Indicators"
 author: "Juan Carlos Villaseñor-Derbez"
 output: rmarkdown::html_vignette
 vignette: >
@@ -20,7 +20,7 @@ knitr::opts_chunk$set(echo = TRUE,
 
 Tha package must be installed with `devtools::install_github("turfeffect/MPAtools", force=T)`.
 
-We do not need an intro now, but we can (must) develop it later. Now I just provide you with some examples on how to use the MPAtools package. As a short background, the MPAtools package has, as of now, 12 different functions that do very different things. I will try to work on the relevant ones first, but may include some additional info on other ones.
+We do not need an intro now, but we can (must) develop it later. Now I just provide you with some examples on how to use the `MPAtools` package. As a short background, the MPAtools package has, as of now, 12 different functions that do very different things. I will try to work on the relevant ones first, but may include some additional info on other ones.
 
 ## Biophysical indicator functions
 
