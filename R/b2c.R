@@ -47,6 +47,13 @@ b2c=function(b){
                 'PromedioDeTalla',
                 'Abundancia')
 
+  b$Talla[b$PromedioDeTalla<=5]="0a5"
+  b$Talla[b$PromedioDeTalla>5]="6a10"
+  b$Talla[b$PromedioDeTalla>10]="11a20"
+  b$Talla[b$PromedioDeTalla>20]="21a30"
+  b$Talla[b$PromedioDeTalla>30]="31a40"
+  b$Talla[b$PromedioDeTalla>40]=">40"
+
   c=untable(df=b, num=b$Abundancia) #Untable b to convert to c
 
   c$Abundancia=1                    #Set abundances = to one
