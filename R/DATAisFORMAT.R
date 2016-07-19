@@ -1,6 +1,6 @@
-#' AisA
+#' DATA is FORMAT
 #'
-#' @description
+#' @description Evaluates if a passed data.frame has a specified format
 #'
 #' @param data a data.frame that will be compared to a data.frame with the specified format as specified by the COBIApp
 #'
@@ -11,6 +11,7 @@
 #' @export
 #'
 #' @author Villaseñor-Derbez, J.C. <juancarlos.villader@gmail.com>
+#'
 
 
 DATAisFORMAT <- function (data, format){
