@@ -8,7 +8,7 @@
 #'
 #' @export
 #'
-#' @author Villaseñor-Derbez, J.C. <juancarlos.villader@gmail.com>#'
+#' @author Villaseñor-Derbez, J.C. <juancarlos.villader@gmail.com>
 #'
 
 a2b=function(a){
