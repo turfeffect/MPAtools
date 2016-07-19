@@ -13,7 +13,7 @@
 #' @author Villaseñor-Derbez, J.C. <juancarlos.villader@gmail.com>
 
 
-DATAisFormat <- function (data, format){
+DATAisFORMAT <- function (data, format){
 
   message=c("Formato correcto")
 
