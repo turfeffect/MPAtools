@@ -16,6 +16,6 @@ b An object of class data.frame wih the format b (One column for sizes and one f
 Convert fish transect data from format a to format b
 }
 \author{
-Villaseñor-Derbez, J.C. <juancarlos.villader@gmail.com>#'
+Villaseñor-Derbez, J.C. <juancarlos.villader@gmail.com>
 }
 
