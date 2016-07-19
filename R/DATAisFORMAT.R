@@ -21,18 +21,18 @@ DATAisFORMAT <- function (data, format){
   if (format == "A"){
 
     if (!length(data)==33){
-      message <- c("El archivo cargado NO coincide con el formato especificado.")
+      message <- c("El archivo cargado NO coincide con el formato especificado. Verifique que el tipo de base y el separador sean los correctos.")
     }
   } else if (format == "B"){
 
     if(!length(data) == 28 | !any(data$Abundancia > 1)){
-      message <- c("El archivo cargado NO coincide con el formato especificado")
+      message <- c("El archivo cargado NO coincide con el formato especificado. Verifique que el tipo de base y el separador sean los correctos.")
     }
 
   } else if (format == "C") {
 
     if (!length(data) == 28 | any(data$Abundancia > 1)){
-      message <- c("El archivo cargado NO coincide con el formato especificado")
+      message <- c("El archivo cargado NO coincide con el formato especificado. Verifique que el tipo de base y el separador sean los correctos.")
     }
   }
 
