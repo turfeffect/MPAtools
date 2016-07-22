@@ -16,6 +16,39 @@ b2a=function(b){
   library(dplyr) #Load dplyr
   library(tidyr) #Load tidyr
 
+  colnames(b)=c('Dia', #Set proper column names to avoid werid characters
+                'Mes',
+                'Ano',
+                'Estado',
+                'Comunidad',
+                'Sitio',
+                'Latitud',
+                'Longitud',
+                'Habitat',
+                'Zonificacion',
+                'TipoDeProteccion',
+                'ANP',
+                'BuzoMonitor',
+                'HoraInicialBuceo',
+                'HoraFinalBuceo',
+                'ProfundidadInicial_m',
+                'ProfundidadFinal_m',
+                'Temperatura_C',
+                'Visibilidad_m',
+                'Corriente',
+                'Transecto',
+                'Genero',
+                'Especie',
+                'GeneroEspecie',
+                'Sexo',
+                'Talla',
+                'PromedioDeTalla',
+                'Abundancia')
+
+  b$PromedioDeTalla=as.numeric(b$PromedioDeTalla)
+
+  b$PromedioDeTalla[is.na(b$PromedioDeTalla)]=41
+
   #Set proper names to cells in Talla based on the size indicated by PromedioDeTalla
 
   b$Talla[b$PromedioDeTalla<=5]="0a5"
@@ -25,12 +58,15 @@ b2a=function(b){
   b$Talla[b$PromedioDeTalla>30]="31a40"
   b$Talla[b$PromedioDeTalla>40]=">40"
 
-  a=b%>%                      #Set a equal to b
-    spread(Talla, Abundancia) #Spread the values in Talla as indicated by Abundance
+  b$rows <- 1:nrow(b)
+
+  a <- b%>%                      #Set a equal to b
+    spread(Talla, Abundancia) %>% #Spread the values in Talla as indicated by Abundance
+    select(-rows)
 
   a$Talla=a$PromedioDeTalla #Set Talla equal to PromedioDeTalla, because we have lost Talla in spread. Talla now contains sizes of fish >40 cm in this weird format (line38)
 
-  a=select(a, -26) #Select all columns except for column 26 (PromedioDeTalla)
+  a=select(a, -PromedioDeTalla) #Select all columns except for column 26 (PromedioDeTalla)
 
 
   a[is.na(a)]=0 #set NA values = 0 so that we can sum properly later on
