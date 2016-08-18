@@ -34,7 +34,7 @@ mpa_plot2 <- function(data, type){
       group_by(Ano, Zonificacion) %>%
       mutate(D = mean(D, na.rm = T))
 
-    p <- ggplot(data, aes(x = Ano, y = D, color = Zonificacion, factor = GeneroEspecie))+
+    p <- ggplot(data, aes(x = Ano, y = D, color = Zonificacion))+
       geom_point()+
       stat_summary(fun.y = "mean", geom = "line")+
       theme_bw()+
