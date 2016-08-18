@@ -1,13 +1,13 @@
 #' Calculate biomass
 #'
-#' @description Calulates biomass for a selected species or the entire dataset, by year and transect, for each location.
+#' @description Calulates biomass for a selected species or the entire dataset, by year, site, and transect, for a given location.
 #'
-#' @param data A dataframe that contains at least columns of Ano, Zonificacion (e.g. "Zona de pesca" or "Zona de no pesca"), Transecto, GeneroEspecie.
-#' @param ab A dataframe that contains the a and b allometric parameters for each species. Dataframe must have three columns: GeneroEspecie, a, b
+#' @param data A dataframe that contains at least columns of Ano, Zonificacion (e.g. "Zona de pesca" or "Zona de no pesca"), Sitio, Transecto, GeneroEspecie. Columns for a and b parameters are optional, though heavily suggested to avoid errors in calculations (this package might not have all parameters for all species).
+#' @param ab An optional dataframe that contains the a and b allometric parameters for each species. Dataframe must have three columns: GeneroEspecie, a, b
 #' @param location A quoted string that indicates the location.
 #' @param species A quoted string that indicates a species for which density should be calulated.
 #'
-#' @return size A dataframe with columns for Ano, Zonificacion, Transect Number, Species, and fish biomass.
+#' @return size A dataframe with columns for Ano, Zonificacion, Sitio, Transecto, GeneroEspecie, and fish biomass (B; in grams).
 #'
 #' @export
 
@@ -21,12 +21,12 @@ fish_biomass <- function(data, ab = NULL, location, species = NULL){
   } else {
     ab <- data(abtl)       #Load the database of allometric  growth parameters and trophic level
     print(1)
-    data <- data %>% #Untable the data based on Abundance (one line per organism)
+    data <- data %>% #Add a and b parameters for each species
       left_join(ab, by = "GeneroEspecie")
   }
 
   if(!is.null(ab)){
-    data <- data %>% #Untable the data based on Abundance (one line per organism)
+    data <- data %>% #Add a and b parameters for each species
       left_join(ab, by = "GeneroEspecie")
   }
 
@@ -38,8 +38,8 @@ fish_biomass <- function(data, ab = NULL, location, species = NULL){
       filter(Comunidad == location) %>%                #Filter by location
       group_by(Ano,
                Zonificacion,
-               Transecto,
-               GeneroEspecie) %>%          #Group by Ano, Zonificacion, Transect, and GenusSpeices
+               Sitio,
+               Transecto) %>%          #Group by Ano, Zonificacion, Transect, and GenusSpeices
       summarize(B = sum(W, na.rm = T))                    #Create a sum of weight by species
   } else {                                 #If a species is selected
     B <- data %>%                             #Set B equals to data
@@ -47,8 +47,9 @@ fish_biomass <- function(data, ab = NULL, location, species = NULL){
       filter(GeneroEspecie == species) %>%   #Filter by species
       group_by(Ano,
                Zonificacion,
+               Sitio,
                Transecto,
-               GeneroEspecie) %>%         #Group by year, zone, transect number, and species
+               GeneroEspecie) %>%         #Group by year, zone, site, transect number, and species
       summarize(B = sum(W, na.rm = T))                   #Create a sum of the weight for selected species
   }
 

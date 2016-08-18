@@ -15,8 +15,14 @@ mpa_plot2 <- function(data, type){
   ## QUitar los stat_summary e incluir cachito de dplyr para que agrupe por zona
 
   library(ggplot2)
+  library(dplyr)
+  library(tidyr)
 
   if (type == "s"){
+    data <- data %>%
+      group_by(Ano, Zonificacion) %>%
+      mutate(S = mean(S, na.rm = T))
+
     p <- ggplot(data, aes(x = Ano, y = S, color = Zonificacion))+
       geom_point()+
       stat_summary(fun.y = "mean", geom = "line")+
@@ -24,6 +30,10 @@ mpa_plot2 <- function(data, type){
       scale_color_brewer(palette = "Set1")
   }
   if (type == "d"){
+    data <- data %>%
+      group_by(Ano, Zonificacion) %>%
+      mutate(D = mean(D, na.rm = T))
+
     p <- ggplot(data, aes(x = Ano, y = D, color = Zonificacion, factor = GeneroEspecie))+
       geom_point()+
       stat_summary(fun.y = "mean", geom = "line")+
@@ -31,6 +41,10 @@ mpa_plot2 <- function(data, type){
       scale_color_brewer(palette = "Set1")
   }
   if (type == "t"){
+    data <- data %>%
+      group_by(Ano, Zonificacion) %>%
+      mutate(mean = mean(mean))
+
     p <- ggplot(data, aes(x = Ano, y = mean, color = Zonificacion))+
       geom_point()+
       stat_summary(fun.y = "mean", geom = "line")+
@@ -38,6 +52,10 @@ mpa_plot2 <- function(data, type){
       scale_color_brewer(palette = "Set1")
   }
   if (type == "b"){
+    data <- data %>%
+      group_by(Ano, Zonificacion) %>%
+      mutate(B = mean(B))
+
     p <- ggplot(data, aes(x = Ano, y = B, color = Zonificacion))+
       geom_point()+
       stat_summary(fun.y = "mean", geom = "line")+
@@ -45,6 +63,10 @@ mpa_plot2 <- function(data, type){
       scale_color_brewer(palette = "Set1")
   }
   if (type == "l"){
+    data <- data %>%
+      group_by(Ano, Zonificacion) %>%
+      mutate(stat = mean (stat))
+
     p <- ggplot(data, aes(x = Ano, y = stat, color = Zonificacion))+
       geom_point()+
       stat_summary(fun.y = "mean", geom = "line")+
