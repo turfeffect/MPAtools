@@ -10,41 +10,46 @@
 #'
 #' @author Villasenor-Derbez, J.C.
 
-mpa_plot2=function(data, type){
-  if (type=="s"){
-    p=ggplot(data, aes(x=Year, y=S, color=Zone))+
+mpa_plot2 <- function(data, type){
+
+  ## QUitar los stat_summary e incluir cachito de dplyr para que agrupe por zona
+
+  library(ggplot2)
+
+  if (type == "s"){
+    p <- ggplot(data, aes(x = Ano, y = S, color = Zonificacion))+
       geom_point()+
-      stat_summary(fun.y="mean", geom="line")+
+      stat_summary(fun.y = "mean", geom = "line")+
       theme_bw()+
-      scale_color_brewer(palette="Set1")
+      scale_color_brewer(palette = "Set1")
   }
-  if (type=="d"){
-    p=ggplot(data, aes(x=Year, y=D, color=Zone, factor=GeneroEspecie))+
+  if (type == "d"){
+    p <- ggplot(data, aes(x = Ano, y = D, color = Zonificacion, factor = GeneroEspecie))+
       geom_point()+
-      stat_summary(fun.y="mean", geom="line")+
+      stat_summary(fun.y = "mean", geom = "line")+
       theme_bw()+
-      scale_color_brewer(palette="Set1")
+      scale_color_brewer(palette = "Set1")
   }
-  if (type=="t"){
-    p=ggplot(data, aes(x=Year, y=mean, color=Zone))+
+  if (type == "t"){
+    p <- ggplot(data, aes(x = Ano, y = mean, color = Zonificacion))+
       geom_point()+
-      stat_summary(fun.y="mean", geom="line")+
+      stat_summary(fun.y = "mean", geom = "line")+
       theme_bw()+
-      scale_color_brewer(palette="Set1")
+      scale_color_brewer(palette = "Set1")
   }
-  if (type=="b"){
-    p=ggplot(data, aes(x=Year, y=B, color=Zone))+
+  if (type == "b"){
+    p <- ggplot(data, aes(x = Ano, y = B, color = Zonificacion))+
       geom_point()+
-      stat_summary(fun.y="mean", geom="line")+
+      stat_summary(fun.y = "mean", geom = "line")+
       theme_bw()+
-      scale_color_brewer(palette="Set1")
+      scale_color_brewer(palette = "Set1")
   }
-  if (type=="l"){
-    p=ggplot(data, aes(x=Year, y=stat, color=Zone))+
+  if (type == "l"){
+    p <- ggplot(data, aes(x = Ano, y = stat, color = Zonificacion))+
       geom_point()+
-      stat_summary(fun.y="mean", geom="line")+
+      stat_summary(fun.y = "mean", geom = "line")+
       theme_bw()+
-      scale_color_brewer(palette="Set1")
+      scale_color_brewer(palette = "Set1")
   }
 
   p

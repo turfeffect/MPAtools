@@ -14,14 +14,23 @@
 fish_biomass <- function(data, ab = NULL, location, species = NULL){
   library(dplyr)   #Load dplyr package
   library(tidyr)   #Load tidyr package
-  library(reshape) #Load reshape package
 
-  if(is.null(ab)){ #If no ab database is passed, loads default ab database
-    abtl <- data(abtl)       #Load the database of allometric  cgrowth parameters and trophic level
+  #If no ab database is passed, checks to see if the data passed has it within the columns or loads default ab database
+  if(is.null(ab) & any(colnames(data) == "a")){
+    ab <- ab
+  } else {
+    ab <- data(abtl)       #Load the database of allometric  growth parameters and trophic level
+    print(1)
+    data <- data %>% #Untable the data based on Abundance (one line per organism)
+      left_join(ab, by = "GeneroEspecie")
   }
 
-  data <- data %>% #Untable the data based on Abundance (one line per organism)
-    left_join(ab, by = "GeneroEspecie") %>%   #Join data with the database that as a, b and TL values
+  if(!is.null(ab)){
+    data <- data %>% #Untable the data based on Abundance (one line per organism)
+      left_join(ab, by = "GeneroEspecie")
+  }
+
+  data <- data %>%   #Join data with the database that has a and b parameters
     mutate(W = Abundancia*a*(Talla^b))                 #Create Weight variable
 
   if(is.null(species)){ #If a single species is not targeted, calculates biomass for all species
@@ -31,7 +40,7 @@ fish_biomass <- function(data, ab = NULL, location, species = NULL){
                Zonificacion,
                Transecto,
                GeneroEspecie) %>%          #Group by Ano, Zonificacion, Transect, and GenusSpeices
-      summarize(B = sum(W))                    #Create a sum of weight by species
+      summarize(B = sum(W, na.rm = T))                    #Create a sum of weight by species
   } else {                                 #If a species is selected
     B <- data %>%                             #Set B equals to data
       filter(Comunidad == location) %>%               #Filter by side
@@ -40,7 +49,7 @@ fish_biomass <- function(data, ab = NULL, location, species = NULL){
                Zonificacion,
                Transecto,
                GeneroEspecie) %>%         #Group by year, zone, transect number, and species
-      summarize(B = sum(W))                   #Create a sum of the weight for selected species
+      summarize(B = sum(W, na.rm = T))                   #Create a sum of the weight for selected species
   }
 
   return(B)                               #Return B

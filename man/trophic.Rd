@@ -4,7 +4,7 @@
 \alias{trophic}
 \title{Calculate mean trophic level}
 \usage{
-trophic(data, tl = NULL, site)
+trophic(data, tl = NULL, location)
 }
 \arguments{
 \item{data}{A dataframe that contains at least columns of Ano, Zonificacion (e.g. "Zona de pesca" or "Zona de no pesca"), Transecto, GeneroEspecie, and Abundancia.}
