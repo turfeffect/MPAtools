@@ -26,7 +26,7 @@ mpa_plot2 <- function(data, type){
     p <- ggplot(data, aes(x = Ano, y = S, color = Zonificacion))+
       geom_point()+
       geom_line()+
-      geom_errorbar(aes(ymin = S-SDS, ymax = S+SDS))
+      geom_errorbar(aes(ymin = S-SDS, ymax = S+SDS), width = 0.2)
       theme_bw()+
       scale_color_brewer(palette = "Set1")
   }
@@ -38,7 +38,7 @@ mpa_plot2 <- function(data, type){
     p <- ggplot(data, aes(x = Ano, y = D, color = Zonificacion))+
       geom_point()+
       geom_line()+
-      geom_errorbar(aes(ymin = D-DSD, ymax = D+DSD))+
+      geom_errorbar(aes(ymin = D-DSD, ymax = D+DSD), width = 0.2)+
       theme_bw()+
       scale_color_brewer(palette = "Set1")
   }
@@ -50,7 +50,7 @@ mpa_plot2 <- function(data, type){
     p <- ggplot(data, aes(x = Ano, y = mean, color = Zonificacion))+
       geom_point()+
       geom_line()+
-      geom_errorbar(aes(ymin = mean-mSD, ymax = mean+mSD))+
+      geom_errorbar(aes(ymin = mean-mSD, ymax = mean+mSD), width = 0.2)+
       theme_bw()+
       scale_color_brewer(palette = "Set1")
   }
@@ -62,7 +62,7 @@ mpa_plot2 <- function(data, type){
     p <- ggplot(data, aes(x = Ano, y = B, color = Zonificacion))+
       geom_point()+
       geom_line()+
-      geom_errorbar(aes(ymin = B-BSD, ymax = B+BSD))+
+      geom_errorbar(aes(ymin = B-BSD, ymax = B+BSD), width = 0.2)+
       theme_bw()+
       scale_color_brewer(palette = "Set1")
   }
@@ -74,7 +74,7 @@ mpa_plot2 <- function(data, type){
     p <- ggplot(data, aes(x = Ano, y = stat, color = Zonificacion))+
       geom_point()+
       geom_line()+
-      geom_errorbar(aes(ymin = stat-sSD, ymax = stat+sSD))+
+      geom_errorbar(aes(ymin = stat-sSD, ymax = stat+sSD), width = 0.2)+
       theme_bw()+
       scale_color_brewer(palette = "Set1")
   }
