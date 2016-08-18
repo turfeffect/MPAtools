@@ -21,55 +21,60 @@ mpa_plot2 <- function(data, type){
   if (type == "s"){
     data <- data %>%
       group_by(Ano, Zonificacion) %>%
-      mutate(S = mean(S, na.rm = T))
+      mutate(SDS = sd(S, na.rm = T), S = mean(S, na.rm = T))
 
     p <- ggplot(data, aes(x = Ano, y = S, color = Zonificacion))+
       geom_point()+
-      stat_summary(fun.y = "mean", geom = "line")+
+      geom_line()+
+      geom_errorbar(aes(ymin = S-SDS, ymax = S+SDS))
       theme_bw()+
       scale_color_brewer(palette = "Set1")
   }
   if (type == "d"){
     data <- data %>%
       group_by(Ano, Zonificacion) %>%
-      mutate(D = mean(D, na.rm = T))
+      mutate(DSD = sd(D, na.rm = T), D = mean(D, na.rm = T))
 
     p <- ggplot(data, aes(x = Ano, y = D, color = Zonificacion))+
       geom_point()+
-      stat_summary(fun.y = "mean", geom = "line")+
+      geom_line()+
+      geom_errorbar(aes(ymin = D-DSD, ymax = D+DSD))+
       theme_bw()+
       scale_color_brewer(palette = "Set1")
   }
   if (type == "t"){
     data <- data %>%
       group_by(Ano, Zonificacion) %>%
-      mutate(mean = mean(mean))
+      mutate(mSD = sd(mean, na.rm = T), mean = mean(mean, na.rm = T))
 
     p <- ggplot(data, aes(x = Ano, y = mean, color = Zonificacion))+
       geom_point()+
-      stat_summary(fun.y = "mean", geom = "line")+
+      geom_line()+
+      geom_errorbar(aes(ymin = mean-mSD, ymax = mean+mSD))+
       theme_bw()+
       scale_color_brewer(palette = "Set1")
   }
   if (type == "b"){
     data <- data %>%
       group_by(Ano, Zonificacion) %>%
-      mutate(B = mean(B))
+      mutate(BSD = sd(B, na.rm = T), B = mean(B, na.rm = T))
 
     p <- ggplot(data, aes(x = Ano, y = B, color = Zonificacion))+
       geom_point()+
-      stat_summary(fun.y = "mean", geom = "line")+
+      geom_line()+
+      geom_errorbar(aes(ymin = B-BSD, ymax = B+BSD))+
       theme_bw()+
       scale_color_brewer(palette = "Set1")
   }
   if (type == "l"){
     data <- data %>%
       group_by(Ano, Zonificacion) %>%
-      mutate(stat = mean (stat))
+      mutate(sSD = sd(stat, na.rm = T), stat = mean (stat, na.rm = T))
 
     p <- ggplot(data, aes(x = Ano, y = stat, color = Zonificacion))+
       geom_point()+
-      stat_summary(fun.y = "mean", geom = "line")+
+      geom_line()+
+      geom_errorbar(aes(ymin = stat-sSD, ymax = stat+sSD))+
       theme_bw()+
       scale_color_brewer(palette = "Set1")
   }
