@@ -26,7 +26,7 @@ mpa_plot2 <- function(data, type){
     p <- ggplot(data, aes(x = Ano, y = S, color = Zonificacion))+
       geom_point()+
       geom_line()+
-      geom_errorbar(aes(ymin = S-SDS, ymax = S+SDS), width = 0.2)
+      geom_errorbar(aes(ymin = S-SDS, ymax = S+SDS), width = 0.2)+
       theme_bw()+
       scale_color_brewer(palette = "Set1")
   }
