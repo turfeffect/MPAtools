@@ -4,19 +4,19 @@
 \alias{fish_size}
 \title{Calculate a descriptor for fish size}
 \usage{
-fish_size(data, site, stat = "mean", species = NULL)
+fish_size(data, location, stat = "mean", species = "")
 }
 \arguments{
-\item{data}{A dataframe that contains at least columns of Year, Zone (e.g. reserve or control site), Transect Number, GenusSpecies.}
+\item{data}{A dataframe that contains at least columns of Ano, Zonificacion (e.g. "Zona de pesca" or "Zona de no pesca"), Transecto, GeneroEspecie, Abundancia.}
 
-\item{site}{A quoted string that indicates the site. Options are "Rosario", "IslaNatividad", "IslaMagdalena".}
+\item{location}{A quoted string that indicates the location.}
 
 \item{stat}{A quoted string that indicates which statistic should be calculated. Options include "max", "min", "mean", and "median". User can also use "all" to calculate all of the above.}
 
-\item{species}{A quoted string that indicates a species for which density should be calulated. Common cases include "Paralabrax clathratus", "Semicossipjus pulcher", or "Anisotremus davidsonii".}
+\item{species}{A quoted string that indicates a species for which the size statistic should be calulated.}
 }
 \value{
-size A dataframe containing year, zone (insido or outside the reserve), transect number, species, and the statistic required.
+size A dataframe with columns for Ano, Zonificacion, Transect Number, Species, and the statistic required.
 }
 \description{
 Calulates mean, median, maximum, or minimum size (cm) for a list of species (or selected species, as indicated by parameter species) by year, and transect, for a speciic location.

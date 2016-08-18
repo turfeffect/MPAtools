@@ -2,28 +2,28 @@
 #'
 #' @description Calculates species richness, by transect, for a specific location.
 #'
-#' @param data A dataframe that contains at least columns of Year, Zone (e.g. reserve or control site), Transect Number, GenusSpecies.
-#' @param site A quoted string that indicates the site. Options are "Rosario", "IslaNatividad", "IslaMagdalena".
+#' @param data A dataframe that contains at least columns of Ano, Zonificacion (e.g. "Zona de pesca" or "Zona de no pesca"), Transecto, GeneroEspecie.
+#' @param location A quoted string that indicates the location.
 #'
-#'@return S A dataframe with columns for Year, Zone (inside outside the reserve), Transect Number, and Species richness (S).
+#'@return S A dataframe with columns for Ano, Zonificacion, Transecto, and Species richness (S).
 #'
 #'@export
 
-richness=function(data,site){
+richness <- function(data, location){
   library(dplyr) #Load dplyr
   library(tidyr) #Load tidyr
 
-  S=data %>% #Set S equal to data
-    filter(Site==site) %>% #Filter by site
-    group_by(Year,
-             Zone,
-             TransectNumber,
+  S <- data %>% #Set S equal to data
+    filter(Comunidad == location) %>% #Filter by location
+    group_by(Ano,
+             Zonificacion,
+             Transecto,
              GeneroEspecie) %>%
-    summarize(N=n()) %>%
-    group_by(Year,
-             Zone,
-             TransectNumber) %>%
-    summarize(S=n())
+    summarize(N = n()) %>%
+    group_by(Ano,
+             Zonificacion,
+             Transecto) %>%
+    summarize(S = n())
 
   return(S)
 }

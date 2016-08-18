@@ -4,15 +4,17 @@
 \alias{trophic}
 \title{Calculate mean trophic level}
 \usage{
-trophic(data, site)
+trophic(data, tl = NULL, site)
 }
 \arguments{
-\item{data}{A dataframe that contains at least columns of Year, Zone (e.g. reserve or control site), Transect Number, GenusSpecies.}
+\item{data}{A dataframe that contains at least columns of Ano, Zonificacion (e.g. "Zona de pesca" or "Zona de no pesca"), Transecto, GeneroEspecie, and Abundancia.}
 
-\item{site}{A quoted string that indicates the site. Options are "Rosario", "IslaNatividad", "IslaMagdalena".}
+\item{tl}{A dataframe with a column for each species (called GenusSpecies) and a column for the trophic level of each species (called TL).}
+
+\item{location}{A quoted string that indicates the location.}
 }
 \value{
-size A dataframe containing year, zone (insido or outside the reserve), transect number, species, and the statistic required.
+size A dataframe with columns for Ano, Zonificacion, Transect Number, Species, and mean trophic level.
 }
 \description{
 Calulates mean trophic level, by year and transect, for each location.

@@ -4,15 +4,15 @@
 \alias{richness}
 \title{Calculate species richness}
 \usage{
-richness(data, site)
+richness(data, location)
 }
 \arguments{
-\item{data}{A dataframe that contains at least columns of Year, Zone (e.g. reserve or control site), Transect Number, GenusSpecies.}
+\item{data}{A dataframe that contains at least columns of Ano, Zonificacion (e.g. "Zona de pesca" or "Zona de no pesca"), Transecto, GeneroEspecie.}
 
-\item{site}{A quoted string that indicates the site. Options are "Rosario", "IslaNatividad", "IslaMagdalena".}
+\item{location}{A quoted string that indicates the location.}
 }
 \value{
-S A dataframe with columns for Year, Zone (inside outside the reserve), Transect Number, and Species richness (S).
+S A dataframe with columns for Ano, Zonificacion, Transecto, and Species richness (S).
 }
 \description{
 Calculates species richness, by transect, for a specific location.

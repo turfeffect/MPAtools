@@ -4,20 +4,20 @@
 \alias{density}
 \title{Calculate density}
 \usage{
-density(data, site, species = NULL)
+density(data, location, species = NULL)
 }
 \arguments{
-\item{data}{A dataframe that contains at least columns of Year, Zone (e.g. reserve or control site), Transect Number, GenusSpecies.}
+\item{data}{A dataframe that contains at least columns of Ano, Zonificacion (e.g. "Zona de pesca" or "Zona de no pesca"), Transecto, GeneroEspecie, Abundancia.}
 
-\item{site}{A quoted string that indicates the site. Options are "Rosario", "IslaNatividad", "IslaMagdalena".}
+\item{location}{A quoted string that indicates the location.}
 
-\item{species}{A quoted string that indicates a species for which density should be calulated. Common cases include "Paralabrax clathratus", "Semicossipjus pulcher", or "Anisotremus davidsonii".}
+\item{species}{A quoted string that indicates a species for which density should be calulated.}
 }
 \value{
-D A dataframe with columns for Year, Zone (inside outside the reserve), Transect Number, Species, and Density (org/m2).
+D A dataframe with columns for Ano, Zonificacion, Transect Number, Species, and Density (org/m2).
 }
 \description{
-Calculates species density, by year and transect, for a specific location.
+Calculates species density (organisms / transect), by year and transect, for a specific location.
 }
 \author{
 Villaseñor-Derbez, J.C. <juancarlos.villader@gmail.com>

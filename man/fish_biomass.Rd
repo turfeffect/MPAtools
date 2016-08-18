@@ -4,17 +4,19 @@
 \alias{fish_biomass}
 \title{Calculate biomass}
 \usage{
-fish_biomass(data, site, species = NULL)
+fish_biomass(data, ab = NULL, location, species = NULL)
 }
 \arguments{
-\item{data}{A dataframe that contains at least columns of Year, Zone (e.g. reserve or control site), Transect Number, GenusSpecies.}
+\item{data}{A dataframe that contains at least columns of Ano, Zonificacion (e.g. "Zona de pesca" or "Zona de no pesca"), Transecto, GeneroEspecie.}
 
-\item{site}{A quoted string that indicates the site. Options are "Rosario", "IslaNatividad", "IslaMagdalena".}
+\item{ab}{A dataframe that contains the a and b allometric parameters for each species. Dataframe must have three columns: GeneroEspecie, a, b}
 
-\item{species}{A quoted string that indicates a species for which density should be calulated. Common cases include "Paralabrax clathratus", "Semicossipjus pulcher", or "Anisotremus davidsonii".}
+\item{location}{A quoted string that indicates the location.}
+
+\item{species}{A quoted string that indicates a species for which density should be calulated.}
 }
 \value{
-size A dataframe containing year, zone (insido or outside the reserve), transect number, species, and the statistic required.
+size A dataframe with columns for Ano, Zonificacion, Transect Number, Species, and fish biomass.
 }
 \description{
 Calulates biomass for a selected species or the entire dataset, by year and transect, for each location.

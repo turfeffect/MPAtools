@@ -26,8 +26,8 @@ did=function(data, year.imp, year.int=NULL){
   # Create dummy variables
   data$Year2[data$Year<=year.imp]=0   #Years prior to implementation are set to 0
   data$Year2[data$Year>year.imp]=1    #Years after implementation are set to 1
-  data$Zone2[data$Zone=="Reserva"]=1  #Reserve site (i.e. under treatment) is set to 1
-  data$Zone2[data$Zone=="Pesca"]=0   #Fished site (i.e. without treatment) is set to 0
+  data$Zone2[data$Zone=="Zona de no Pesca"]=1  #Reserve site (i.e. under treatment) is set to 1
+  data$Zone2[data$Zone=="Zona de Pesca"]=0   #Fished site (i.e. without treatment) is set to 0
 
   model=lm(Interest~Year2 + Zone2 +Year2*Zone2, data=data) #Calculate the linear model on the data
 
