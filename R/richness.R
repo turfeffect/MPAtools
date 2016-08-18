@@ -15,6 +15,7 @@ richness <- function(data, location){
 
   S <- data %>% #Set S equal to data
     filter(Comunidad == location) %>% #Filter by location
+    filter(Abundancia > 0) %>%
     group_by(Ano,
              Zonificacion,
              Transecto,

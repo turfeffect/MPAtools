@@ -17,12 +17,12 @@ fish_biomass <- function(data, ab = NULL, location, species = NULL){
   library(reshape) #Load reshape package
 
   if(is.null(ab)){ #If no ab database is passed, loads default ab database
-    data(abtl)       #Load the database of allometric  cgrowth parameters and trophic level
+    abtl <- data(abtl)       #Load the database of allometric  cgrowth parameters and trophic level
   }
 
   data <- data %>% #Untable the data based on Abundance (one line per organism)
     left_join(ab, by = "GeneroEspecie") %>%   #Join data with the database that as a, b and TL values
-    mutate(W = Abundancia*a*(SizeClass^b))                 #Create Weight variable
+    mutate(W = Abundancia*a*(Talla^b))                 #Create Weight variable
 
   if(is.null(species)){ #If a single species is not targeted, calculates biomass for all species
     B <- data %>% #Set b equals to data

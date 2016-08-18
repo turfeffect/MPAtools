@@ -23,7 +23,7 @@ density <- function(data, location, species = NULL){
                Zonificacion,
                Transecto,
                GeneroEspecie) %>% #Group by year, zone, transect number and species
-      summarize(D = suma(Abundancia))       #Calculate abundance by species by transect
+      summarize(D = sum(Abundancia))       #Calculate abundance by species by transect
   } else { #Else indicates that a single species has been selected
     D <- data %>%                    #Set D equal to data
       filter(Comunidad == location) %>%      #Filter by location

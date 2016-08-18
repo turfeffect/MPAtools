@@ -10,7 +10,7 @@
 #'
 #' @export
 
-trophic <- function(data, tl = NULL, site){
+trophic <- function(data, tl = NULL, location){
   library(dplyr)
   library(tidyr)
   library(reshape)
@@ -19,11 +19,11 @@ trophic <- function(data, tl = NULL, site){
     data(abtl)       #Load the database of allometric  cgrowth parameters and trophic level
   }
 
-  data <- untable(df=data, n=data$Abundancia) %>%
+  data <- untable(df=data, n = data$Abundancia) %>%
     left_join(abtl, by="GeneroEspecie")
 
   B <- data %>%
-    filter(Site == site) %>%
+    filter(Comunidad == location) %>%
     group_by(Ano, Zonificacion, Transecto) %>%
     summarize(mean = mean(TL, na.rm=TRUE))
 
