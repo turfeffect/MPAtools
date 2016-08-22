@@ -16,9 +16,12 @@ mpa_plot2 <- function(data, error.bars = F){
   library(dplyr)
   library(tidyr)
 
+  colnames(data) <- c("Ano", "Zonificacion", "Sitio", "Transecto", "Indicador")
+
+
   data <- data %>%
     group_by(Ano, Zonificacion) %>%
-    mutate(SD = sd(S, na.rm = T), Indicator = mean(S, na.rm = T))
+    mutate(SD = sd(Indicador, na.rm = T), Indicator = mean(Indicador, na.rm = T))
 
   p <- ggplot(data, aes(x = Ano, y = Indicator, color = Zonificacion))+
     geom_point()+
