@@ -19,8 +19,8 @@ did <- function(data, year.imp, year.int=NULL){
   colnames(data) <- c("Ano", "Zonificacion", "Sitio", "Transecto", "Indicador") #Reasign the new columnames to the data
 
   data <- data %>%              #Set data equal to data
-    filter(Ano2 == year.imp|   #Filter by year to keep only year before treatment
-             Ano2 == year.int) #and latest year or year indicated by user in year.int
+    filter(Ano == year.imp|   #Filter by year to keep only year before treatment
+             Ano == year.int) #and latest year or year indicated by user in year.int
 
   Ano <-  seq(1:length(data$Ano))
   Zonificacion <- seq(1:length(data$Ano))
