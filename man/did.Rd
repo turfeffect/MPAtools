@@ -14,9 +14,9 @@ did(data, year.imp, year.int = NULL)
 \item{year.int}{An integer that indicates the year of interest to perform the DiD analysis}
 }
 \value{
-Returns an objet of class "lm", where the value of the interactive term between Zone and Year (Zonificacion and Ano) is the difference-in-difference estimate.
+Returns an objet of class "lm", where the value of the interactive term between Zonificacion and Ano (Zonificacion and Ano) is the difference-in-difference estimate.
 }
 \description{
-Performs a difference-in-difference analysis on a series of data and compares the effect of the reserve. It is based on a linear model, where the variable of interest is regressed on dummy variables composed by Year and Zone, and an interaction term between both. The model is OutcomeVariable = b0 + b1*Year + b2*Zone + b3(Year*Zone). Here, Year indicates pre and post implementation of the reserve. Zone serves as a a way to compare a trend and allows to compare between the reserve and control sites. The DD value is indicated by the coefficient of the interaction term b3.
+Performs a difference-in-difference analysis on a series of data and compares the effect of the reserve. It is based on a linear model, where the variable of interest is regressed on dummy variables composed by Ano and Zonificacion, and an interaction term between both. The model is OutcomeVariable = b0 + b1*Ano + b2*Zonificacion + b3(Ano*Zonificacion). Here, Ano indicates pre and post implementation of the reserve. Zonificacion serves as a a way to compare a trend and allows to compare between the reserve and control sites. The DD value is indicated by the coefficient of the interaction term b3.
 }
 
