@@ -20,7 +20,6 @@ trophic <- function(data, tl = NULL, location){
     tl <- tl
   } else {
     tl <- data(tltl)       #Load the dattlase of allometric  growth parameters and trophic level
-    print(1)
     data <- untable(df = data, num = data$Abundancia) %>% #Untable the data based on Abundance (one line per organism)
       left_join(tl, by = "GeneroEspecie")  #Add TL values for each species
   }
