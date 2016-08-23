@@ -20,7 +20,6 @@ fish_biomass <- function(data, ab = NULL, location, species = NULL){
     ab <- ab
   } else {
     ab <- data(abtl)       #Load the database of allometric  growth parameters and trophic level
-    print(1)
     data <- data %>% #Add a and b parameters for each species
       left_join(ab, by = "GeneroEspecie")
   }
