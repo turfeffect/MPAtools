@@ -17,7 +17,7 @@ MPAreport_html <- function(peces, invertebrados, comunidad, reserva, control) {
 
   title <- paste("Análisis para", reserva, "en la comunidad pesquera", comunidad, sep = " ")
 
-  render(input = "ReporteSAM.Rmd",
+  render(input = "Reporte.Rmd",
          params = list(title = title,
                        peces = peces,
                        invertebrados = invertebrados,
