@@ -35,5 +35,5 @@ density <- function(data, location, species = NULL){
       summarize(D = sum(Abundancia))
   }
 
-  return(D)                       #Return D
+  return(as.data.frame(D))                       #Return D
 }

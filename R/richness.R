@@ -28,5 +28,5 @@ richness <- function(data, location){
              Transecto) %>%
     summarize(S = n())
 
-  return(S)
+  return(as.data.frame(S))
 }

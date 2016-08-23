@@ -52,6 +52,6 @@ fish_biomass <- function(data, ab = NULL, location, species = NULL){
       summarize(B = sum(W, na.rm = T))                   #Create a sum of the weight for selected species
   }
 
-  return(B)                               #Return B
+  return(as.data.frame(B))                               #Return B
 
 }

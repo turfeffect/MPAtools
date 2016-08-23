@@ -38,6 +38,6 @@ trophic <- function(data, tl = NULL, location){
     summarize(mean = mean(TL, na.rm=TRUE))
 
 
-  return(B)
+  return(as.data.frame(B))
 
 }

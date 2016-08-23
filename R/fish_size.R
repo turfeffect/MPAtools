@@ -45,4 +45,6 @@ fish_size <- function(data, location, stat="mean", species=""){
                      max = max(Talla),
                      min = min(Talla))
     }
+
+    return(as.data.frame(size))
 }
