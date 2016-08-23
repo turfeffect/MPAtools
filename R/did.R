@@ -28,8 +28,8 @@ did <- function(data, year.imp, year.int=NULL){
   # Create dummy variables
   Ano[data$Ano2 <= year.imp] <- 0   #Anos prior to implementation are set to 0
   Ano[data$Ano2 > year.imp] <- 1    #Anos after implementation are set to 1
-  Zonificacion[data$Zonificacion == "Pesca"] <- 1  #Reserve site (i.e. under treatment) is set to 1
-  Zonificacion[data$Zonificacion == "No Pesca"] <- 0   #Fished site (i.e. without treatment) is set to 0
+  Zonificacion[data$Zonificacion == "Pesca"] <- 0  #Reserve site (i.e. under treatment) is set to 0
+  Zonificacion[data$Zonificacion == "No Pesca"] <- 1   #Fished site (i.e. without treatment) is set to 1
 
   dummy.data <- data.frame(Ano = Ano,
                            Zonificacion = Zonificacion,
