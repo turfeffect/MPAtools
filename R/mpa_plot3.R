@@ -21,7 +21,7 @@ mpa_plot3 <- function(data, reserve = NULL, control = NULL, error.bars = F){
   library(tidyr)
 
   if (is.null(reserve)|is.null(control)){
-    error("You must specify reserve and control sites")
+    stop("You must specify reserve and control sites")
   }
 
   colnames(data) <- c("Ano", "Zonificacion", "Sitio", "Transecto", "Indicador")
