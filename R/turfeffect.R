@@ -6,7 +6,7 @@
 #'
 #' @return An object of class "lm"
 #'
-#' @examples
+#' @export
 
 turfeffect <- function (data, reserve, control){
 
