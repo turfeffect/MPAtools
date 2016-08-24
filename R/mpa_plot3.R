@@ -10,38 +10,39 @@
 #'
 #' @param error.bars A logical value indicating if error bars (1 SD) should be plotted.
 #'
+#' @param x.lab A string to be used as x-axis label
+#'
 #' @export
 #'
 #' @author Villasenor-Derbez, J.C.
 
-mpa_plot3 <- function(data, reserve = NULL, control = NULL, error.bars = F){
+mpa_plot3 <- function (data, reserve = NULL, control = NULL, error.bars = F, x.lab = "Indicador") {
 
   library(ggplot2)
   library(dplyr)
   library(tidyr)
 
-  if (is.null(reserve)|is.null(control)){
+  if (is.null(reserve) | is.null(control)) {
     stop("You must specify reserve and control sites")
   }
 
-  colnames(data) <- c("Ano", "Zonificacion", "Sitio", "Transecto", "Indicador")
+   colnames(data) <- c("Ano", "Zonificacion", "Sitio", "Transecto",
+                      "Indicador")
 
+  data <- data %>% filter(Sitio == reserve | Sitio == control) %>%
+    group_by(Ano, Zonificacion, Sitio) %>%
+    summarize(SD = sd(Indicador, na.rm = T),
+              Indicator = mean(Indicador, na.rm = T))
 
-  data <- data %>%
-    filter(Sitio == reserve | Sitio == control) %>%
-    group_by(Ano, Sitio) %>%
-    mutate(SD = sd(Indicador, na.rm = T), Indicator = mean(Indicador, na.rm = T))
+  p <- ggplot(data, aes(x = Ano, y = Indicator, color = Zonificacion, pch = Sitio)) +
+    geom_point() +
+    geom_line() +
+    theme_bw() +
+    scale_color_brewer(palette = "Set1")+
+    labs(x = x.lab, y = "Año")
 
-  p <- ggplot(data, aes(x = Ano, y = Indicator, color = Zonificacion, pch = Sitio))+
-    geom_point()+
-    geom_line()+
-    theme_bw()+
-    scale_color_brewer(palette = "Set1")
-
-  if (error.bars){
-    p <- p +
-      geom_errorbar(aes(ymin = Indicator-SD, ymax = Indicator+SD), width = 0.2)
+  if (error.bars) {
+    p <- p + geom_errorbar(aes(ymin = Indicator - SD, ymax = Indicator +
+                                 SD), width = 0.2)
   }
-
-  p
 }
