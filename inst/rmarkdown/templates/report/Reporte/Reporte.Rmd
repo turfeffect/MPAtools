@@ -52,7 +52,7 @@ mpa_plot3(Np, reserve = params$reserva, control = params$control)
 
 ```{r tabla densidad peces, results = 'asis'}
 
-stargazer(did(Np, 2012), type = "html")
+stargazer(turfeffect(Np, reserve = params$reserva, control = params$control), type = "html")
 
 ```
 
@@ -66,43 +66,43 @@ mpa_plot3(Sp, reserve = params$reserva, control = params$control)
 
 ```{r tabla riqueza peces, results = 'asis'}
 
-stargazer(did(Sp, 2012), type = "html")
+stargazer(turfeffect(Sp, reserve = params$reserva, control = params$control), type = "html")
 
 ```
 
 ## Biomasa
 
-```{r biomasa, eval = F, fig.cap="Biomasa promedio de peces"}
+```{r biomasa, fig.cap="Biomasa promedio de peces"}
 
 Bp <- fish_biomass(data = peces, location = params$comunidad)
 mpa_plot3(Bp, reserve = params$reserva, control = params$control)
 
 ```
 
-```{r, eval = F, results = 'asis'}
+```{r tabla de biomasa, results = 'asis'}
 
-stargazer(did(Bp, 2012), type = "html")
+stargazer(turfeffect(Bp, reserve = params$reserva, control = params$control), type = "html")
 
 ```
 
 ## Nivel trofico
 
-```{r nivel trofico, eval = F, fig.cap = "Nivel trofico promedio de peces"}
+```{r nivel trofico, fig.cap = "Nivel trofico promedio de peces"}
 
 NTp <- trophic(data = peces, location = params$comunidad)
 mpa_plot3(NTp, reserve = params$reserva, control = params$control)
 
 ```
 
-```{r, eval = F, results = 'asis'}
+```{r tabla de nivel trofico, results = 'asis'}
 
-stargazer(did(NTp, 2012), type = "html")
+stargazer(turfeffect(NTp, reserve = params$reserva, control = params$control), type = "html")
 
 ```
 
 ## Proporciones por Nivel trofico
 
-```{r proporciones trofico, results = 'asis', eval = F}
+```{r proporciones trofico, results = 'asis'}
 
 NT2 <- peces %>%
   filter(!is.na(NT)) %>%
@@ -121,33 +121,33 @@ ggplot(NT2, aes(x = Ano, y = Abundancia, factor = NT, color = NT))+
   facet_grid(.~Zonificacion)+
   scale_color_brewer(palette = "Set1")
 
-# Para zonas de pesca
-NT_P <- NT2 %>%
-  ungroup() %>%
-  filter(Zonificacion == "Zona de Pesca ") %>%
-  select(-Zonificacion) %>%
-  spread(Ano, Abundancia)
-
-rows <- unique(NT_P$NT)
-NT_P <- as.data.frame(NT_P[-1])
-rownames(NT_P) <- rows
-pro.NT_P<- prop.table(as.matrix(NT_P),2)
-XsqP <- chisq.test(pro.NT_P)
-print(XsqP)
-
-# Para zonas de no pesca
-NT_R <- NT2 %>%
-  ungroup() %>%
-  filter(Zonificacion == "Zona de no Pesca ") %>%
-  select(-Zonificacion) %>%
-  spread(Ano, Abundancia)
-
-rows <- unique(NT_R$NT)
-NT_R <- as.data.frame(NT_R[-1])
-rownames(NT_R) <- rows
-pro.NT_R<- prop.table(as.matrix(NT_R),2)
-XsqR <- chisq.test(pro.NT_R)
-print(XsqR)
+# # Para zonas de pesca
+# NT_P <- NT2 %>%
+#   ungroup() %>%
+#   filter(Zonificacion == "Pesca") %>%
+#   select(-Zonificacion) %>%
+#   spread(Ano, Abundancia)
+# 
+# rows <- unique(NT_P$NT)
+# NT_P <- as.data.frame(NT_P[-1])
+# rownames(NT_P) <- rows
+# pro.NT_P<- prop.table(as.matrix(NT_P),2)
+# XsqP <- chisq.test(pro.NT_P)
+# print(XsqP)
+# 
+# # Para zonas de no pesca
+# NT_R <- NT2 %>%
+#   ungroup() %>%
+#   filter(Zonificacion == "No Pesca") %>%
+#   select(-Zonificacion) %>%
+#   spread(Ano, Abundancia)
+# 
+# rows <- unique(NT_R$NT)
+# NT_R <- as.data.frame(NT_R[-1])
+# rownames(NT_R) <- rows
+# pro.NT_R<- prop.table(as.matrix(NT_R),2)
+# XsqR <- chisq.test(pro.NT_R)
+# print(XsqR)
 
 ```
 
@@ -169,32 +169,14 @@ mpa_plot3(Ni, reserve = params$reserva, control = params$control)
 
 ```{r tabla densidad invertebrados, results = 'asis'}
 
-stargazer(did(Ni, 2012), type = "html")
+stargazer(turfeffect(Ni, reserve = params$reserva, control = params$control), type = "html")
 
 ```
 
 
-## Riqueza
+# Especies de interes
 
-```{r, riqueza invertebrados, fig.cap = "Densidad promedio de invertebrados (org / transecto)"}
-
-Si <- richness(data = invertebrados, location = params$comunidad) %>%
-  filter(Sitio == params$reserva|
-           Sitio == params$control)
-
-mpa_plot3(Si, reserve = params$reserva, control = params$control)
-
-```
-
-```{r tabla riqueza invertebrados, results = 'asis'}
-
-stargazer(did(Si, 2012), type = "html")
-
-```
-
-# Especies de interés
-
-## Langosta
+## Langosta (*Panulirus argus*)
 
 ```{r}
 
@@ -208,6 +190,24 @@ mpa_plot3(Nlang, reserve = params$reserva, control = params$control)
 
 ```{r tabla densidad langosta, results = 'asis'}
 
-stargazer(did(Nlang, 2012), type = "html")
+stargazer(turfeffect(Nlang, reserve = params$reserva, control = params$control), type = "html")
+
+```
+
+## Caracol rosa (*Strombus gigas*)
+
+```{r, eval = F}
+
+car <- filter(invertebrados, GeneroEspecie == "Strombus gigas")
+
+Ncar <- density(car, location = params$comunidad)
+
+mpa_plot3(car, reserve = params$reserva, control = params$control)
+
+```
+
+```{r tabla densidad caracol, results = 'asis', eval = F}
+
+stargazer(turfeffect(Ncar, reserve = params$reserva, control = params$control), type = "html")
 
 ```
