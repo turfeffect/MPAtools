@@ -11,23 +11,11 @@
 #'
 #' @export
 
-fish_biomass <- function(data, ab = NULL, location, species = NULL){
+fish_biomass <- function(data, location, species = NULL){
   library(dplyr)   #Load dplyr package
   library(tidyr)   #Load tidyr package
 
   #If no ab database is passed, checks to see if the data passed has it within the columns or loads default ab database
-  if(is.null(ab) & any(colnames(data) == "a")){
-    ab <- ab
-  } else {
-    ab <- data(abtl)       #Load the database of allometric  growth parameters and trophic level
-    data <- data %>% #Add a and b parameters for each species
-      left_join(ab, by = "GeneroEspecie")
-  }
-
-  if(!is.null(ab)){
-    data <- data %>% #Add a and b parameters for each species
-      left_join(ab, by = "GeneroEspecie")
-  }
 
   data <- data %>%   #Join data with the database that has a and b parameters
     mutate(W = Abundancia*a*(Talla^b))                 #Create Weight variable

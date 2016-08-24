@@ -10,27 +10,12 @@
 #'
 #' @export
 
-trophic <- function(data, tl = NULL, location){
+trophic <- function(data, location){
   library(dplyr)
   library(tidyr)
   library(reshape)
 
-  #If no tl dattlase is passed, checks to see if the data passed has it within the columns or loads default tl dattlase
-  if(is.null(tl) & any(colnames(data) == "TL")){
-    tl <- tl
-  } else {
-    tl <- data(tltl)       #Load the dattlase of allometric  growth parameters and trophic level
-    data <- untable(df = data, num = data$Abundancia) %>% #Untable the data based on Abundance (one line per organism)
-      left_join(tl, by = "GeneroEspecie")  #Add TL values for each species
-  }
-
-  if(!is.null(tl)){
-    data <- untable(df = data, num = data&Abundancia) %>% #Untable the data based on Abundance (one line per organism)
-      left_join(tl, by = "GeneroEspecie")  #Add TL values for each species
-  }
-
-  B <- data %>%
-    filter(Comunidad == location) %>%
+  data <- filter(data, Comunidad == location) %>%
     group_by(Ano,
              Zonificacion,
              Sitio,
@@ -38,6 +23,6 @@ trophic <- function(data, tl = NULL, location){
     summarize(mean = mean(TL, na.rm=TRUE))
 
 
-  return(as.data.frame(B))
+  return(as.data.frame(data))
 
 }
