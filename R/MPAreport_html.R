@@ -9,7 +9,6 @@
 #' @param control A string
 #'
 #' @export
-#'
 
 MPAreport_html <- function(peces, invertebrados, comunidad, reserva, control) {
 
@@ -25,6 +24,6 @@ MPAreport_html <- function(peces, invertebrados, comunidad, reserva, control) {
                        reserva = reserva,
                        control = control
          ),
-         output_file = paste('Reporte', comunidad, reserva, '.html', sep='')
+         output_file = paste(getwd(), 'Reporte', comunidad, reserva, '.html', sep='')
   )
 }

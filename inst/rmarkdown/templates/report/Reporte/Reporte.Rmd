@@ -178,7 +178,7 @@ stargazer(did(Ni, 2012), type = "html")
 
 ```{r, riqueza invertebrados, fig.cap = "Densidad promedio de invertebrados (org / transecto)"}
 
-Si <- density(data = invertebrados, location = params$comunidad) %>%
+Si <- richness(data = invertebrados, location = params$comunidad) %>%
   filter(Sitio == params$reserva|
            Sitio == params$control)
 

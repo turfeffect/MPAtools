@@ -4,16 +4,16 @@
 \alias{fish_biomass}
 \title{Calculate biomass}
 \usage{
-fish_biomass(data, ab = NULL, location, species = NULL)
+fish_biomass(data, location, species = NULL)
 }
 \arguments{
 \item{data}{A dataframe that contains at least columns of Ano, Zonificacion (e.g. "Zona de pesca" or "Zona de no pesca"), Sitio, Transecto, GeneroEspecie. Columns for a and b parameters are optional, though heavily suggested to avoid errors in calculations (this package might not have all parameters for all species).}
 
-\item{ab}{An optional dataframe that contains the a and b allometric parameters for each species. Dataframe must have three columns: GeneroEspecie, a, b}
-
 \item{location}{A quoted string that indicates the location.}
 
 \item{species}{A quoted string that indicates a species for which density should be calulated.}
+
+\item{ab}{An optional dataframe that contains the a and b allometric parameters for each species. Dataframe must have three columns: GeneroEspecie, a, b}
 }
 \value{
 size A dataframe with columns for Ano, Zonificacion, Sitio, Transecto, GeneroEspecie, and fish biomass (B; in grams).
