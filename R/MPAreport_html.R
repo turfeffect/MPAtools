@@ -16,7 +16,7 @@ MPAreport_html <- function(peces, invertebrados, comunidad, reserva, control) {
 
   title <- paste("Análisis para", reserva, "en la comunidad pesquera", comunidad, sep = " ")
 
-  render(input = system.file("rmarkdown/templates/report/Reporte/Reporte.Rmd", package="MPAtools"),
+  render(input = "ReporteSAM.Rmd",
          params = list(title = title,
                        peces = peces,
                        invertebrados = invertebrados,
@@ -24,6 +24,7 @@ MPAreport_html <- function(peces, invertebrados, comunidad, reserva, control) {
                        reserva = reserva,
                        control = control
          ),
-         output_file = paste(getwd(), 'Reporte', comunidad, reserva, '.html', sep='')
+         output_file = paste('/Reporte', comunidad, reserva, '.html', sep=''),
+         output_dir = getwd()
   )
 }
