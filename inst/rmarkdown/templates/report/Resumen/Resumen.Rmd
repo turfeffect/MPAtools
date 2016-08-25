@@ -1,0 +1,77 @@
+---
+title: "Resumen"
+output: html_document
+params:
+  summary: ""
+---
+
+```{r, echo = F}
+
+summary <- list(Bio = list(P = list(Dp = list(est = 1,
+                                               p = 0),
+
+                                      Sp = list(est = 1,
+                                               p = 0),
+
+                                      Bp = list(est = 1,
+                                                p = 0),
+
+                                      NT = list(est = 1,
+                                                p = 0)),
+
+                             I = list(Di = list(est = 1,
+                                               p = 0),
+
+                                      Si = list(est = 1,
+                                               p = 0)),
+                             O = list(D = 0)),
+                  Soc = list(1),
+                  Gov = list(1))
+
+score <- function(x){
+  # est = x$est
+  # p = x$p
+  # 
+  # if (est > 0 & p < 0.05) {
+  #   score = "![](green.jpg)"
+  # }
+  # 
+  # if (est > 0 & p > 0.05){
+  #   score = "![](orange.jpg)"
+  # }
+score = "![](green.jpg)"
+  return(score)
+
+}
+
+```
+
+
+```{r}
+
+# Clase de indicador | Indicador | Valor 
+# -------------------|-----------|----------------------------
+# Biofísico          | Densidad P| `r score(summary$Bio$P$Dp)` 
+# Biofísico          | Densidad P| `r score(summary$Bio$P$Sp)` 
+# Biofísico          | Densidad P| `r score(summary$Bio$P$Bp)` 
+# Biofísico          | Densidad P| `r score(summary$Bio$P$Nt)` 
+# Biofísico          | Densidad P| `r score(summary$Bio$I$Dpi)` 
+# Biofísico          | Densidad P| `r score(summary$Bio$I$Si)` 
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
