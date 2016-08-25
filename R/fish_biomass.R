@@ -18,7 +18,7 @@ fish_biomass <- function(data, location, species = NULL){
   #If no ab database is passed, checks to see if the data passed has it within the columns or loads default ab database
 
   data <- data %>%   #Join data with the database that has a and b parameters
-    mutate(W = Abundancia*a*(Talla^b))                 #Create Weight variable
+    mutate(W = Abundancia*a*(Talla^b)/1000)                 #Create Weight variable
 
   if(is.null(species)){ #If a single species is not targeted, calculates biomass for all species
     B <- data %>% #Set b equals to data
