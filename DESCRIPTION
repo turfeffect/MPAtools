@@ -12,8 +12,8 @@ Imports: ggplot2,
     dplyr,
     tidyr,
     reshape,
-    ggplot2
-Suggests: knitr,
-    rmarkdown,
-    devtools
+    ggplot2,
+    knitr,
+    rmarkdown
+Suggests: devtools
 VignetteBuilder: knitr
