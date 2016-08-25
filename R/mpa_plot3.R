@@ -16,7 +16,7 @@
 #'
 #' @author Villasenor-Derbez, J.C.
 
-mpa_plot3 <- function (data, reserve = NULL, control = NULL, error.bars = F, x.lab = "Indicador") {
+mpa_plot3 <- function (data, reserve = NULL, control = NULL, error.bars = F, y.lab = "Indicador") {
 
   library(ggplot2)
   library(dplyr)
@@ -39,7 +39,7 @@ mpa_plot3 <- function (data, reserve = NULL, control = NULL, error.bars = F, x.l
     geom_line() +
     theme_bw() +
     scale_color_brewer(palette = "Set1")+
-    labs(x = x.lab, y = "Año")
+    labs(x = "Ano", y = y.lab)
 
   if (error.bars) {
     p <- p + geom_errorbar(aes(ymin = Indicator - SD, ymax = Indicator +
