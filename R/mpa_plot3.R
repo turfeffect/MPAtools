@@ -45,4 +45,7 @@ mpa_plot3 <- function (data, reserve = NULL, control = NULL, error.bars = F, x.l
     p <- p + geom_errorbar(aes(ymin = Indicator - SD, ymax = Indicator +
                                  SD), width = 0.2)
   }
+
+  p
+
 }
