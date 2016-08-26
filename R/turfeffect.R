@@ -17,7 +17,9 @@ turfeffect <- function (data, reserve, control){
 
   colnames(data) <- columnas
 
-  data <- filter(data, Sitio == reserve | Sitio == control)
+  data <- filter(data, Sitio == reserve | Sitio == control) %>%
+    group_by(Ano, Zonificacion, Sitio) %>%
+    summarize(Indicador = mean(Indicador, na.rm = T))
 
   data$Zona[data$Zonificacion == "Pesca"] <- 0
   data$Zona[data$Zonificacion == "No Pesca"] <- 1
