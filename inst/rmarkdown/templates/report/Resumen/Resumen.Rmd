@@ -5,60 +5,15 @@ params:
   summary: ""
 ---
 
-```{r, echo = F}
-
-summary <- list(Bio = list(P = list(Dp = list(est = 1,
-                                               p = 0),
-
-                                      Sp = list(est = 1,
-                                               p = 0),
-
-                                      Bp = list(est = 1,
-                                                p = 0),
-
-                                      NT = list(est = 1,
-                                                p = 0)),
-
-                             I = list(Di = list(est = 1,
-                                               p = 0),
-
-                                      Si = list(est = 1,
-                                               p = 0)),
-                             O = list(D = 0)),
-                  Soc = list(1),
-                  Gov = list(1))
-
-score <- function(x){
-  # est = x$est
-  # p = x$p
-  # 
-  # if (est > 0 & p < 0.05) {
-  #   score = "![](green.jpg)"
-  # }
-  # 
-  # if (est > 0 & p > 0.05){
-  #   score = "![](orange.jpg)"
-  # }
-score = "![](green.jpg)"
-  return(score)
-
-}
-
-```
+Clase de indicador | Indicador      | Valor
+-------------------|----------------|------------------------------------------
+Bio                | Densidad P     | `r knitr::include_graphics(params$summary$Bio$P$Dp)`
+Bio                | Riqueza P      | `r knitr::include_graphics(params$summary$Bio$P$Sp)`
+Bio                | Biomasa P      | `r knitr::include_graphics(params$summary$Bio$P$Bp)`
+Bio                | Nivel Trofico P| `r knitr::include_graphics(params$summary$Bio$P$NT)`
+Bio                | Densidad I     | `r knitr::include_graphics(params$summary$Bio$I$Di)`
 
 
-```{r}
-
-# Clase de indicador | Indicador | Valor 
-# -------------------|-----------|----------------------------
-# Biofísico          | Densidad P| `r score(summary$Bio$P$Dp)` 
-# Biofísico          | Densidad P| `r score(summary$Bio$P$Sp)` 
-# Biofísico          | Densidad P| `r score(summary$Bio$P$Bp)` 
-# Biofísico          | Densidad P| `r score(summary$Bio$P$Nt)` 
-# Biofísico          | Densidad P| `r score(summary$Bio$I$Dpi)` 
-# Biofísico          | Densidad P| `r score(summary$Bio$I$Si)` 
-
-```
 
 
 

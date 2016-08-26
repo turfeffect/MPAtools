@@ -21,10 +21,15 @@ turfeffect <- function (data, reserve, control){
     group_by(Ano, Zonificacion, Sitio) %>%
     summarize(Indicador = mean(Indicador, na.rm = T))
 
-  data$Zona[data$Zonificacion == "Pesca"] <- 0
-  data$Zona[data$Zonificacion == "No Pesca"] <- 1
+  dummy.data <- data.frame(Ano = data$Ano,
+                           Zona = NA,
+                           Sitio = data$Sitio,
+                           Indicador = data$Indicador)
 
-  model <- lm(Indicador ~ Ano + Zona, data = data)
+  dummy.data$Zona[data$Zonificacion == "Pesca"] <- 0
+  dummy.data$Zona[data$Zonificacion == "No Pesca"] <- 1
+
+  model <- lm(Indicador ~ Ano + Zona, data = dummy.data)
 
   return(model)
 }
