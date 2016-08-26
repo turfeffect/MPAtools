@@ -42,7 +42,7 @@ MPAreport_html <- function(peces, invertebrados, comunidad, reserva, control) {
 
                   Gov = list(1))
 
-  title <- paste("Análisis para", reserva, "en la comunidad pesquera", comunidad, sep = " ")
+  title <- paste("Analisis para", reserva, "en la comunidad pesquera", comunidad, sep = " ")
 
   render(input = system.file("rmarkdown/templates/report/Reporte/Reporte.Rmd", package="MPAtools"),
          params = list(title = title,

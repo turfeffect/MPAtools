@@ -39,6 +39,18 @@ suppressPackageStartupMessages({
 
 # Resumen
 
+**Leyenda**
+
+![Positivo y significativo](green2.jpg)
+
+![Positivo y no significativo](green1.jpg)
+
+![Sin cambios](yellow.jpg)
+
+![Negativo y no significativo](orange.jpg)
+
+![Negativo y significativo](red.jpg)
+
 
 Clase de indicador | Indicador               | Valor
 -------------------|--------------------------|-----------------------------------------------------
@@ -134,7 +146,7 @@ ggplot(NT2, aes(x = Ano, y = Abundancia, factor = NT, color = NT))+
   theme_bw()+
   facet_grid(.~Zonificacion)+
   scale_color_brewer(palette = "Set1")+
-  labs(x = "Año", y = "Densidad (org / transecto)")
+  labs(x = "Ano", y = "Densidad (org / transecto)")
 
 # # Para zonas de pesca
 # NT_P <- NT2 %>%
