@@ -39,13 +39,21 @@ suppressPackageStartupMessages({
 
 # Resumen
 
-Color                       | Interpretacion
-----------------------------|----------------
-Positivo y significativo    | ![](green2.jpg)
-Positivo y no significativo | ![](green1.jpg)
-Sin cambios                 | ![](yellow.jpg)
-Negativo y no significativo | ![](orange.jpg)
-Negativo y significativo    | ![](red.jpg)
+<center>
+
+**Leyenda**
+
+----
+
+![Negativo y significativo](red.jpg)
+![Negativo y no significativo](orange.jpg)
+![Sin cambios](yellow.jpg)
+![Positivo y no significativo](green1.jpg)
+![Positivo y significativo](green2.jpg)
+
+----
+
+</center>
 
 
 Clase de indicador | Indicador               | Valor
