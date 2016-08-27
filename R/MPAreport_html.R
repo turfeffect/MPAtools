@@ -22,10 +22,10 @@ MPAreport_html <- function(peces, invertebrados, comunidad, reserva, control) {
   Di <- summary(turfeffect(density(invertebrados, comunidad), reserva, control))
 
   lang <- filter(invertebrados, GeneroEspecie == "Panulirus argus")
-  Nlang <- summary(turfeffect(density(lang, comunidad)))
+  Nlang <- summary(turfeffect(density(lang, comunidad), reserva, control))
 
   car <- filter(invertebrados, GeneroEspecie == "Strombus gigas")
-  Ncar <- summary(turfeffect(density(car, comunidad)))
+  Ncar <- summary(turfeffect(density(car, comunidad), reserva, control))
 
   summary <- list(Bio = list(P = list(Dp = score(x = data.frame(est = coefficients(Dp)[3],
                                                                 p = coefficients(Dp)[12])),
