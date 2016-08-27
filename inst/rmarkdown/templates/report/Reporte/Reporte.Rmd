@@ -63,6 +63,8 @@ Bio                | Riqueza Peces           | `r knitr::include_graphics(params
 Bio                | Biomasa Peces           | `r knitr::include_graphics(params$summary$Bio$P$Bp)`
 Bio                | Nivel Trofico Peces     | `r knitr::include_graphics(params$summary$Bio$P$NT)`
 Bio                | Densidad Iinvertebrados | `r knitr::include_graphics(params$summary$Bio$I$Di)`
+Bio                | Densidad de langostas   | `r knitr::include_graphics(params$summary$Bio$O$L)`
+Bio                | Densidad de caracol rosa| `r knitr::include_graphics(params$summary$Bio$O$C)`
 
 <center>
 
@@ -118,7 +120,7 @@ stargazer(turfeffect(Bp, reserve = params$reserva, control = params$control), de
 ```{r nivel trofico, fig.cap = "Nivel trofico promedio de peces."}
 
 NTp <- trophic(data = peces, location = params$comunidad)
-mpa_plot3(NTp, reserve = params$reserva, control = params$control, y.lab = "Nivel trófico")
+mpa_plot3(NTp, reserve = params$reserva, control = params$control, y.lab = "Nivel trofico")
 
 ```
 

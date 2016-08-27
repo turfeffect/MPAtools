@@ -1,3 +1,11 @@
+#' Scoring system
+#'
+#' @param x
+#'
+#' @return
+#' @export
+#'
+
 score <- function(x){
   est = x$est
   p = x$p
