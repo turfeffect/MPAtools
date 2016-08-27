@@ -2,7 +2,7 @@
 #'
 #' @param x
 #'
-#' @return
+#' @return score
 #' @export
 #'
 
