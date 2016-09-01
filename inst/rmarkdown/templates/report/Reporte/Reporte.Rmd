@@ -9,10 +9,11 @@ params:
   summary: ""
 output: 
   html_document: 
+    fig_caption: yes
     toc: yes
     toc_float:
-      collapsed: false
-      smooth_scroll: false
+      collapsed: no
+      smooth_scroll: no
 ---
 
 ---
@@ -74,15 +75,16 @@ Bio                | Densidad de caracol rosa| `r knitr::include_graphics(params
 
 ```{r densidad peces, fig.cap = "Densidad promedio de peces (org / transecto)."}
 
-Np <- density(data = peces, location = params$comunidad)
+Np <- density(data = peces, location = params$comunidad) %>%
+  mutate(D = D/60)
 
-mpa_plot3(Np, reserve = params$reserva, control = params$control, y.lab = "Densidad (org / transecto)")
+mpa_plot3(Np, reserve = params$reserva, control = params$control, y.lab = "Densidad (org / m^2)")
 
 ```
 
 ```{r tabla densidad peces, results = 'asis'}
 
-stargazer(turfeffect(Np, reserve = params$reserva, control = params$control), dep.var.labels = "Densidad (org / transecto)", type = "html", dep.var.caption = "", report = "vc*", single.row = T, omit.stat = c("adj.rsq", "n"), digits = 2, df = F, covariate.labels = c("Ano", "**Zona**", "Constante"))
+stargazer(turfeffect(Np, reserve = params$reserva, control = params$control), dep.var.labels = "Densidad (org / transecto)", type = "html", dep.var.caption = "", report = "vc*", single.row = T, omit.stat = c("adj.rsq", "n"), digits = 2, df = F, covariate.labels = c("Ano", "**Zona**", "Constante"), star.char = "+")
 
 ```
 
