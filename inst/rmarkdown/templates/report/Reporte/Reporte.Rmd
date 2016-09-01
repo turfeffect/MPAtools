@@ -88,7 +88,7 @@ mpa_plot3(Np, reserve = params$reserva, control = params$control, y.lab = "Densi
 
 ```{r tabla densidad peces, results = 'asis'}
 
-stargazer(turfeffect(Np, reserve = params$reserva, control = params$control), dep.var.labels = "Densidad (org / transecto)", type = "html", dep.var.caption = "", report = "vc*", single.row = T, omit.stat = c("adj.rsq", "n"), digits = 2, df = F, covariate.labels = c("Ano", "**Zona**", "Constante"), notes = "\*p < 0.1, \*0\*p < 0.05, \*\*\*p < 0.001", notes.append = FALSE)
+stargazer(turfeffect(Np, reserve = params$reserva, control = params$control), dep.var.labels = "Densidad (org / transecto)", type = "html", dep.var.caption = "", report = "vc*", single.row = T, omit.stat = c("adj.rsq", "n"), digits = 2, df = F, covariate.labels = c("Ano", "**Zona**", "Constante"), notes = "*p < 0.1, **p < 0.05, ***p < 0.001", notes.append = FALSE)
 
 ```
 
