@@ -47,7 +47,7 @@ suppressPackageStartupMessages({
 ----
 
 Negativo y significativo | Negativo y no significativo | Sin cambios | Positivo y no significativo | Positivo y significativo
--------------------------------------------------------------------------------------------------------------------------------
+-------------------------|-----------------------------|-------------|-----------------------------|--------------------------
 ![](red.jpg) | ![](orange.jpg) | ![](yellow.jpg) | ![](green1.jpg) | ![](green2.jpg)
 
 ----
