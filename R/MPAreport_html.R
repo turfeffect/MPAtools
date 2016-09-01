@@ -27,6 +27,10 @@ MPAreport_html <- function(peces, invertebrados, comunidad, reserva, control) {
   car <- filter(invertebrados, GeneroEspecie == "Strombus gigas")
   Ncar <- summary(turfeffect(density(car, comunidad), reserva, control))
 
+  lut <- filter(peces, Genero == "Lutjanus")
+  Nlut <- summary(turfeffect(density(lut, comunidad), reserva, control))
+  Blut <- summary(turfeffect(fish_biomass(lut, comunidad), reserva, control))
+
   summary <- list(Bio = list(P = list(Dp = score(x = data.frame(est = coefficients(Dp)[3],
                                                                 p = coefficients(Dp)[12])),
 
@@ -45,7 +49,11 @@ MPAreport_html <- function(peces, invertebrados, comunidad, reserva, control) {
                              O = list(L = score(x = data.frame(est = coefficients(Nlang)[3],
                                                                p = coefficients(Nlang)[12])),
                                       C = score(x = data.frame(est = coefficients(Ncar)[3],
-                                                               p = coefficients(Ncar)[12])))),
+                                                               p = coefficients(Ncar)[12])),
+                                      P = score(x = data.frame(est = coefficients(Nlut)[3],
+                                                               p = coefficients(Nlut)[12])),
+                                      Pb = score(x = data.frame(est = coefficients(Blut)[3],
+                                                                p = coefficients(Blut)[12])))),
 
                   Soc = list(1),
 

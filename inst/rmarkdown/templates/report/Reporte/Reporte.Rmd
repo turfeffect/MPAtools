@@ -70,6 +70,9 @@ Bio                | Nivel Trofico Peces     | `r knitr::include_graphics(params
 Bio                | Densidad Iinvertebrados | `r knitr::include_graphics(params$summary$Bio$I$Di)`
 Bio                | Densidad de langostas   | `r knitr::include_graphics(params$summary$Bio$O$L)`
 Bio                | Densidad de caracol rosa| `r knitr::include_graphics(params$summary$Bio$O$C)`
+Bio                | Densidad de pargos      | `r knitr::include_graphics(params$summary$Bio$O$P)`
+Bio                | Densidad de pargos      | `r knitr::include_graphics(params$summary$Bio$O$Pb)`
+
 
 <center>
 
@@ -250,6 +253,46 @@ mpa_plot3(Ncar, reserve = params$reserva, control = params$control, y.lab = "Den
 stargazer(turfeffect(Ncar, reserve = params$reserva, control = params$control), dep.var.labels = "Densidad (org / transecto)", type = "html", dep.var.caption = "", report = "vc*", single.row = T, omit.stat = c("adj.rsq", "n"), digits = 2, df = F, covariate.labels = c("Ano", "**Zona**", "Constante"), notes = "+p < 0.1, ++p<0.05, +++p<0.001", notes.append = FALSE, star.char = "+")
 
 ```
+
+## Pargos (*Lutjanus sp.*)
+
+### Densidad
+
+```{r}
+
+lutjanus <- peces %>%
+  filter(Genero == "Lutjanus")
+
+Nlut <- density(lutjanus, location = params$comunidad)
+
+mpa_plot3(Nlut, reserve = params$reserva, control = params$control, y.lab = "Densidad de pargos (org / transecto)")
+
+```
+
+```{r}
+
+stargazer(turfeffect(Nlut, reserve = params$reserva, control = params$control), dep.var.labels = "Densidad (org / transecto)", type = "html", dep.var.caption = "", report = "vc*", single.row = T, omit.stat = c("adj.rsq", "n"), digits = 2, df = F, covariate.labels = c("Ano", "**Zona**", "Constante"), notes = "+p < 0.1, ++p<0.05, +++p<0.001", notes.append = FALSE, star.char = "+")
+
+```
+
+
+### Biomasa
+
+```{r}
+
+Blut <- fish_biomass(lutjanus, location = params$comunidad)
+
+mpa_plot3(Nlut, reserve = params$reserva, control = params$control, y.lab = "Biomasa de pargos (Kg / transecto)")
+
+```
+
+```{r}
+
+stargazer(turfeffect(Nlut, reserve = params$reserva, control = params$control), dep.var.labels = "Biomasa (Kg / transecto)", type = "html", dep.var.caption = "", report = "vc*", single.row = T, omit.stat = c("adj.rsq", "n"), digits = 2, df = F, covariate.labels = c("Ano", "**Zona**", "Constante"), notes = "+p < 0.1, ++p<0.05, +++p<0.001", notes.append = FALSE, star.char = "+")
+
+```
+
+
 
 </center>
 
