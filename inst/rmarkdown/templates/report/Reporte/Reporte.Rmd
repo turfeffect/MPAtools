@@ -46,9 +46,7 @@ suppressPackageStartupMessages({
 
 ----
 
-Negativo y significativo | Negativo y no significativo | Sin cambios | Positivo y no significativo | Positivo y significativo
--------------------------|-----------------------------|-------------|-----------------------------|--------------------------
-![](red.jpg) | ![](orange.jpg) | ![](yellow.jpg) | ![](green1.jpg) | ![](green2.jpg)
+![](legend.jpg)
 
 ----
 
@@ -56,7 +54,7 @@ Negativo y significativo | Negativo y no significativo | Sin cambios | Positivo 
 
 
 Clase de indicador | Indicador               | Valor
--------------------|--------------------------|-----------------------------------------------------
+-------------------|-------------------------|-----------------------------------------------------
 Bio                | Densidad Peces          | `r knitr::include_graphics(params$summary$Bio$P$Dp)`
 Bio                | Riqueza Peces           | `r knitr::include_graphics(params$summary$Bio$P$Sp)`
 Bio                | Biomasa Peces           | `r knitr::include_graphics(params$summary$Bio$P$Bp)`
@@ -227,9 +225,9 @@ stargazer(turfeffect(Nlang, reserve = params$reserva, control = params$control),
 
 ```
 
-## Caracol rosa (*Strombus gigas*)
+## Caracol rosa (*Lobatus gigas*)
 
-```{r, fig.cap = "Densidad promedio de caracol rosa (*Strombus gigas*; org / transecto)"}
+```{r, fig.cap = "Densidad promedio de caracol rosa (*Lobatus gigas*; org / transecto)"}
 
 car <- filter(invertebrados, GeneroEspecie == "Strombus gigas")
 
