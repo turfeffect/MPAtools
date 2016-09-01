@@ -38,6 +38,14 @@ suppressPackageStartupMessages({
 
 ```
 
+<style type="text/css">
+.table {
+
+    width: 40%;
+
+}
+</style>
+
 # Resumen
 
 <center>
