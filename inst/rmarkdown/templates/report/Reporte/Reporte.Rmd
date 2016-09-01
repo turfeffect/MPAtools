@@ -130,7 +130,7 @@ stargazer(turfeffect(NTp, reserve = params$reserva, control = params$control), d
 
 ## Densidades por Nivel trofico
 
-```{r proporciones trofico, results = 'asis', fig.cap = "Abundancia (org / transecto)"}
+```{r proporciones trofico, results = 'asis', fig.cap = "Proporciones de nivel trófico (org / transecto)"}
 
 NT2 <- peces %>%
   filter(Comunidad == params$comunidad) %>%
