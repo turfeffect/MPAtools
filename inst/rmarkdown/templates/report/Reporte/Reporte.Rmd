@@ -46,7 +46,7 @@ suppressPackageStartupMessages({
 
 ----
 
-![](legend.jpg)
+![](legend.png)
 
 ----
 
