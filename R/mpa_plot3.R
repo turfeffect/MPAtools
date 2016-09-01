@@ -39,7 +39,7 @@ mpa_plot3 <- function (data, reserve = NULL, control = NULL, error.bars = F, y.l
     geom_line() +
     theme_bw() +
     scale_color_brewer(palette = "Set1")+
-    labs(x = "Ano", y = expression(y.lab))
+    labs(x = "Ano", y = y.lab)
 
   if (error.bars) {
     p <- p + geom_errorbar(aes(ymin = Indicator - SD, ymax = Indicator +
