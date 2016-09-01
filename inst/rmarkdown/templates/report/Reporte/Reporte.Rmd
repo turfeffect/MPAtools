@@ -286,7 +286,7 @@ mpa_plot3(Nlut, reserve = params$reserva, control = params$control, y.lab = "Bio
 
 ```
 
-```{r tabla biomasa pargos}
+```{r tabla biomasa pargos, results = 'asis'}
 
 stargazer(turfeffect(Nlut, reserve = params$reserva, control = params$control), dep.var.labels = "Biomasa (Kg / transecto)", type = "html", dep.var.caption = "", report = "vc*", single.row = T, omit.stat = c("adj.rsq", "n"), digits = 2, df = F, covariate.labels = c("Ano", "**Zona**", "Constante"), notes = "+p < 0.1, ++p<0.05, +++p<0.001", notes.append = FALSE, star.char = "+")
 
