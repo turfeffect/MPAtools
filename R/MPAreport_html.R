@@ -31,32 +31,32 @@ MPAreport_html <- function(peces, invertebrados, comunidad, reserva, control) {
   Nlut <- summary(turfeffect(density(lut, comunidad), reserva, control))
   Blut <- summary(turfeffect(fish_biomass(lut, comunidad), reserva, control))
 
-  summary <- list(Bio = list(P = list(Dp = score(x = data.frame(est = coefficients(Dp)[3],
-                                                                p = coefficients(Dp)[15])),
+  summary <- list(Bio = list(P = list(Dp = score(x = data.frame(est = coefficients(Dp)[4],
+                                                                p = coefficients(Dp)[16])),
 
-                                      Sp = score(x = data.frame(est = coefficients(Sp)[3],
-                                                                p = coefficients(Sp)[15])),
+                                      Sp = score(x = data.frame(est = coefficients(Sp)[4],
+                                                                p = coefficients(Sp)[16])),
 
-                                      Bp = score(x = data.frame(est = coefficients(Bp)[3],
-                                                                p = coefficients(Bp)[15])),
+                                      Bp = score(x = data.frame(est = coefficients(Bp)[4],
+                                                                p = coefficients(Bp)[16])),
 
-                                      NT = score(x = data.frame(est = coefficients(NT)[3],
-                                                                p = coefficients(NT)[15]))),
+                                      NT = score(x = data.frame(est = coefficients(NT)[4],
+                                                                p = coefficients(NT)[16]))),
 
-                             I = list(Di = score(x = data.frame(est = coefficients(Di)[3],
-                                                                p = coefficients(Di)[15]))),
+                             I = list(Di = score(x = data.frame(est = coefficients(Di)[4],
+                                                                p = coefficients(Di)[16]))),
 
-                             O = list(L = score(x = data.frame(est = coefficients(Nlang)[3],
-                                                               p = coefficients(Nlang)[15])),
+                             O = list(L = score(x = data.frame(est = coefficients(Nlang)[4],
+                                                               p = coefficients(Nlang)[16])),
 
-                                      C = score(x = data.frame(est = coefficients(Ncar)[3],
-                                                               p = coefficients(Ncar)[15])),
+                                      C = score(x = data.frame(est = coefficients(Ncar)[4],
+                                                               p = coefficients(Ncar)[16])),
 
-                                      P = score(x = data.frame(est = coefficients(Nlut)[3],
-                                                               p = coefficients(Nlut)[15])),
+                                      P = score(x = data.frame(est = coefficients(Nlut)[4],
+                                                               p = coefficients(Nlut)[16])),
 
-                                      Pb = score(x = data.frame(est = coefficients(Blut)[3],
-                                                                p = coefficients(Blut)[15])))),
+                                      Pb = score(x = data.frame(est = coefficients(Blut)[4],
+                                                                p = coefficients(Blut)[16])))),
 
                   Soc = list(1),
 
