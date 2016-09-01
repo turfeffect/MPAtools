@@ -258,7 +258,7 @@ stargazer(turfeffect(Ncar, reserve = params$reserva, control = params$control), 
 
 ### Densidad
 
-```{r}
+```{r densidad de pargos, fig.cap = "Densidad promedio de pargos (*Lutjanus sp.; org / transecto*)"}
 
 lutjanus <- peces %>%
   filter(Genero == "Lutjanus")
@@ -269,7 +269,7 @@ mpa_plot3(Nlut, reserve = params$reserva, control = params$control, y.lab = "Den
 
 ```
 
-```{r}
+```{r, tabla densidad pargos, results = 'asis'}
 
 stargazer(turfeffect(Nlut, reserve = params$reserva, control = params$control), dep.var.labels = "Densidad (org / transecto)", type = "html", dep.var.caption = "", report = "vc*", single.row = T, omit.stat = c("adj.rsq", "n"), digits = 2, df = F, covariate.labels = c("Ano", "**Zona**", "Constante"), notes = "+p < 0.1, ++p<0.05, +++p<0.001", notes.append = FALSE, star.char = "+")
 
@@ -278,7 +278,7 @@ stargazer(turfeffect(Nlut, reserve = params$reserva, control = params$control), 
 
 ### Biomasa
 
-```{r}
+```{r biomasa de pargos, fig.cap = "Densidad promedio de pargos (*Lutjanus sp.; Kg / transecto*)"}
 
 Blut <- fish_biomass(lutjanus, location = params$comunidad)
 
@@ -286,7 +286,7 @@ mpa_plot3(Nlut, reserve = params$reserva, control = params$control, y.lab = "Bio
 
 ```
 
-```{r}
+```{r tabla biomasa pargos}
 
 stargazer(turfeffect(Nlut, reserve = params$reserva, control = params$control), dep.var.labels = "Biomasa (Kg / transecto)", type = "html", dep.var.caption = "", report = "vc*", single.row = T, omit.stat = c("adj.rsq", "n"), digits = 2, df = F, covariate.labels = c("Ano", "**Zona**", "Constante"), notes = "+p < 0.1, ++p<0.05, +++p<0.001", notes.append = FALSE, star.char = "+")
 
