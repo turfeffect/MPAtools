@@ -282,7 +282,7 @@ stargazer(turfeffect(Nlut, reserve = params$reserva, control = params$control), 
 
 Blut <- fish_biomass(lutjanus, location = params$comunidad)
 
-mpa_plot3(Nlut, reserve = params$reserva, control = params$control, y.lab = "Biomasa de pargos (Kg / transecto)")
+mpa_plot3(Blut, reserve = params$reserva, control = params$control, y.lab = "Biomasa de pargos (Kg / transecto)")
 
 ```
 
