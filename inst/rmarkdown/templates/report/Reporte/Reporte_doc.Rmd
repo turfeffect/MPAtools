@@ -1,0 +1,308 @@
+---
+output:
+  word_document:
+    toc: yes
+params:
+  title: ''
+  control: ''
+  invertebrados: ''
+  peces: ''
+  reserva: ''
+  summary: ''
+  comunidad: ''
+---
+
+---
+title: `r params$title`
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = F, fig.height = 3, warning = F, message = F)
+```
+
+```{r cargar paquetes}
+
+suppressPackageStartupMessages({
+  library(ggplot2)
+  library(dplyr)
+  library(tidyr)
+  library(MPAtools)
+  library(reshape)
+  library(stargazer)
+  library(ggExtra)
+})
+
+```
+
+
+# Resumen
+
+**Leyenda**
+
+----
+
+![](legend.png)
+
+----
+
+
+Clase de indicador | Indicador               | Valor
+-------------------|-------------------------|-----------------------------------------------------
+Bio                | Densidad Peces          | `r knitr::include_graphics(params$summary$Bio$P$Dp)`
+Bio                | Riqueza Peces           | `r knitr::include_graphics(params$summary$Bio$P$Sp)`
+Bio                | Biomasa Peces           | `r knitr::include_graphics(params$summary$Bio$P$Bp)`
+Bio                | Nivel Trofico Peces     | `r knitr::include_graphics(params$summary$Bio$P$NT)`
+Bio                | Densidad Iinvertebrados | `r knitr::include_graphics(params$summary$Bio$I$Di)`
+Bio                | Densidad de langostas   | `r knitr::include_graphics(params$summary$Bio$O$L)`
+Bio                | Densidad de caracol rosa| `r knitr::include_graphics(params$summary$Bio$O$C)`
+Bio                | Densidad de pargos      | `r knitr::include_graphics(params$summary$Bio$O$P)`
+Bio                | Densidad de pargos      | `r knitr::include_graphics(params$summary$Bio$O$Pb)`
+
+
+\clearpage
+
+# Peces
+
+## Densidad
+
+```{r densidad peces, fig.cap = "Densidad promedio de peces (org / m^2)."}
+
+Np <- density(data = peces, location = params$comunidad) %>%
+  mutate(D = D/60)
+
+mpa_plot3(Np, reserve = params$reserva, control = params$control, y.lab = "Densidad (org / m^2)")
+
+```
+
+```{r tabla densidad peces, results = 'asis'}
+
+stargazer(turfeffect(Np, reserve = params$reserva, control = params$control), dep.var.labels = "Densidad (org / transecto)", type = "latex", dep.var.caption = "", report = "vc*", single.row = T, omit.stat = c("adj.rsq", "n"), digits = 2, df = F, covariate.labels = c("Ano", "Zona", "**Ano:Zona**", "Constante"), notes = "+p < 0.1, ++p<0.05, +++p<0.001", notes.append = FALSE, star.char = "+")
+
+```
+
+\clearpage
+
+## Riqueza
+
+```{r riqueza peces, fig.cap = "Riqueza promedio de peces (Sp / transecto)."}
+
+Sp <- richness(data = peces, location = params$comunidad)
+mpa_plot3(Sp, reserve = params$reserva, control = params$control, y.lab = "Riqueza (Sp. / transecto)")
+```
+
+```{r tabla riqueza peces, results = 'asis'}
+
+stargazer(turfeffect(Sp, reserve = params$reserva, control = params$control), dep.var.labels = "Riqueza (Sp. / transecto)", type = "latex", dep.var.caption = "", report = "vc*", single.row = T, omit.stat = c("adj.rsq", "n"), digits = 2, df = F, covariate.labels = c("Ano", "Zona", "**Ano:Zona**", "Constante"), notes = "+p < 0.1, ++p<0.05, +++p<0.001", notes.append = FALSE, star.char = "+")
+
+```
+
+\clearpage
+
+## Biomasa
+
+```{r biomasa, fig.cap="Biomasa promedio de peces (Kg / transecto)."}
+
+Bp <- fish_biomass(data = peces, location = params$comunidad)
+mpa_plot3(Bp, reserve = params$reserva, control = params$control, y.lab = "Biomasa (Kg / transecto)")
+
+```
+
+```{r tabla de biomasa, results = 'asis'}
+
+stargazer(turfeffect(Bp, reserve = params$reserva, control = params$control), dep.var.labels = "Biomasa (Kg / transecto)", type = "latex", dep.var.caption = "", report = "vc*", single.row = T, omit.stat = c("adj.rsq", "n"), digits = 2, df = F, covariate.labels = c("Ano", "Zona", "**Ano:Zona**", "Constante"), notes = "+p < 0.1, ++p<0.05, +++p<0.001", notes.append = FALSE, star.char = "+")
+
+```
+
+\clearpage
+
+## Nivel trofico
+
+```{r nivel trofico, fig.cap = "Nivel trofico promedio de peces."}
+
+NTp <- trophic(data = peces, location = params$comunidad)
+mpa_plot3(NTp, reserve = params$reserva, control = params$control, y.lab = "Nivel trofico")
+
+```
+
+```{r tabla de nivel trofico, results = 'asis'}
+
+stargazer(turfeffect(NTp, reserve = params$reserva, control = params$control), dep.var.labels = "Nivel trofico", type = "latex", dep.var.caption = "", report = "vc*", single.row = T, omit.stat = c("adj.rsq", "n"), digits = 2, df = F, covariate.labels = c("Ano", "Zona", "**Ano:Zona**", "Constante"), notes = "+p < 0.1, ++p<0.05, +++p<0.001", notes.append = FALSE, star.char = "+")
+
+```
+
+\clearpage
+
+## Densidades por Nivel trofico
+
+```{r proporciones trofico, results = 'asis', fig.cap = "Proporciones de nivel trofico (org / transecto)"}
+
+NT2 <- peces %>%
+  filter(Comunidad == params$comunidad) %>%
+  filter(Sitio == params$reserva | Sitio == params$control) %>%
+  filter(!is.na(NT)) %>%
+  filter(Abundancia > 0) %>%
+  mutate(NT = as.factor(floor(NT))) %>%
+  group_by(Ano, Zonificacion, Sitio, Transecto, NT) %>%
+  summarize(Abundancia = sum(Abundancia)) %>%
+  group_by(Ano, Zonificacion, NT) %>%
+  summarize(Abundancia = mean(Abundancia))
+
+
+ggplot(NT2, aes(x = Ano, y = Abundancia, factor = NT, color = NT))+
+  geom_point()+
+  geom_line()+
+  theme_bw()+
+  facet_grid(.~Zonificacion)+
+  scale_color_brewer(palette = "Set1")+
+  labs(x = "Ano", y = "Densidad (org / transecto)")
+
+# # Para zonas de pesca
+# NT_P <- NT2 %>%
+#   ungroup() %>%
+#   filter(Zonificacion == "Pesca") %>%
+#   select(-Zonificacion) %>%
+#   spread(Ano, Abundancia)
+# 
+# rows <- unique(NT_P$NT)
+# NT_P <- as.data.frame(NT_P[-1])
+# rownames(NT_P) <- rows
+# pro.NT_P<- prop.table(as.matrix(NT_P),2)
+# XsqP <- chisq.test(pro.NT_P)
+# print(XsqP)
+# 
+# # Para zonas de no pesca
+# NT_R <- NT2 %>%
+#   ungroup() %>%
+#   filter(Zonificacion == "No Pesca") %>%
+#   select(-Zonificacion) %>%
+#   spread(Ano, Abundancia)
+# 
+# rows <- unique(NT_R$NT)
+# NT_R <- as.data.frame(NT_R[-1])
+# rownames(NT_R) <- rows
+# pro.NT_R<- prop.table(as.matrix(NT_R),2)
+# XsqR <- chisq.test(pro.NT_R)
+# print(XsqR)
+
+```
+
+\clearpage
+
+# Invertebrados
+
+## Densidades
+
+```{r, densidad invertebrados, fig.cap = "Densidad promedio de invertebrados (org / transecto)."}
+
+Ni <- density(data = invertebrados, location = params$comunidad) %>%
+  filter(Sitio == params$reserva|
+           Sitio == params$control)
+
+mpa_plot3(Ni, reserve = params$reserva, control = params$control, y.lab = "Densidad (org / transecto)")
+
+```
+
+```{r tabla densidad invertebrados, results = 'asis'}
+
+stargazer(turfeffect(Ni, reserve = params$reserva, control = params$control), dep.var.labels = "Densidad (org / transecto)", type = "latex", dep.var.caption = "", report = "vc*", single.row = T, omit.stat = c("adj.rsq", "n"), digits = 2, df = F, covariate.labels = c("Ano", "Zona", "**Ano:Zona**", "Constante"), notes = "+p < 0.1, ++p<0.05, +++p<0.001", notes.append = FALSE, star.char = "+")
+
+```
+
+\clearpage
+
+# Especies de interes
+
+## Langosta (*Panulirus argus*)
+
+```{r, fig.cap = "Densidad promedio de langosta (*Panulirus argus*; org / transecto)."}
+
+lang <- filter(invertebrados, GeneroEspecie == "Panulirus argus")
+
+Nlang <- density(lang, location = params$comunidad)
+
+mpa_plot3(Nlang, reserve = params$reserva, control = params$control, y.lab = "Densidad (langostas / transecto)")
+
+```
+
+```{r tabla densidad langosta, results = 'asis'}
+
+stargazer(turfeffect(Nlang, reserve = params$reserva, control = params$control), dep.var.labels = "Densidad (org / transecto)", type = "latex", dep.var.caption = "", report = "vc*", single.row = T, omit.stat = c("adj.rsq", "n"), digits = 2, df = F, covariate.labels = c("Ano", "Zona", "**Ano:Zona**", "Constante"), notes = "+p < 0.1, ++p<0.05, +++p<0.001", notes.append = FALSE, star.char = "+")
+
+```
+
+\clearpage
+
+## Caracol rosa (*Lobatus gigas*)
+
+```{r, fig.cap = "Densidad promedio de caracol rosa (*Lobatus gigas*; org / transecto)"}
+
+car <- filter(invertebrados, GeneroEspecie == "Strombus gigas")
+
+Ncar <- density(car, location = params$comunidad)
+
+mpa_plot3(Ncar, reserve = params$reserva, control = params$control, y.lab = "Densidad (caracoles / transecto)")
+
+```
+
+```{r tabla densidad caracol, results = 'asis'}
+
+stargazer(turfeffect(Ncar, reserve = params$reserva, control = params$control), dep.var.labels = "Densidad (org / transecto)", type = "latex", dep.var.caption = "", report = "vc*", single.row = T, omit.stat = c("adj.rsq", "n"), digits = 2, df = F, covariate.labels = c("Ano", "Zona", "**Ano:Zona**", "Constante"), notes = "+p < 0.1, ++p<0.05, +++p<0.001", notes.append = FALSE, star.char = "+")
+
+```
+
+\clearpage
+
+## Pargos (*Lutjanus sp.*)
+
+### Densidad
+
+```{r densidad de pargos, fig.cap = "Densidad promedio de pargos (*Lutjanus sp.; org / transecto*)"}
+
+lutjanus <- peces %>%
+  filter(Genero == "Lutjanus")
+
+Nlut <- density(lutjanus, location = params$comunidad)
+
+mpa_plot3(Nlut, reserve = params$reserva, control = params$control, y.lab = "Densidad de pargos (org / transecto)")
+
+```
+
+```{r, tabla densidad pargos, results = 'asis'}
+
+stargazer(turfeffect(Nlut, reserve = params$reserva, control = params$control), dep.var.labels = "Densidad (org / transecto)", type = "latex", dep.var.caption = "", report = "vc*", single.row = T, omit.stat = c("adj.rsq", "n"), digits = 2, df = F, covariate.labels = c("Ano", "Zona", "**Ano:Zona**", "Constante"), notes = "+p < 0.1, ++p<0.05, +++p<0.001", notes.append = FALSE, star.char = "+")
+
+```
+
+\clearpage
+
+### Biomasa
+
+```{r biomasa de pargos, fig.cap = "Densidad promedio de pargos (*Lutjanus sp.; Kg / transecto*)"}
+
+Blut <- fish_biomass(lutjanus, location = params$comunidad)
+
+mpa_plot3(Blut, reserve = params$reserva, control = params$control, y.lab = "Biomasa de pargos (Kg / transecto)")
+
+```
+
+```{r tabla biomasa pargos, results = 'asis'}
+
+stargazer(turfeffect(Nlut, reserve = params$reserva, control = params$control), dep.var.labels = "Biomasa (Kg / transecto)", type = "latex", dep.var.caption = "", report = "vc*", single.row = T, omit.stat = c("adj.rsq", "n"), digits = 2, df = F, covariate.labels = c("Ano", "Zona", "**Ano:Zona**", "Constante"), notes = "+p < 0.1, ++p<0.05, +++p<0.001", notes.append = FALSE, star.char = "+")
+
+```
+
+\clearpage
+
+_______
+
+**Referencias**
+
+- R Core Team (2015). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. URL https://www.R-project.org/.
+
+- JJ Allaire, Joe Cheng, Yihui Xie, Jonathan McPherson, Winston Chang, Jeff Allen, Hadley Wickham, Aron Atkins and Rob Hyndman (2016). rmarkdown: Dynamic Documents for R. R package version 0.9.6. https://CRAN.R-project.org/package=rmarkdown
+
+- Hadley Wickham and Romain Francois (2016). dplyr: A Grammar of Data Manipulation. R package version 0.5.0. https://CRAN.R-project.org/package=dplyr
+
+- Hadley Wickham (2016). tidyr: Easily Tidy Data with `spread()` and `gather()` Functions. R package version 0.6.0. https://CRAN.R-project.org/package=tidyr
+
+- Hlavac, Marek (2015). stargazer: Well-Formatted Regression and Summary Statistics Tables. R package version 5.2. http://CRAN.R-project.org/package=stargazer
