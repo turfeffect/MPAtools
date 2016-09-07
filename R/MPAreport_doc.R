@@ -73,7 +73,7 @@ MPAreport_doc <- function(peces, invertebrados, comunidad, reserva, control) {
                        control = control,
                        summary = summary
          ),
-         output_file = paste('/Reporte', comunidad, reserva, '.html', sep=''),
+         output_file = paste('/Reporte', comunidad, reserva, '.docx', sep=''),
          output_dir = getwd()
   )
 }
