@@ -10,7 +10,7 @@
 #'
 #' @author Villasenor-Derbez, J.C.
 
-mpa_plot2 <- function(data, error.bars = F){
+mpa_plot2 <- function(data, error.bars = F, y.lab = "Indicador"){
 
   library(ggplot2)
   library(dplyr)
@@ -27,7 +27,8 @@ mpa_plot2 <- function(data, error.bars = F){
     geom_point()+
     geom_line()+
     theme_bw()+
-    scale_color_brewer(palette = "Set1")
+    scale_color_brewer(palette = "Set1")+
+    labs(x = "Año", y = y.lab)
 
   if (error.bars){
     p <- p +
