@@ -4,6 +4,7 @@
 #' @param location A string
 #'
 #' @return H A data.frame
+#'
 #' @export
 #'
 #'
