@@ -82,8 +82,7 @@ Bio                | Densidad de pargos      | `r knitr::include_graphics(params
 
 ```{r densidad peces, fig.cap = "Densidad promedio de peces (org / m^2)."}
 
-Np <- density(data = peces, location = params$comunidad) %>%
-  mutate(D = D/60)
+Np <- density(data = peces, location = params$comunidad)
 
 mpa_plot3(Np, reserve = params$reserva, control = params$control, y.lab = "Densidad (org / m^2)")
 
@@ -136,60 +135,6 @@ mpa_plot3(NTp, reserve = params$reserva, control = params$control, y.lab = "Nive
 ```{r tabla de nivel trofico, results = 'asis'}
 
 stargazer(turfeffect(NTp, reserve = params$reserva, control = params$control), dep.var.labels = "Nivel trofico", type = "html", dep.var.caption = "", report = "vc*", single.row = T, omit.stat = c("adj.rsq", "n"), digits = 2, df = F, covariate.labels = c("Ano", "Zona", "**Ano:Zona**", "Constante"), notes = "+p < 0.1, ++p<0.05, +++p<0.001", notes.append = FALSE, star.char = "+")
-
-```
-
-## Densidades por Nivel trofico
-
-```{r proporciones trofico, results = 'asis', fig.cap = "Proporciones de nivel trofico (org / transecto)"}
-
-NT2 <- peces %>%
-  filter(Comunidad == params$comunidad) %>%
-  filter(Sitio == params$reserva | Sitio == params$control) %>%
-  filter(!is.na(NT)) %>%
-  filter(Abundancia > 0) %>%
-  mutate(NT = as.factor(floor(NT))) %>%
-  group_by(Ano, Zonificacion, Sitio, Transecto, NT) %>%
-  summarize(Abundancia = sum(Abundancia)) %>%
-  group_by(Ano, Zonificacion, NT) %>%
-  summarize(Abundancia = mean(Abundancia))
-
-
-ggplot(NT2, aes(x = Ano, y = Abundancia, factor = NT, color = NT))+
-  geom_point()+
-  geom_line()+
-  theme_bw()+
-  facet_grid(.~Zonificacion)+
-  scale_color_brewer(palette = "Set1")+
-  labs(x = "Ano", y = "Densidad (org / transecto)")
-
-# # Para zonas de pesca
-# NT_P <- NT2 %>%
-#   ungroup() %>%
-#   filter(Zonificacion == "Pesca") %>%
-#   select(-Zonificacion) %>%
-#   spread(Ano, Abundancia)
-# 
-# rows <- unique(NT_P$NT)
-# NT_P <- as.data.frame(NT_P[-1])
-# rownames(NT_P) <- rows
-# pro.NT_P<- prop.table(as.matrix(NT_P),2)
-# XsqP <- chisq.test(pro.NT_P)
-# print(XsqP)
-# 
-# # Para zonas de no pesca
-# NT_R <- NT2 %>%
-#   ungroup() %>%
-#   filter(Zonificacion == "No Pesca") %>%
-#   select(-Zonificacion) %>%
-#   spread(Ano, Abundancia)
-# 
-# rows <- unique(NT_R$NT)
-# NT_R <- as.data.frame(NT_R[-1])
-# rownames(NT_R) <- rows
-# pro.NT_R<- prop.table(as.matrix(NT_R),2)
-# XsqR <- chisq.test(pro.NT_R)
-# print(XsqR)
 
 ```
 
