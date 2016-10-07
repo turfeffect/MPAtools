@@ -47,7 +47,7 @@ suppressPackageStartupMessages({
 }
 </style>
 
-## Resumen
+# Resumen
 
 <center>
 
@@ -93,7 +93,7 @@ arribos <- landings(data = pesca, site = coop, type = 'kg')
 
 arrG <- arribos %>%
   group_by(Ano) %>%
-  summarize(Peso = sum(Peso))
+  summarize(Peso = sum(Peso)/1000)
 
 modG <- lm(Peso ~ Ano, arrG)
 
@@ -117,7 +117,37 @@ arrL <- arribos %>%
 
 modL <- lm(Peso ~ Ano, arrL)
   
-  ##
+  # Landings and price
+
+ingresos <- landings(data = pesca, site =coop, type = 'price')
+
+ingG <- ingresos %>%
+  group_by(Ano) %>%
+  summarize(Valor = sum(Precio)/1000)
+
+modG2 <- lm(Valor ~ Ano, ingG)
+
+ingM <- ingresos %>%
+  filter(NombreCientifico == "Epinephelus spp")
+
+modM2 <- lm(Precio ~ Ano, ingM)
+
+ingP <- ingresos %>%
+  filter(NombreCientifico == "Lutjanus aratus" |
+           NombreCientifico == "Lutjanus cyanopterus" |
+           NombreCientifico == "Lujanus griseus" |
+           NombreCientifico == "Lutjanus spp." |
+           NombreCientifico == "Lutjanus viridis" |
+           NombreCientifico == "Lutjanus spp")
+
+modP2 <- lm(Precio ~ Ano, ingP)
+
+ingL <- ingresos %>%
+  filter(NombreCientifico == "Panulirus argus")
+
+modL2 <- lm(Precio ~ Ano, ingL)
+
+##
 
   summary <- list(Bio = list(P = list(Dp = score(x = data.frame(est = coefficients(Dp)[4],
                                                                 p = coefficients(Dp)[16])),
@@ -156,7 +186,18 @@ modL <- lm(Peso ~ Ano, arrL)
                                                                 p = coefficients(summary(modM))[8])),
                                       
                                       Ll = score(x = data.frame(est = coefficients(summary(modM))[2],
-                                                              p = coefficients(summary(modM))[8])))),
+                                                              p = coefficients(summary(modM))[8]))),
+                             V = list(Vg = score(x = data.frame(est = coefficients(summary(modG2))[2],
+                                                                p = coefficients(summary(modG2))[8])),
+                                      
+                                      Vm = score(x = data.frame(est = coefficients(summary(modM2))[2],
+                                                                p = coefficients(summary(modM2))[8])),
+                                      
+                                      Vp = score(x = data.frame(est = coefficients(summary(modL2))[2],
+                                                                p = coefficients(summary(modM2))[8])),
+                                      
+                                      Vl = score(x = data.frame(est = coefficients(summary(modM2))[2],
+                                                              p = coefficients(summary(modM2))[8])))),
 
                   Gov = list(1))
 
@@ -179,11 +220,17 @@ Soc                | Arribos totales         | `r knitr::include_graphics(summar
 Soc                | Arribos de mero         | `r knitr::include_graphics(summary$Soc$L$Lm)`
 Soc                | Arribos de pargos       | `r knitr::include_graphics(summary$Soc$L$Lp)`
 Soc                | Arribos de langosta     | `r knitr::include_graphics(summary$Soc$L$Ll)`
+Soc                | Ingresos totales        | `r knitr::include_graphics(summary$Soc$V$Vg)`
+Soc                | Ingresos por mero       | `r knitr::include_graphics(summary$Soc$V$Vm)`
+Soc                | Ingresos por pargos     | `r knitr::include_graphics(summary$Soc$V$Vp)`
+Soc                | Ingresos por langosta   | `r knitr::include_graphics(summary$Soc$V$Vl)`
 
 
 
 
 <center>
+
+# Ecologicos
 
 ## Peces
 
@@ -246,7 +293,6 @@ mpa_plot3(NTp, reserve = reserva, control = control, y.lab = "Nivel trofico")
 stargazer(turfeffect(NTp, reserve = reserva, control = control), dep.var.labels = "Nivel trofico", type = "html", dep.var.caption = "", report = "vc*", single.row = T, omit.stat = c("adj.rsq", "n"), digits = 2, df = F, covariate.labels = c("Ano", "Zona", "**Ano:Zona**", "Constante"), notes = "+p < 0.1, ++p<0.05, +++p<0.001", notes.append = FALSE, star.char = "+")
 
 ```
-
 
 
 ## Invertebrados
@@ -365,7 +411,8 @@ stargazer(turfeffect(Ncar, reserve = reserva, control = control), dep.var.labels
 ggplot(arrG, aes(x = Ano, y = Peso)) +
   geom_point() +
   geom_abline(intercept = coef(summary(modG))[1], slope = coef(summary(modG))[2]) +
-  theme_bw()
+  theme_bw() +
+  labs(x = "Ano", y = "Capturas (T)")
 ```
 
 
@@ -377,7 +424,8 @@ ggplot(arrG, aes(x = Ano, y = Peso)) +
 ggplot(arrM, aes(x = Ano, y = Peso)) +
   geom_point() +
   geom_abline(intercept = coef(summary(modM))[1], slope = coef(summary(modM))[2]) +
-  theme_bw()
+  theme_bw() +
+  labs(x = "Ano", y = "Capturas (T)")
 ```
 
 #### Pargo
@@ -394,7 +442,8 @@ ggplot(arrM, aes(x = Ano, y = Peso)) +
 ggplot(arrP, aes(x = Ano, y = Peso)) +
   geom_point() +
   geom_abline(intercept = coef(summary(modP))[1], slope = coef(summary(modP))[2]) +
-  theme_bw()
+  theme_bw() +
+  labs(x = "Ano", y = "Capturas (T)")
 ```
 
 #### Langosta
@@ -403,14 +452,15 @@ ggplot(arrP, aes(x = Ano, y = Peso)) +
 ggplot(arrL, aes(x = Ano, y = Peso)) +
   geom_point() +
   geom_abline(intercept = coef(summary(modL))[1], slope = coef(summary(modL))[2]) +
-  theme_bw()
+  theme_bw() +
+  labs(x = "Ano", y = "Capturas (T)")
 ```
 
 ## Ingresos
 
-```{r}
+```{r, include = F}
 
-ingresos <- landings(data = pesca, site =coop, type = 'price')
+# Code for this section is at the begining of the document
 
 ```
 
@@ -420,9 +470,7 @@ ingresos <- landings(data = pesca, site =coop, type = 'price')
 
 ingresos %>%
   ggplot(aes(x = Ano, y = Precio)) +
-  geom_point() +
-  geom_line()
-
+  geom_point()
 ```
 
 
