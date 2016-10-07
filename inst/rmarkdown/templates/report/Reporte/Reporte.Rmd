@@ -86,6 +86,38 @@ Dp <- summary(turfeffect(density(peces, comunidad), reserva, control))
   lut <- filter(peces, Genero == "Lutjanus")
   Nlut <- summary(turfeffect(density(lut, comunidad), reserva, control))
   Blut <- summary(turfeffect(fish_biomass(lut, comunidad), reserva, control))
+  
+  ## Landings section
+  
+arribos <- landings(data = pesca, site = coop, type = 'kg')
+
+arrG <- arribos %>%
+  group_by(Ano) %>%
+  summarize(Peso = sum(Peso))
+
+modG <- lm(Peso ~ Ano, arrG)
+
+arrM <- arribos %>%
+  filter(NombreCientifico == "Epinephelus spp")
+
+modM <- lm(Peso ~ Ano, arrM)
+
+arrP <- arribos %>%
+  filter(NombreCientifico == "Lutjanus aratus" |
+           NombreCientifico == "Lutjanus cyanopterus" |
+           NombreCientifico == "Lujanus griseus" |
+           NombreCientifico == "Lutjanus spp." |
+           NombreCientifico == "Lutjanus viridis" |
+           NombreCientifico == "Lutjanus spp")
+
+modP <- lm(Peso ~ Ano, arrP)
+
+arrL <- arribos %>%
+  filter(NombreCientifico == "Panulirus argus")
+
+modL <- lm(Peso ~ Ano, arrL)
+  
+  ##
 
   summary <- list(Bio = list(P = list(Dp = score(x = data.frame(est = coefficients(Dp)[4],
                                                                 p = coefficients(Dp)[16])),
@@ -114,7 +146,17 @@ Dp <- summary(turfeffect(density(peces, comunidad), reserva, control))
                                       Pb = score(x = data.frame(est = coefficients(Blut)[4],
                                                                 p = coefficients(Blut)[16])))),
 
-                  Soc = list(1),
+                  Soc = list(L = list(Lg = score(x = data.frame(est = coefficients(summary(modG))[2],
+                                                                p = coefficients(summary(modG))[8])),
+                                      
+                                      Lm = score(x = data.frame(est = coefficients(summary(modM))[2],
+                                                                p = coefficients(summary(modM))[8])),
+                                      
+                                      Lp = score(x = data.frame(est = coefficients(summary(modL))[2],
+                                                                p = coefficients(summary(modM))[8])),
+                                      
+                                      Ll = score(x = data.frame(est = coefficients(summary(modM))[2],
+                                                              p = coefficients(summary(modM))[8])))),
 
                   Gov = list(1))
 
@@ -133,6 +175,12 @@ Bio                | Densidad de langostas   | `r knitr::include_graphics(summar
 Bio                | Densidad de caracol rosa| `r knitr::include_graphics(summary$Bio$O$C)`
 Bio                | Densidad de pargos      | `r knitr::include_graphics(summary$Bio$O$P)`
 Bio                | Densidad de pargos      | `r knitr::include_graphics(summary$Bio$O$Pb)`
+Soc                | Arribos totales         | `r knitr::include_graphics(summary$Soc$L$Lg)`
+Soc                | Arribos de mero         | `r knitr::include_graphics(summary$Soc$L$Lm)`
+Soc                | Arribos de pargos       | `r knitr::include_graphics(summary$Soc$L$Lp)`
+Soc                | Arribos de langosta     | `r knitr::include_graphics(summary$Soc$L$Ll)`
+
+
 
 
 <center>
@@ -303,27 +351,62 @@ stargazer(turfeffect(Ncar, reserve = reserva, control = control), dep.var.labels
 
 ## Arribos
 
-```{r}
+```{r, include = F}
 
-arribos <- landings(data = pesca, site = coop, type = 'kg')
+# Data and models for this section were calculated at the beggining of the document
 
 ```
 
+
 ### Generales
 
+
 ```{r}
-arribos %>%
-  filter(NombreCientifico == "Epinephelus striatus") %>%
-  ggplot(aes(x = Ano, y = Peso)) +
+ggplot(arrG, aes(x = Ano, y = Peso)) +
   geom_point() +
-  geom_line()
+  geom_abline(intercept = coef(summary(modG))[1], slope = coef(summary(modG))[2]) +
+  theme_bw()
 ```
 
 
 ### Especies Objetivo
 
-## Ingresos
+#### Mero
 
+```{r}
+ggplot(arrM, aes(x = Ano, y = Peso)) +
+  geom_point() +
+  geom_abline(intercept = coef(summary(modM))[1], slope = coef(summary(modM))[2]) +
+  theme_bw()
+```
+
+#### Pargo
+
+- Lutjanus aratus                       
+
+- Lutjanus cyanopterus                  
+
+- Lutjanus griseus                      
+
+- Lutjanus viridis                      
+
+```{r}
+ggplot(arrP, aes(x = Ano, y = Peso)) +
+  geom_point() +
+  geom_abline(intercept = coef(summary(modP))[1], slope = coef(summary(modP))[2]) +
+  theme_bw()
+```
+
+#### Langosta
+
+```{r}
+ggplot(arrL, aes(x = Ano, y = Peso)) +
+  geom_point() +
+  geom_abline(intercept = coef(summary(modL))[1], slope = coef(summary(modL))[2]) +
+  theme_bw()
+```
+
+## Ingresos
 
 ```{r}
 
@@ -336,7 +419,6 @@ ingresos <- landings(data = pesca, site =coop, type = 'price')
 ```{r}
 
 ingresos %>%
-  filter(NombreCientifico == "Epinephelus striatus") %>%
   ggplot(aes(x = Ano, y = Precio)) +
   geom_point() +
   geom_line()
@@ -344,7 +426,13 @@ ingresos %>%
 ```
 
 
-### Objetivo
+### Especies Objetivo
+
+## Índice de conocimiento
+
+
+
+
 
 # Gobernanza
 
