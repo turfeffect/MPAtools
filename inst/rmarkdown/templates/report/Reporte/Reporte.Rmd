@@ -305,7 +305,7 @@ stargazer(turfeffect(Ncar, reserve = reserva, control = control), dep.var.labels
 
 ```{r}
 
-arribos <- landings(data = pesca, site =coop, type = 'kg')
+arribos <- landings(data = pesca, site = coop, type = 'kg')
 
 ```
 
@@ -328,7 +328,7 @@ arribos %>%
 
 ```{r}
 
-ingresos <- landings(data = pesca, site =coop, type = 'precio')
+ingresos <- landings(data = pesca, site =coop, type = 'price')
 
 ```
 
