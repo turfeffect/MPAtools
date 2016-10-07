@@ -476,7 +476,45 @@ ingresos %>%
 
 ### Especies Objetivo
 
-## Índice de conocimiento
+#### Mero
+
+```{r}
+ggplot(ingM, aes(x = Ano, y = Precio)) +
+  geom_point() +
+  geom_abline(intercept = coef(summary(modM2))[1], slope = coef(summary(modM2))[2]) +
+  theme_bw() +
+  labs(x = "Ano", y = "Ingresos ($)")
+```
+
+#### Pargo
+
+- Lutjanus aratus                       
+
+- Lutjanus cyanopterus                  
+
+- Lutjanus griseus                      
+
+- Lutjanus viridis                      
+
+```{r}
+ggplot(ingP, aes(x = Ano, y = Precio)) +
+  geom_point() +
+  geom_abline(intercept = coef(summary(modP2))[1], slope = coef(summary(modP2))[2]) +
+  theme_bw() +
+  labs(x = "Ano", y = "Ingresos ($)")
+```
+
+#### Langosta
+
+```{r}
+ggplot(ingL, aes(x = Ano, y = Precio)) +
+  geom_point() +
+  geom_abline(intercept = coef(summary(modL2))[1], slope = coef(summary(modL2))[2]) +
+  theme_bw() +
+  labs(x = "Ano", y = "Ingresos ($)")
+```
+
+## Indice de conocimiento
 
 
 
