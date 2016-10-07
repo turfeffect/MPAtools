@@ -7,8 +7,7 @@
 ################################################
 
 
-landings <- function(data, site, type, species = NULL)
-{
+landings <- function(data, site, type, species = NULL) {
   library(dplyr)
   library(tidyr)
 
