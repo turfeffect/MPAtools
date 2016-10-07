@@ -468,9 +468,9 @@ ggplot(arrL, aes(x = Ano, y = Peso)) +
 
 ```{r}
 
-ingresos %>%
-  ggplot(aes(x = Ano, y = Precio)) +
+ggplot(ingG, aes(x = Ano, y = Valor)) +
   geom_point()
+
 ```
 
 
