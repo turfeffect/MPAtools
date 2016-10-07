@@ -3,6 +3,8 @@ params:
   title: ""
   peces: ""
   invertebrados: ""
+  pesca: ""
+  coop: ""
   comunidad: ""
   reserva: ""
   control: ""
@@ -63,6 +65,7 @@ suppressPackageStartupMessages({
 
 peces = params$peces
 invertebrados = params$invertebrados
+pesca = params$pesca
 comunidad = params$comunidad
 reserva = params$reserva
 control = params$control
@@ -221,42 +224,6 @@ stargazer(turfeffect(Ni, reserve = reserva, control = control), dep.var.labels =
 
 ## Especies de interes
 
-### Langosta (*Panulirus argus*)
-
-```{r, fig.cap = "Densidad promedio de langosta (*Panulirus argus*; org / transecto)."}
-
-lang <- filter(invertebrados, GeneroEspecie == "Panulirus argus")
-
-Nlang <- density(lang, location = comunidad)
-
-mpa_plot3(Nlang, reserve = reserva, control = control, y.lab = "Densidad (langostas / transecto)")
-
-```
-
-```{r tabla densidad langosta, results = 'asis'}
-
-stargazer(turfeffect(Nlang, reserve = reserva, control = control), dep.var.labels = "Densidad (org / transecto)", type = "html", dep.var.caption = "", report = "vc*", single.row = T, omit.stat = c("adj.rsq", "n"), digits = 2, df = F, covariate.labels = c("Ano", "Zona", "**Ano:Zona**", "Constante"), notes = "+p < 0.1, ++p<0.05, +++p<0.001", notes.append = FALSE, star.char = "+")
-
-```
-
-### Caracol rosa (*Lobatus gigas*)
-
-```{r, fig.cap = "Densidad promedio de caracol rosa (*Lobatus gigas*; org / transecto)"}
-
-car <- filter(invertebrados, GeneroEspecie == "Strombus gigas")
-
-Ncar <- density(car, location = comunidad)
-
-mpa_plot3(Ncar, reserve = reserva, control = control, y.lab = "Densidad (caracoles / transecto)")
-
-```
-
-```{r tabla densidad caracol, results = 'asis'}
-
-stargazer(turfeffect(Ncar, reserve = reserva, control = control), dep.var.labels = "Densidad (org / transecto)", type = "html", dep.var.caption = "", report = "vc*", single.row = T, omit.stat = c("adj.rsq", "n"), digits = 2, df = F, covariate.labels = c("Ano", "Zona", "**Ano:Zona**", "Constante"), notes = "+p < 0.1, ++p<0.05, +++p<0.001", notes.append = FALSE, star.char = "+")
-
-```
-
 ### Pargos (*Lutjanus sp.*)
 
 #### Densidad
@@ -295,15 +262,75 @@ stargazer(turfeffect(Blut, reserve = reserva, control = control), dep.var.labels
 
 ```
 
-# Socioeconomicos
+### Langosta (*Panulirus argus*)
+
+```{r, fig.cap = "Densidad promedio de langosta (*Panulirus argus*; org / transecto)."}
+
+lang <- filter(invertebrados, GeneroEspecie == "Panulirus argus")
+
+Nlang <- density(lang, location = comunidad)
+
+mpa_plot3(Nlang, reserve = reserva, control = control, y.lab = "Densidad (langostas / transecto)")
+
+```
+
+```{r tabla densidad langosta, results = 'asis'}
+
+stargazer(turfeffect(Nlang, reserve = reserva, control = control), dep.var.labels = "Densidad (org / transecto)", type = "html", dep.var.caption = "", report = "vc*", single.row = T, omit.stat = c("adj.rsq", "n"), digits = 2, df = F, covariate.labels = c("Ano", "Zona", "**Ano:Zona**", "Constante"), notes = "+p < 0.1, ++p<0.05, +++p<0.001", notes.append = FALSE, star.char = "+")
+
+```
+
+### Caracol rosa (*Lobatus gigas*)
+
+```{r, fig.cap = "Densidad promedio de caracol rosa (*Lobatus gigas*; org / transecto)"}
+
+car <- filter(invertebrados, GeneroEspecie == "Strombus gigas")
+
+Ncar <- density(car, location = comunidad)
+
+mpa_plot3(Ncar, reserve = reserva, control = control, y.lab = "Densidad (caracoles / transecto)")
+
+```
+
+```{r tabla densidad caracol, results = 'asis'}
+
+stargazer(turfeffect(Ncar, reserve = reserva, control = control), dep.var.labels = "Densidad (org / transecto)", type = "html", dep.var.caption = "", report = "vc*", single.row = T, omit.stat = c("adj.rsq", "n"), digits = 2, df = F, covariate.labels = c("Ano", "Zona", "**Ano:Zona**", "Constante"), notes = "+p < 0.1, ++p<0.05, +++p<0.001", notes.append = FALSE, star.char = "+")
+
+```
+
+
+# Socioeconomico
 
 ## Arribos
 
+```{r}
+
+arribos <- landings(data = pesca, site =coop, type = 'kg')
+
+```
+
 ### Generales
+
+```{r}
+
+arribos %>%
+  filter(NombreCientifico == "Epinephelus striatus") %>%
+  ggplot(aes(x = Ano, y = Precio)) +
+  geom_point() +
+  geom_line()
+```
+
 
 ### Especies Objetivo
 
 ## Ingresos
+
+
+```{r}
+
+ingresos <- landings(data = pesca, site =coop, type = 'precio')
+
+```
 
 ### Generales
 

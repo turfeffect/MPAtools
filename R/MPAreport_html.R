@@ -10,7 +10,7 @@
 #'
 #' @export
 
-MPAreport_html <- function(peces, invertebrados, comunidad, reserva, control) {
+MPAreport_html <- function(peces, invertebrados, pesca, coop, comunidad, reserva, control) {
 
   library(rmarkdown)
 
@@ -21,6 +21,8 @@ MPAreport_html <- function(peces, invertebrados, comunidad, reserva, control) {
          params = list(title = title,
                        peces = peces,
                        invertebrados = invertebrados,
+                       pesca = pesca,
+                       coop = coop,
                        comunidad = comunidad,
                        reserva = reserva,
                        control = control
