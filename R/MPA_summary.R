@@ -5,7 +5,7 @@ MPA_summary <- function(peces, invertebrados, comunidad, reserva, control){
 # Para peces
 
   Dp <- summary(turfeffect(density(peces, comunidad), reserva, control))
-  Sp <- summary(turfeffect(richness(peces, comunidad), reserva, control))
+  Sp <- summary(turfeffect(shannon(peces, comunidad), reserva, control))
   Bp <- summary(turfeffect(fish_biomass(peces, comunidad), reserva, control))
   NT <- summary(turfeffect(trophic(peces, comunidad), reserva, control))
 
