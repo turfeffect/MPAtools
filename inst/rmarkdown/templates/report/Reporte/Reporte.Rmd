@@ -312,10 +312,9 @@ arribos <- landings(data = pesca, site = coop, type = 'kg')
 ### Generales
 
 ```{r}
-
 arribos %>%
   filter(NombreCientifico == "Epinephelus striatus") %>%
-  ggplot(aes(x = Ano, y = Precio)) +
+  ggplot(aes(x = Ano, y = Peso)) +
   geom_point() +
   geom_line()
 ```
@@ -333,6 +332,17 @@ ingresos <- landings(data = pesca, site =coop, type = 'price')
 ```
 
 ### Generales
+
+```{r}
+
+ingresos %>%
+  filter(NombreCientifico == "Epinephelus striatus") %>%
+  ggplot(aes(x = Ano, y = Precio)) +
+  geom_point() +
+  geom_line()
+
+```
+
 
 ### Objetivo
 
