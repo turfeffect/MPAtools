@@ -14,7 +14,7 @@ landings <- function(data, site, type, species = NULL) {
   if (type == "kg") {
     if (is.null(species)) {
     D = data %>%
-    filter(UnidadEconomica = site) %>%
+    filter(UnidadEconomica == site) %>%
     group_by(Ano, NombreCientifico) %>%
     summarise(Peso = sum(PesoVivo))
     }
@@ -37,8 +37,8 @@ landings <- function(data, site, type, species = NULL) {
     }
     else {
       D = data %>%
-        filter(UnidadEconomica = site) %>%
-        filter(NombreCientifico = species) %>%
+        filter(UnidadEconomica == site) %>%
+        filter(NombreCientifico == species) %>%
         group_by(Ano, NombreCientifico) %>%
         summarise(Precio = sum(Valor))
     }
