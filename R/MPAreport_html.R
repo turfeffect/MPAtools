@@ -10,7 +10,7 @@
 #'
 #' @export
 
-MPAreport_html <- function(peces, invertebrados, pesca, coop, comunidad, reserva, control) {
+MPAreport_html <- function(peces, invertebrados, pesca, gov, coop, comunidad, reserva, control) {
 
   library(rmarkdown)
 
@@ -22,6 +22,7 @@ MPAreport_html <- function(peces, invertebrados, pesca, coop, comunidad, reserva
                        peces = peces,
                        invertebrados = invertebrados,
                        pesca = pesca,
+                       gov = gov,
                        coop = coop,
                        comunidad = comunidad,
                        reserva = reserva,

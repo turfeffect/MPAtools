@@ -4,6 +4,7 @@ params:
   peces: ""
   invertebrados: ""
   pesca: ""
+  gov: ""
   coop: ""
   comunidad: ""
   reserva: ""
@@ -517,10 +518,115 @@ ggplot(ingL, aes(x = Ano, y = Precio)) +
 ## Indice de conocimiento
 
 
+```{r}
 
+#knowledge()
+
+```
 
 
 # Gobernanza
+
+## Acceso a la pesqueria
+
+```{r}
+
+gov$Access.to.the.fishery[2]
+
+```
+
+
+## Número de pescadores
+
+```{r}
+
+gov$Number.of.fishers[1]
+
+```
+
+
+## Reconocimiento legal de la reserva
+
+```{r}
+
+gov$Legal.recognition.of.reserve[1]
+
+gov$Legal.recognition.of.reserve[2]
+
+```
+
+
+## Tipo de reserva
+
+```{r}
+
+gov$Reserve.type[1]
+
+gov$Reserve.type[2]
+
+```
+
+
+## Grado de pesca 
+
+```{r}
+
+gov$Ilegal.harvesting[1]
+
+```
+
+
+## Plan de manejo
+
+```{r}
+
+gov$Management.plan[1]
+
+gov$Management.plan[2]
+
+```
+
+
+## Procuracion de la reserva
+
+```{r}
+
+gov$Reserve.enforcement[2]
+
+```
+
+
+## Razonamiento para la ubicacion
+
+```{r}
+
+gov$Reasoning.for.reserve.location[2]
+
+```
+
+
+## Organizacion
+
+```{r}
+
+gov$Membership.to.fisher.organizations[1]
+
+gov$Type.of.fisher.organizations[1]
+
+gov$Type.of.fisher.organizations[2]
+
+
+```
+
+# Nivel inclusividad
+```{r}
+
+gov$Representation[1]
+
+gov$Representation[2]
+
+```
+
 
 
 </center>
