@@ -514,7 +514,7 @@ ggplot(ingL, aes(x = Ano, y = Precio)) +
 
 # Gobernanza
 
-*La información de gobernanza se presenta con propósitos de realizar el ejercicio; de ninguna manera representa una evaluación que pueda utilizarse para recomendaciones.* 
+*La informacion de gobernanza se presenta con propositos de realizar el ejercicio; de ninguna manera representa una evaluacion que pueda utilizarse para recomendaciones.* 
 
 ## Acceso a la pesqueria
 
