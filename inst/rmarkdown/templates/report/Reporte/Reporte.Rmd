@@ -23,7 +23,7 @@ title: `r params$title`
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = F, fig.height = 3, warning = F, message = F)
+knitr::opts_chunk$set(echo = F, fig.height = 3, warning = F, message = F, results = 'asis')
 ```
 
 ```{r cargar paquetes}
@@ -48,7 +48,9 @@ suppressPackageStartupMessages({
 }
 </style>
 
-*Este documento fue generado por el paquete [`MPAtools`](https://github.com/turfeffect/MPAtools), uno de los entregables del grupo de [TURFeffect](www.turfeffect.org). Los resultados presentados son una versión preliminar del softwer que se está desarrollando, y no recomendamos la toma de decisiones basado en la información aquí presentada*
+*Este documento fue generado por el paquete [`MPAtools`](https://github.com/turfeffect/MPAtools), uno de los entregables del grupo [TURFeffect](www.turfeffect.org). Los resultados presentados son una version preliminar del software que se esta desarrollando, y no recomendamos la toma de decisiones basado en la informacion aqui presentada*
+
+*Acentos y caracteres especiales omitidos*
 
 # Resumen
 
