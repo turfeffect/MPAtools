@@ -43,12 +43,12 @@ suppressPackageStartupMessages({
 <style type="text/css">
 .table {
 
-    width: 40%;
+    width: 80%;
 
 }
 </style>
 
-*Este documento fue generado por el paquete `MPAtools`, uno de los entregables del grupo de [TURFeffect](www.turfeffect.org). Los resultados presentados son una versión preliminar del softwer que se está desarrollando, y no recomendamos la toma de decisiones basado en la información aquí presentada*
+*Este documento fue generado por el paquete [`MPAtools`](https://github.com/turfeffect/MPAtools), uno de los entregables del grupo de [TURFeffect](www.turfeffect.org). Los resultados presentados son una versión preliminar del softwer que se está desarrollando, y no recomendamos la toma de decisiones basado en la información aquí presentada*
 
 # Resumen
 
@@ -101,7 +101,8 @@ arrG <- arribos %>%
 modG <- lm(Peso ~ Ano, arrG)
 
 arrM <- arribos %>%
-  filter(NombreCientifico == "Epinephelus spp")
+  filter(NombreCientifico == "Epinephelus spp") %>%
+  mutate(Peso = Peso/1000)
 
 modM <- lm(Peso ~ Ano, arrM)
 
@@ -111,12 +112,14 @@ arrP <- arribos %>%
            NombreCientifico == "Lujanus griseus" |
            NombreCientifico == "Lutjanus spp." |
            NombreCientifico == "Lutjanus viridis" |
-           NombreCientifico == "Lutjanus spp")
+           NombreCientifico == "Lutjanus spp") %>%
+  mutate(Peso = Peso /1000)
 
 modP <- lm(Peso ~ Ano, arrP)
 
 arrL <- arribos %>%
-  filter(NombreCientifico == "Panulirus argus")
+  filter(NombreCientifico == "Panulirus argus") %>%
+  mutate(Peso = Peso /1000)
 
 modL <- lm(Peso ~ Ano, arrL)
   
@@ -141,12 +144,14 @@ ingP <- ingresos %>%
            NombreCientifico == "Lujanus griseus" |
            NombreCientifico == "Lutjanus spp." |
            NombreCientifico == "Lutjanus viridis" |
-           NombreCientifico == "Lutjanus spp")
+           NombreCientifico == "Lutjanus spp") %>%
+  mutate(Precio = Precio /1000)
 
 modP2 <- lm(Precio ~ Ano, ingP)
 
 ingL <- ingresos %>%
-  filter(NombreCientifico == "Panulirus argus")
+  filter(NombreCientifico == "Panulirus argus") %>%
+  mutate(Precio = Precio /1000)
 
 modL2 <- lm(Precio ~ Ano, ingL)
 
@@ -415,7 +420,7 @@ ggplot(arrG, aes(x = Ano, y = Peso)) +
 #### Mero
 
 ```{r}
-ggplot(arrM, aes(x = Ano, y = Peso/1000)) +
+ggplot(arrM, aes(x = Ano, y = Peso)) +
   geom_point() +
   geom_abline(intercept = coef(summary(modM))[1], slope = coef(summary(modM))[2]) +
   theme_bw() +
@@ -425,7 +430,7 @@ ggplot(arrM, aes(x = Ano, y = Peso/1000)) +
 #### Pargo
 
 ```{r}
-ggplot(arrP, aes(x = Ano, y = Peso/1000)) +
+ggplot(arrP, aes(x = Ano, y = Peso)) +
   geom_point() +
   geom_abline(intercept = coef(summary(modP))[1], slope = coef(summary(modP))[2]) +
   theme_bw() +
@@ -435,7 +440,7 @@ ggplot(arrP, aes(x = Ano, y = Peso/1000)) +
 #### Langosta
 
 ```{r}
-ggplot(arrL, aes(x = Ano, y = Peso/1000)) +
+ggplot(arrL, aes(x = Ano, y = Peso)) +
   geom_point() +
   geom_abline(intercept = coef(summary(modL))[1], slope = coef(summary(modL))[2]) +
   theme_bw() +
@@ -454,7 +459,7 @@ ggplot(arrL, aes(x = Ano, y = Peso/1000)) +
 
 ```{r}
 
-ggplot(ingG, aes(x = Ano, y = Valor/1000)) +
+ggplot(ingG, aes(x = Ano, y = Valor)) +
   geom_point()  +
   geom_abline(intercept = coef(summary(modG2))[1], slope = coef(summary(modG2))[2]) +
   theme_bw() +
@@ -468,7 +473,7 @@ ggplot(ingG, aes(x = Ano, y = Valor/1000)) +
 #### Mero
 
 ```{r}
-ggplot(ingM, aes(x = Ano, y = Precio/1000)) +
+ggplot(ingM, aes(x = Ano, y = Precio)) +
   geom_point() +
   geom_abline(intercept = coef(summary(modM2))[1], slope = coef(summary(modM2))[2]) +
   theme_bw() +
@@ -477,16 +482,8 @@ ggplot(ingM, aes(x = Ano, y = Precio/1000)) +
 
 #### Pargo
 
-- Lutjanus aratus                       
-
-- Lutjanus cyanopterus                  
-
-- Lutjanus griseus                      
-
-- Lutjanus viridis                      
-
 ```{r}
-ggplot(ingP, aes(x = Ano, y = Precio/1000)) +
+ggplot(ingP, aes(x = Ano, y = Precio)) +
   geom_point() +
   geom_abline(intercept = coef(summary(modP2))[1], slope = coef(summary(modP2))[2]) +
   theme_bw() +
@@ -496,7 +493,7 @@ ggplot(ingP, aes(x = Ano, y = Precio/1000)) +
 #### Langosta
 
 ```{r}
-ggplot(ingL, aes(x = Ano, y = Precio/1000)) +
+ggplot(ingL, aes(x = Ano, y = Precio)) +
   geom_point() +
   geom_abline(intercept = coef(summary(modL2))[1], slope = coef(summary(modL2))[2]) +
   theme_bw() +
