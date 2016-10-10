@@ -48,6 +48,8 @@ suppressPackageStartupMessages({
 }
 </style>
 
+*Este documento fue generado por el paquete `MPAtools`, uno de los entregables del grupo de [TURFeffect](www.turfeffect.org). Los resultados presentados son una versión preliminar del softwer que se está desarrollando, y no recomendamos la toma de decisiones basado en la información aquí presentada*
+
 # Resumen
 
 <center>
@@ -206,26 +208,17 @@ modL2 <- lm(Precio ~ Ano, ingL)
 ```
 
 
-Clase de indicador | Indicador               | Valor
--------------------|-------------------------|-----------------------------------------------------
-Bio                | Densidad Peces          | `r knitr::include_graphics(summary$Bio$P$Dp)`
-Bio                | Riqueza Peces           | `r knitr::include_graphics(summary$Bio$P$Sp)`
-Bio                | Biomasa Peces           | `r knitr::include_graphics(summary$Bio$P$Bp)`
-Bio                | Nivel Trofico Peces     | `r knitr::include_graphics(summary$Bio$P$NT)`
-Bio                | Densidad Iinvertebrados | `r knitr::include_graphics(summary$Bio$I$Di)`
-Bio                | Densidad de langostas   | `r knitr::include_graphics(summary$Bio$O$L)`
-Bio                | Densidad de caracol rosa| `r knitr::include_graphics(summary$Bio$O$C)`
-Bio                | Densidad de pargos      | `r knitr::include_graphics(summary$Bio$O$P)`
-Bio                | Densidad de pargos      | `r knitr::include_graphics(summary$Bio$O$Pb)`
-Soc                | Arribos totales         | `r knitr::include_graphics(summary$Soc$L$Lg)`
-Soc                | Arribos de mero         | `r knitr::include_graphics(summary$Soc$L$Lm)`
-Soc                | Arribos de pargos       | `r knitr::include_graphics(summary$Soc$L$Lp)`
-Soc                | Arribos de langosta     | `r knitr::include_graphics(summary$Soc$L$Ll)`
-Soc                | Ingresos totales        | `r knitr::include_graphics(summary$Soc$V$Vg)`
-Soc                | Ingresos por mero       | `r knitr::include_graphics(summary$Soc$V$Vm)`
-Soc                | Ingresos por pargos     | `r knitr::include_graphics(summary$Soc$V$Vp)`
-Soc                | Ingresos por langosta   | `r knitr::include_graphics(summary$Soc$V$Vl)`
-
+Cat    | Indicador               | Valor                                        |Cat    | Indicador               | Valor                                        |
+-------|-------------------------|----------------------------------------------|-------|-------------------------|----------------------------------------------|
+Bio    | Densidad Peces          | `r knitr::include_graphics(summary$Bio$P$Dp)`| Soc   | Arribos totales         | `r knitr::include_graphics(summary$Soc$L$Lg)`
+Bio    | Riqueza Peces           | `r knitr::include_graphics(summary$Bio$P$Sp)`| Soc   | Arribos de mero         | `r knitr::include_graphics(summary$Soc$L$Lm)`
+Bio    | Biomasa Peces           | `r knitr::include_graphics(summary$Bio$P$Bp)`| Soc   | Arribos de pargos       | `r knitr::include_graphics(summary$Soc$L$Lp)`
+Bio    | Nivel Trofico Peces     | `r knitr::include_graphics(summary$Bio$P$NT)`| Soc   | Arribos de langosta     | `r knitr::include_graphics(summary$Soc$L$Ll)`
+Bio    | Densidad Iinvertebrados | `r knitr::include_graphics(summary$Bio$I$Di)`| Soc   | Ingresos totales        | `r knitr::include_graphics(summary$Soc$V$Vg)`
+Bio    | Densidad de langostas   | `r knitr::include_graphics(summary$Bio$O$L)` | Soc   | Ingresos por mero       | `r knitr::include_graphics(summary$Soc$V$Vm)`
+Bio    | Densidad de caracol rosa| `r knitr::include_graphics(summary$Bio$O$C)` | Soc   | Ingresos por pargos     | `r knitr::include_graphics(summary$Soc$V$Vp)`
+Bio    | Densidad de pargos      | `r knitr::include_graphics(summary$Bio$O$P)` | Soc   | Ingresos por langosta   | `r knitr::include_graphics(summary$Soc$V$Vl)`
+Bio    | Biomasa de pargos       | `r knitr::include_graphics(summary$Bio$O$Pb)`|       |                         |
 
 
 
@@ -396,7 +389,7 @@ stargazer(turfeffect(Ncar, reserve = reserva, control = control), dep.var.labels
 
 # Socioeconomico
 
-## Arribos
+## Capturas
 
 ```{r, include = F}
 
@@ -422,7 +415,7 @@ ggplot(arrG, aes(x = Ano, y = Peso)) +
 #### Mero
 
 ```{r}
-ggplot(arrM, aes(x = Ano, y = Peso)) +
+ggplot(arrM, aes(x = Ano, y = Peso/1000)) +
   geom_point() +
   geom_abline(intercept = coef(summary(modM))[1], slope = coef(summary(modM))[2]) +
   theme_bw() +
@@ -431,16 +424,8 @@ ggplot(arrM, aes(x = Ano, y = Peso)) +
 
 #### Pargo
 
-- Lutjanus aratus                       
-
-- Lutjanus cyanopterus                  
-
-- Lutjanus griseus                      
-
-- Lutjanus viridis                      
-
 ```{r}
-ggplot(arrP, aes(x = Ano, y = Peso)) +
+ggplot(arrP, aes(x = Ano, y = Peso/1000)) +
   geom_point() +
   geom_abline(intercept = coef(summary(modP))[1], slope = coef(summary(modP))[2]) +
   theme_bw() +
@@ -450,7 +435,7 @@ ggplot(arrP, aes(x = Ano, y = Peso)) +
 #### Langosta
 
 ```{r}
-ggplot(arrL, aes(x = Ano, y = Peso)) +
+ggplot(arrL, aes(x = Ano, y = Peso/1000)) +
   geom_point() +
   geom_abline(intercept = coef(summary(modL))[1], slope = coef(summary(modL))[2]) +
   theme_bw() +
@@ -469,8 +454,11 @@ ggplot(arrL, aes(x = Ano, y = Peso)) +
 
 ```{r}
 
-ggplot(ingG, aes(x = Ano, y = Valor)) +
-  geom_point()
+ggplot(ingG, aes(x = Ano, y = Valor/1000)) +
+  geom_point()  +
+  geom_abline(intercept = coef(summary(modG2))[1], slope = coef(summary(modG2))[2]) +
+  theme_bw() +
+  labs(x = "Ano", y = "Ingresos (Miles de pesos)")
 
 ```
 
@@ -480,11 +468,11 @@ ggplot(ingG, aes(x = Ano, y = Valor)) +
 #### Mero
 
 ```{r}
-ggplot(ingM, aes(x = Ano, y = Precio)) +
+ggplot(ingM, aes(x = Ano, y = Precio/1000)) +
   geom_point() +
   geom_abline(intercept = coef(summary(modM2))[1], slope = coef(summary(modM2))[2]) +
   theme_bw() +
-  labs(x = "Ano", y = "Ingresos ($)")
+  labs(x = "Ano", y = "Ingresos (Miles de pesos)")
 ```
 
 #### Pargo
@@ -498,21 +486,21 @@ ggplot(ingM, aes(x = Ano, y = Precio)) +
 - Lutjanus viridis                      
 
 ```{r}
-ggplot(ingP, aes(x = Ano, y = Precio)) +
+ggplot(ingP, aes(x = Ano, y = Precio/1000)) +
   geom_point() +
   geom_abline(intercept = coef(summary(modP2))[1], slope = coef(summary(modP2))[2]) +
   theme_bw() +
-  labs(x = "Ano", y = "Ingresos ($)")
+  labs(x = "Ano", y = "Ingresos (Miles de pesos)")
 ```
 
 #### Langosta
 
 ```{r}
-ggplot(ingL, aes(x = Ano, y = Precio)) +
+ggplot(ingL, aes(x = Ano, y = Precio/1000)) +
   geom_point() +
   geom_abline(intercept = coef(summary(modL2))[1], slope = coef(summary(modL2))[2]) +
   theme_bw() +
-  labs(x = "Ano", y = "Ingresos ($)")
+  labs(x = "Ano", y = "Ingresos (Miles de pesos)")
 ```
 
 ## Indice de conocimiento
@@ -527,6 +515,8 @@ ggplot(ingL, aes(x = Ano, y = Precio)) +
 
 # Gobernanza
 
+*La información de gobernanza se presenta con propósitos de realizar el ejercicio; de ninguna manera representa una evaluación que pueda utilizarse para recomendaciones.* 
+
 ## Acceso a la pesqueria
 
 ```{r}
@@ -536,7 +526,7 @@ gov$Access.to.the.fishery[2]
 ```
 
 
-## Número de pescadores
+## Numero de pescadores
 
 ```{r}
 
@@ -549,8 +539,6 @@ gov$Number.of.fishers[1]
 
 ```{r}
 
-gov$Legal.recognition.of.reserve[1]
-
 gov$Legal.recognition.of.reserve[2]
 
 ```
@@ -560,18 +548,18 @@ gov$Legal.recognition.of.reserve[2]
 
 ```{r}
 
-gov$Reserve.type[1]
-
 gov$Reserve.type[2]
 
 ```
 
 
-## Grado de pesca 
+## Grado de pesca ilegal
 
 ```{r}
 
-gov$Ilegal.harvesting[1]
+gov$Illegal.harvesting[1]
+
+gov$Illegal.harvesting[2]
 
 ```
 
@@ -609,16 +597,12 @@ gov$Reasoning.for.reserve.location[2]
 
 ```{r}
 
-gov$Membership.to.fisher.organizations[1]
-
-gov$Type.of.fisher.organizations[1]
-
 gov$Type.of.fisher.organizations[2]
 
 
 ```
 
-# Nivel inclusividad
+## Nivel inclusividad
 ```{r}
 
 gov$Representation[1]
@@ -634,7 +618,7 @@ gov$Representation[2]
 
 _______
 
-**Referencias**
+# Referencias
 
 - R Core Team (2015). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. URL https://www.R-project.org/.
 
