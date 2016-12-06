@@ -88,10 +88,10 @@ mpa_sim=function(area, nsteps, r, pop0, K, mrate, op=FALSE, cf=NULL, closure.vec
     #left, 1/4 those leaving cells to the right, 1/4 those leaving up
     #and 1/4 those leaving down. This is a complicated expression
     #take a minute to think it through!
-    arriving=0.25*leaving[left.cells]+
-      0.25*leaving[right.cells]+
-      0.25*leaving[up.cells]+
-      0.25*leaving[down.cells]
+    arriving=0.25*leaving[,left.cells]+
+      0.25*leaving[,right.cells]+
+      0.25*leaving[up.cells,]+
+      0.25*leaving[down.cells,]
 
     #surplus production from the logistic model
     surplus=(r*pop)*(1-(pop/K))

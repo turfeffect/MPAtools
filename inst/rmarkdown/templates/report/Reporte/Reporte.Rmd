@@ -1,21 +1,21 @@
 ---
 params:
-  title: ""
-  peces: ""
-  invertebrados: ""
-  pesca: ""
-  gov: ""
-  coop: ""
-  comunidad: ""
-  reserva: ""
-  control: ""
+title: ""
+peces: ""
+invertebrados: ""
+pesca: ""
+gov: ""
+coop: ""
+comunidad: ""
+reserva: ""
+control: ""
 output: 
-  html_document: 
-    fig_caption: yes
-    toc: yes
-    toc_float:
-      collapsed: no
-      smooth_scroll: no
+html_document: 
+fig_caption: yes
+toc: yes
+toc_float:
+collapsed: no
+smooth_scroll: no
 ---
 
 ---
@@ -43,7 +43,7 @@ suppressPackageStartupMessages({
 <style type="text/css">
 .table {
 
-    width: 80%;
+width: 80%;
 
 }
 </style>
@@ -76,24 +76,24 @@ reserva = params$reserva
 control = params$control
 
 Dp <- summary(turfeffect(density(peces, comunidad), reserva, control))
-  Sp <- summary(turfeffect(richness(peces, comunidad), reserva, control))
-  Bp <- summary(turfeffect(fish_biomass(peces, comunidad), reserva, control))
-  NT <- summary(turfeffect(trophic(peces, comunidad), reserva, control))
+Sp <- summary(turfeffect(richness(peces, comunidad), reserva, control))
+Bp <- summary(turfeffect(fish_biomass(peces, comunidad), reserva, control))
+NT <- summary(turfeffect(trophic(peces, comunidad), reserva, control))
 
-  Di <- summary(turfeffect(density(invertebrados, comunidad), reserva, control))
+Di <- summary(turfeffect(density(invertebrados, comunidad), reserva, control))
 
-  lang <- filter(invertebrados, GeneroEspecie == "Panulirus argus")
-  Nlang <- summary(turfeffect(density(lang, comunidad), reserva, control))
+lang <- filter(invertebrados, GeneroEspecie == "Panulirus argus")
+Nlang <- summary(turfeffect(density(lang, comunidad), reserva, control))
 
-  car <- filter(invertebrados, GeneroEspecie == "Strombus gigas")
-  Ncar <- summary(turfeffect(density(car, comunidad), reserva, control))
+car <- filter(invertebrados, GeneroEspecie == "Strombus gigas")
+Ncar <- summary(turfeffect(density(car, comunidad), reserva, control))
 
-  lut <- filter(peces, Genero == "Lutjanus")
-  Nlut <- summary(turfeffect(density(lut, comunidad), reserva, control))
-  Blut <- summary(turfeffect(fish_biomass(lut, comunidad), reserva, control))
-  
-  ## Landings section
-  
+lut <- filter(peces, Genero == "Lutjanus")
+Nlut <- summary(turfeffect(density(lut, comunidad), reserva, control))
+Blut <- summary(turfeffect(fish_biomass(lut, comunidad), reserva, control))
+
+## Landings section
+
 arribos <- landings(data = pesca, site = coop, type = 'kg')
 
 arrG <- arribos %>%
@@ -124,8 +124,8 @@ arrL <- arribos %>%
   mutate(Peso = Peso /1000)
 
 modL <- lm(Peso ~ Ano, arrL)
-  
-  # Landings and price
+
+# Landings and price
 
 ingresos <- landings(data = pesca, site =coop, type = 'price')
 
@@ -159,57 +159,57 @@ modL2 <- lm(Precio ~ Ano, ingL)
 
 ##
 
-  summary <- list(Bio = list(P = list(Dp = score(x = data.frame(est = coefficients(Dp)[4],
-                                                                p = coefficients(Dp)[16])),
-
-                                      Sp = score(x = data.frame(est = coefficients(Sp)[4],
-                                                                p = coefficients(Sp)[16])),
-
-                                      Bp = score(x = data.frame(est = coefficients(Bp)[4],
-                                                                p = coefficients(Bp)[16])),
-
-                                      NT = score(x = data.frame(est = coefficients(NT)[4],
-                                                                p = coefficients(NT)[16]))),
-
-                             I = list(Di = score(x = data.frame(est = coefficients(Di)[4],
-                                                                p = coefficients(Di)[16]))),
-
-                             O = list(L = score(x = data.frame(est = coefficients(Nlang)[4],
-                                                               p = coefficients(Nlang)[16])),
-
-                                      C = score(x = data.frame(est = coefficients(Ncar)[4],
-                                                               p = coefficients(Ncar)[16])),
-
-                                      P = score(x = data.frame(est = coefficients(Nlut)[4],
-                                                               p = coefficients(Nlut)[16])),
-
-                                      Pb = score(x = data.frame(est = coefficients(Blut)[4],
-                                                                p = coefficients(Blut)[16])))),
-
-                  Soc = list(L = list(Lg = score(x = data.frame(est = coefficients(summary(modG))[2],
-                                                                p = coefficients(summary(modG))[8])),
-                                      
-                                      Lm = score(x = data.frame(est = coefficients(summary(modM))[2],
-                                                                p = coefficients(summary(modM))[8])),
-                                      
-                                      Lp = score(x = data.frame(est = coefficients(summary(modL))[2],
-                                                                p = coefficients(summary(modM))[8])),
-                                      
-                                      Ll = score(x = data.frame(est = coefficients(summary(modM))[2],
+summary <- list(Bio = list(P = list(Dp = score(x = data.frame(est = coefficients(Dp)[4],
+                                                              p = coefficients(Dp)[16])),
+                                    
+                                    Sp = score(x = data.frame(est = coefficients(Sp)[4],
+                                                              p = coefficients(Sp)[16])),
+                                    
+                                    Bp = score(x = data.frame(est = coefficients(Bp)[4],
+                                                              p = coefficients(Bp)[16])),
+                                    
+                                    NT = score(x = data.frame(est = coefficients(NT)[4],
+                                                              p = coefficients(NT)[16]))),
+                           
+                           I = list(Di = score(x = data.frame(est = coefficients(Di)[4],
+                                                              p = coefficients(Di)[16]))),
+                           
+                           O = list(L = score(x = data.frame(est = coefficients(Nlang)[4],
+                                                             p = coefficients(Nlang)[16])),
+                                    
+                                    C = score(x = data.frame(est = coefficients(Ncar)[4],
+                                                             p = coefficients(Ncar)[16])),
+                                    
+                                    P = score(x = data.frame(est = coefficients(Nlut)[4],
+                                                             p = coefficients(Nlut)[16])),
+                                    
+                                    Pb = score(x = data.frame(est = coefficients(Blut)[4],
+                                                              p = coefficients(Blut)[16])))),
+                
+                Soc = list(L = list(Lg = score(x = data.frame(est = coefficients(summary(modG))[2],
+                                                              p = coefficients(summary(modG))[8])),
+                                    
+                                    Lm = score(x = data.frame(est = coefficients(summary(modM))[2],
+                                                              p = coefficients(summary(modM))[8])),
+                                    
+                                    Lp = score(x = data.frame(est = coefficients(summary(modL))[2],
+                                                              p = coefficients(summary(modM))[8])),
+                                    
+                                    Ll = score(x = data.frame(est = coefficients(summary(modM))[2],
                                                               p = coefficients(summary(modM))[8]))),
-                             V = list(Vg = score(x = data.frame(est = coefficients(summary(modG2))[2],
-                                                                p = coefficients(summary(modG2))[8])),
-                                      
-                                      Vm = score(x = data.frame(est = coefficients(summary(modM2))[2],
-                                                                p = coefficients(summary(modM2))[8])),
-                                      
-                                      Vp = score(x = data.frame(est = coefficients(summary(modL2))[2],
-                                                                p = coefficients(summary(modM2))[8])),
-                                      
-                                      Vl = score(x = data.frame(est = coefficients(summary(modM2))[2],
+                           V = list(Vg = score(x = data.frame(est = coefficients(summary(modG2))[2],
+                                                              p = coefficients(summary(modG2))[8])),
+                                    
+                                    Vm = score(x = data.frame(est = coefficients(summary(modM2))[2],
+                                                              p = coefficients(summary(modM2))[8])),
+                                    
+                                    Vp = score(x = data.frame(est = coefficients(summary(modL2))[2],
+                                                              p = coefficients(summary(modM2))[8])),
+                                    
+                                    Vl = score(x = data.frame(est = coefficients(summary(modM2))[2],
                                                               p = coefficients(summary(modM2))[8])))),
-
-                  Gov = list(1))
+                
+                Gov = list(1))
 
 
 ```
