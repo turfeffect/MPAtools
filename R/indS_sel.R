@@ -15,7 +15,9 @@ indS_sel <- function(x) {
 
   library(dplyr)
 
-  dataS <- read.csv(file = "./data/IndListS.csv", header = T)
+  data(IndListS)
+
+  dataS <- IndSelS
 
 
   selected <- mutate(dataS, selected = rowSums(select(dataS, x))) %>%

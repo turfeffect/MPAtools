@@ -15,7 +15,9 @@ indG_sel <- function(x) {
 
   library(dplyr)
 
-  dataG <- read.csv(file = "./data/IndListG.csv", header = T, stringsAsFactors = F)
+  data(IndListG)
+
+  dataG <- IndListG
 
 
   selected <- mutate(dataG, selected = rowSums(select(dataG, x))) %>%
