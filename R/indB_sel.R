@@ -5,20 +5,17 @@
 # 12/07/2016
 #############################
 
-indB_sel <- function(objective) {
+indB_sel <- function(x) {
 
-  if (any(objective == "A")){
-    bio_sel = c("Densidad",
-              "Biomasa",
-              "Organismos > LT_50")
-  }
+  library(dplyr)
 
-  else {
-    bio_sel = c("Densidad",
-                 "Biomasa")
-  }
+  dataB <- read.csv(file = "./data/IndListB.csv", header = T)
 
-  return(bio_sel)
+
+  IndListB <- mutate(dataB, selected = rowSums(select(dataB, x))>0) %>%
+    select(selected)
+
+
+  return(IndListB)
 
 }
-

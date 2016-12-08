@@ -4,29 +4,18 @@
 # 12/07/2016
 #############################
 
-indG_sel <- function(objective) {
+indG_sel <- function(x) {
 
-  if (any(objective == "A")){
-    gov_sel = c("Acceso a la pesquería",
-                "Número de pescadores",
-                "Reconocimiento legal de la reserva",
-                "Grado de pesca ilegal",
-                "Plan de manejo",
-                "Tamaño de la reserva",
-                "Razonamiento para el diseño de la reserva",
-                "Pertenencia a oragnizaciones pesqueras",
-                "Tipo de organización pesquera",
-                "Representación")
-  }
+  library(dplyr)
 
-  else {
-    gov_sel = c("Acceso a la pesquería",
-                "Plan de manejo",
-                "Tamaño de la reserva",
-                "Razonamiento para el diseño de la reserva",
-                "Representación")
-  }
+  dataG <- read.csv(file = "./data/IndListG.csv", header = T)
 
-  return(gov_sel)
+
+  IndListG <- mutate(dataG, selected = rowSums(select(dataG, x))>0) %>%
+    select(selected)
+
+
+  return(IndListG)
 
 }
+

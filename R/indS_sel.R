@@ -4,17 +4,18 @@
 # 12/07/2016
 #############################
 
-indS_sel <- function(objective) {
+indS_sel <- function(x) {
 
-  if (any(objective == "A")){
-    sec_sel = c("Arribos")
-  }
+  library(dplyr)
 
-  else {
-    sec_sel = c("Arribos",
-                "Ingresos por arribos")
-  }
+  dataS <- read.csv(file = "./data/IndListS.csv", header = T)
 
-  return(sec_sel)
+
+  IndListS <- mutate(dataS, selected = rowSums(select(dataS, x))>0) %>%
+    select(selected)
+
+
+  return(IndListS)
 
 }
+
