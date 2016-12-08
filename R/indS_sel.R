@@ -17,7 +17,7 @@ indS_sel <- function(x) {
 
   data(IndListS)
 
-  dataS <- IndSelS
+  dataS <- IndListS
 
 
   selected <- mutate(dataS, selected = rowSums(select(dataS, x))) %>%
