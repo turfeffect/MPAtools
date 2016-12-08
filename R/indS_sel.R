@@ -1,8 +1,15 @@
-#############################
-# Socioeconomic indicators selection function
-# Caio Faro
-# 12/07/2016
-#############################
+#' Select indicators
+#'
+#' @description Socioeconomical indicators selection function
+#'
+#' @param x An character vector containing the column numbers from the list
+#'
+#' @return
+#'
+#' @export
+#'
+#' @author Caio Faro
+#'
 
 indS_sel <- function(x) {
 
@@ -11,8 +18,10 @@ indS_sel <- function(x) {
   dataS <- read.csv(file = "./data/IndListS.csv", header = T)
 
 
-  IndListS <- mutate(dataS, selected = rowSums(select(dataS, x))>0) %>%
+  selected <- mutate(dataS, selected = rowSums(select(dataS, x))) %>%
     select(selected)
+
+  IndListS <- dataS$Indicators[selected < 0]
 
 
   return(IndListS)

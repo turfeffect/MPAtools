@@ -1,20 +1,27 @@
-
-#############################
-# Biophysical indicators selection function
-# Caio Faro
-# 12/07/2016
-#############################
+#' Select indicators
+#'
+#' @description Biophysical indicators selection function
+#'
+#' @param x An character vector containing the column numbers from the list
+#'
+#' @return
+#'
+#' @export
+#'
+#' @author Caio Faro
+#'
 
 indB_sel <- function(x) {
 
   library(dplyr)
 
-  dataB <- read.csv(file = "./data/IndListB.csv", header = T)
+  dataB <- read.csv(file = "./data/IndListB.csv", header = T, stringsAsFactors = F)
 
 
-  IndListB <- mutate(dataB, selected = rowSums(select(dataB, x))>0) %>%
+  selected <- mutate(dataB, selected = rowSums(select(dataB, x))) %>%
     select(selected)
 
+  IndListB <- dataB$Indicators[selected>0]
 
   return(IndListB)
 

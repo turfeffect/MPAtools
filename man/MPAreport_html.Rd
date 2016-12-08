@@ -4,7 +4,8 @@
 \alias{MPAreport_html}
 \title{Create report for an MPA}
 \usage{
-MPAreport_html(peces, invertebrados, comunidad, reserva, control)
+MPAreport_html(peces, invertebrados, pesca, gov, coop, comunidad, reserva,
+  control)
 }
 \arguments{
 \item{peces}{A data.frame}
