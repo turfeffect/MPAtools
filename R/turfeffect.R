@@ -13,7 +13,7 @@ turfeffect <- function (data, reserve, control){
   library(dplyr)
   library(tidyr)
 
-  columnas <- c("Ano", "Zonificacion", "Sitio", "Transecto", "Indicador")
+  columnas <- c("Ano", "Zonificacion", "Sitio", "Transecto", "Indicador", "Temperatura", "Visibilidad", "Profundidad")
 
   colnames(data) <- columnas
 
