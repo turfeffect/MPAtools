@@ -13,7 +13,7 @@ turfeffect <- function (data, reserve, control){
   library(dplyr)
   library(tidyr)
 
-  columnas <- c("Ano", "Zonificacion", "Sitio", "Transecto", "Indicador")
+  columnas <- c("Ano", "Zonificacion", "Sitio", "Transecto", "Indicador", "Temperatura", "Visibilidad", "Profundidad")
 
   colnames(data) <- columnas
 
@@ -22,12 +22,15 @@ turfeffect <- function (data, reserve, control){
   dummy.data <- data.frame(Ano = data$Ano,
                            Zona = NA,
                            Sitio = data$Sitio,
-                           Indicador = data$Indicador)
+                           Indicador = data$Indicador,
+                           Temperatura = data$Temperatura,
+                           Profundidad = data$Profundidad,
+                           Visibilidad = data$Visibilidad)
 
   dummy.data$Zona[data$Zonificacion == "Reserva"] <- 0
   dummy.data$Zona[data$Zonificacion == "Control"] <- 1
 
-  model <- lm(Indicador ~ Ano * Zona, data = dummy.data)
+  model <- lm(Indicador ~ Ano * Zona + Temperatura + Visibilidad + Profundidad, data = dummy.data)
 
   return(model)
 }

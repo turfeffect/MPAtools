@@ -23,7 +23,10 @@ density <- function(data, location, species = NULL){
                Zonificacion,
                Sitio,
                Transecto) %>% #Group by year, zone, transect number and species
-      summarize(D = sum(Abundancia)/60)       #Calculate abundance by species by transect
+      summarize(D = sum(Abundancia, na.rm = T),
+                Temperatura = mean(Temperatura, na.rm = T),
+                Visibilidad = mean(Visibilidad, na.rm = T),
+                Profundidad = mean(Profundidad, na.rm = T))       #Calculate abundance by species by transect
   } else { #Else indicates that a single species has been selected
     D <- data %>%                    #Set D equal to data
       filter(Comunidad == location) %>%      #Filter by location
@@ -32,7 +35,7 @@ density <- function(data, location, species = NULL){
                Zonificacion,
                Sitio,
                Transecto) %>% #Group by year, zone, transect number and species
-      summarize(D = sum(Abundancia)/60)
+      summarize(D = sum(Abundancia))
   }
 
   return(as.data.frame(D))                       #Return D
