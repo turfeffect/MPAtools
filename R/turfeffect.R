@@ -24,8 +24,8 @@ turfeffect <- function (data, reserve, control){
                            Sitio = data$Sitio,
                            Indicador = data$Indicador)
 
-  dummy.data$Zona[data$Zonificacion == "Pesca"] <- 0
-  dummy.data$Zona[data$Zonificacion == "No Pesca"] <- 1
+  dummy.data$Zona[data$Zonificacion == "Reserva"] <- 0
+  dummy.data$Zona[data$Zonificacion == "Control"] <- 1
 
   model <- lm(Indicador ~ Ano * Zona, data = dummy.data)
 
