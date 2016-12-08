@@ -1,9 +1,9 @@
 Indicators,Recuperar especies de interés comercial ,Conservar especies en régimen de protección especial ,Mejorar la productividad pesquera en aguas adyacentes ,Evitar que se llegue a la sobreexplotación ,Recuperar especies sobreexplotadas ,Contribuir al mantenimiento de los procesos biológicos,Preservar el hábitat de las especies pesqueras ,Preservar la diversidad biológica y los ecosistemas
-"Diversity index (Richness, Shannon, Simpson)",0,0,0,0,0,1,0,1
-Density of mature organisms,1,1,0,1,1,1,0,1
-Density,0,1,1,1,1,1,0,1
-Density of target species,1,1,1,1,1,1,0,1
+Índice de diversidad de Shannon,0,0,0,0,0,1,0,1
+Organismos > LT_50,1,1,0,1,1,1,0,1
+Densidad,0,1,1,1,1,1,0,1
+Densidad de especies objetivo,1,1,1,1,1,1,0,1
 Natural Disturbance,1,1,1,1,1,1,0,1
-Trophic level,0,0,0,0,0,1,0,1
-Biomass,0,1,1,1,1,1,0,1
-Biomass of target species,1,1,1,1,1,1,0,1
+Nivel trófico,0,0,0,0,0,1,0,1
+Biomasa,0,1,1,1,1,1,0,1
+Biomasa de especies objetivo,1,1,1,1,1,1,0,1
