@@ -23,8 +23,7 @@ indS_sel <- function(x) {
   selected <- mutate(dataS, selected = rowSums(select(dataS, x))) %>%
     select(selected)
 
-  IndListS <- dataS$Indicators[selected < 0]
-
+  IndListS <- dataS$Indicators[selected > 0]
 
   return(IndListS)
 

@@ -1,6 +1,6 @@
 #' Select indicators
 #'
-#' @description Fovernance indicators selection function
+#' @description Governance indicators selection function
 #'
 #' @param x An character vector containing the column numbers from the list
 #'
@@ -23,7 +23,7 @@ indG_sel <- function(x) {
   selected <- mutate(dataG, selected = rowSums(select(dataG, x))) %>%
     select(selected)
 
-  IndListG <- dataG$Indicators[selected>0]
+  IndListG <- dataG$Indicators[selected > 0]
 
   return(IndListG)
 
