@@ -13,7 +13,7 @@ indG_sel(x)
 
 }
 \description{
-Fovernance indicators selection function
+Governance indicators selection function
 }
 \author{
 Caio Faro
