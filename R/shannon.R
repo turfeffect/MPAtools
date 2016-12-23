@@ -51,5 +51,5 @@ shannon <- function(data, location){
               Profundidad = mean(Profundidad, na.rm = T)) %>%
     ungroup()
 
-  return(H)
+  return(as.data.frame(H))
 }
