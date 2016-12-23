@@ -20,7 +20,10 @@ trophic <- function(data, location){
              Zonificacion,
              Sitio,
              Transecto) %>%
-    summarize(mean = mean(NT, na.rm=TRUE))
+    summarize(NT = mean(NT, na.rm=TRUE),
+              Temperatura = mean(Temperatura, na.rm = T),
+              Visibilidad = mean(Visibilidad, na.rm = T),
+              Profundidad = mean(ProfundidadInicial, na.rm = T))
 
 
   return(as.data.frame(data))
