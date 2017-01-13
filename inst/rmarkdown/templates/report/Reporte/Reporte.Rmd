@@ -1,21 +1,21 @@
 ---
 params:
-title: ""
-peces: ""
-invertebrados: ""
-pesca: ""
-gov: ""
-coop: ""
-comunidad: ""
-reserva: ""
-control: ""
+    title: ""
+    peces: ""
+    invertebrados: ""
+    pesca: ""
+    gov: ""
+    coop: ""
+    comunidad: ""
+    reserva: ""
+    control: ""
 output: 
-html_document: 
-fig_caption: yes
-toc: yes
-toc_float:
-collapsed: no
-smooth_scroll: no
+    html_document: 
+        fig_caption: yes
+        toc: yes
+        toc_float:
+            collapsed: no
+            smooth_scroll: no
 ---
 
 ---
