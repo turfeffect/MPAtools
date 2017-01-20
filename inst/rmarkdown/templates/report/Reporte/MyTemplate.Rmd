@@ -1,0 +1,104 @@
+---
+output: html_document
+params:
+  title: ""
+  peces: ""
+  comunidad: ""
+  reserva: ""
+  control: ""
+---
+
+---
+title: `r params$title`
+---
+
+```{r cargar paquetes}
+
+suppressPackageStartupMessages({
+  library(ggplot2)
+  library(dplyr)
+  library(tidyr)
+  library(MPAtools)
+  library(reshape)
+  library(stargazer)
+  library(ggExtra)
+})
+
+```
+
+<style type="text/css">
+.table {
+
+width: 80%;
+
+}
+</style>
+
+*Este documento fue generado por el paquete [`MPAtools`](https://github.com/turfeffect/MPAtools), uno de los entregables del grupo [TURFeffect](www.turfeffect.org). Los resultados presentados son una version preliminar del software que se esta desarrollando, y no recomendamos la toma de decisiones basado en la informacion aqui presentada*
+
+*Acentos y caracteres especiales omitidos*
+
+# Resumen
+
+<center>
+
+**Leyenda**
+
+----
+
+![](legend.png)
+
+----
+
+</center>
+
+```{r}
+
+peces = params$peces
+invertebrados = params$invertebrados
+pesca = params$pesca
+comunidad = params$comunidad
+reserva = params$reserva
+control = params$control
+
+Dp <- summary(turfeffect(density(peces, comunidad), reserva, control))
+
+##
+
+summary <-
+  list(
+  Bio = list(P = list(Dp = score(
+  x = data.frame(est = coefficients(Dp)[4],
+  p = coefficients(Dp)[16])
+  ))))
+
+
+```
+
+
+Cat    | Indicador               | Valor                                        
+-------|-------------------------|----------------------------------------------
+Bio    | Densidad Peces          | `r knitr::include_graphics(summary$Bio$P$Dp)`
+
+
+<center>
+
+# Ecologicos
+
+## Peces
+
+### Densidad
+
+```{r densidad peces, fig.cap = "Densidad promedio de peces (org / m^2)."}
+
+Np <- richness(data = peces, location = comunidad)
+
+#mpa_plot3(Np, reserve = reserva, control = control, y.lab = "Densidad (org / m^2)")
+
+```
+
+```{r tabla densidad peces, results = 'asis'}
+
+stargazer(turfeffect(Np, reserve = reserva, control = control), dep.var.labels = "Densidad (org / transecto)", type = "latex", dep.var.caption = "", report = "vc*", single.row = T, omit.stat = c("adj.rsq", "n"), digits = 2, df = F, covariate.labels = c("Ano", "Zona", "**Ano:Zona**", "Constante"), notes = "+p < 0.1, ++p<0.05, +++p<0.001", notes.append = FALSE, star.char = "+")
+
+```
