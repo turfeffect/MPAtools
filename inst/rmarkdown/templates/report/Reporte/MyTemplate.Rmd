@@ -1,5 +1,5 @@
 ---
-output: html_document
+output: pdf_document
 params:
   title: ""
   peces: ""
@@ -11,6 +11,10 @@ params:
 ---
 title: `r params$title`
 ---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = F, fig.height = 3, warning = F, message = F, results = 'asis')
+```
 
 ```{r cargar paquetes}
 
