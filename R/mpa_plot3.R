@@ -48,7 +48,7 @@ mpa_plot3 <-
         x = Ano,
         y = Indicador,
         color = Zonificacion,
-        pch = Sitio
+        pch = Sitio,
         fill = Zonificacion
       )) +
       geom_jitter(width = 0.1, size = 1) +
