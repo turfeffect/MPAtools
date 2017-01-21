@@ -69,12 +69,9 @@ Dp <- summary(turfeffect(density(peces, comunidad), reserva, control))
 
 ##
 
-summary <-
-  list(
-  Bio = list(P = list(Dp = score(
-  x = data.frame(est = coefficients(Dp)[4],
-  p = coefficients(Dp)[16])
-  ))))
+summary <-list(Bio = list(P = list(Dp = paste(
+  score(x = data.frame(est = coefficients(Dp)[4], p = coefficients(Dp)[16])), ".jpg", sep = ""
+))))
 
 
 ```
