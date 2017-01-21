@@ -49,6 +49,7 @@ mpa_plot3 <-
         y = Indicador,
         color = Zonificacion,
         pch = Sitio
+        fill = Zonificacion
       )) +
       geom_jitter(width = 0.1, size = 1) +
       stat_summary(geom = "point", fun.y = mean, color = "black", size = 2, alpha = 0.5) +
