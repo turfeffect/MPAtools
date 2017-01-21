@@ -41,10 +41,7 @@ mpa_plot3 <-
       "Profundidad"
     )
 
-    data <- data %>% filter(Sitio == reserve | Sitio == control) %>%
-      group_by(Ano, Zonificacion, Sitio) %>%
-      summarize(SD = sd(Indicador, na.rm = T),
-                Indicator = mean(Indicador, na.rm = T))
+    data <- data %>% filter(Sitio == reserve | Sitio == control)
 
     p <-
       ggplot(data, aes(
@@ -53,8 +50,9 @@ mpa_plot3 <-
         color = Zonificacion,
         pch = Sitio
       )) +
-      geom_point() +
-      geom_line() +
+      geom_jitter() +
+      stat_summary(geom = "point", fun.y = "mean", color = "black", pch = 2, alpha = 0.5) +
+      stat_summary(geom = "line", fun.y = "mean", color = "black", pch = 2, alpha = 0.5) +
       theme_bw() +
       scale_color_brewer(palette = "Set1") +
       labs(x = "Ano", y = y.lab)
