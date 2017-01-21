@@ -11,23 +11,23 @@ score <- function(x){
   p = x$p
 
   if (est > 0 & p < 0.05) {
-    score = "green2.jpg"
+    score = "olive"
   }
 
   if (est > 0 & p > 0.05){
-    score = "green1.jpg"
+    score = "green"
   }
 
   if (est == 0){
-    score = "yellow.jpg"
+    score = "yellow"
   }
 
   if (est < 0 & p > 0.05){
-    score = "orange.jpg"
+    score = "orange"
   }
 
   if (est < 0 & p < 0.05){
-    score = "red.jpg"
+    score = "red"
   }
 
   return(score)
