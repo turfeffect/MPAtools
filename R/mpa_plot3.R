@@ -46,7 +46,7 @@ mpa_plot3 <-
     p <-
       ggplot(data, aes(
         x = Ano,
-        y = Indicator,
+        y = Indicador,
         color = Zonificacion,
         pch = Sitio
       )) +
