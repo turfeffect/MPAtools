@@ -50,11 +50,13 @@ mpa_plot3 <-
         color = Zonificacion,
         pch = Sitio
       )) +
-      geom_jitter() +
-      stat_summary(geom = "point", fun.y = "mean", color = "black", pch = 2, alpha = 0.5) +
-      stat_summary(geom = "line", fun.y = "mean", color = "black", pch = 2, alpha = 0.5) +
-      theme_bw() +
+      geom_jitter(width = 0.1, size = 1) +
+      stat_summary(geom = "point", fun.y = mean, color = "black", size = 2, alpha = 0.5) +
+      stat_summary(geom = "line", fun.y = mean, color = "black", alpha = 0.5) +
+      stat_summary(fun.data = mean_se, geom = "ribbon", alpha = 0.5) +
       scale_color_brewer(palette = "Set1") +
+      scale_fill_brewer(palette = "Set1") +
+      theme_bw() +
       labs(x = "Ano", y = y.lab)
 
     if (error.bars) {
