@@ -27,6 +27,7 @@ suppressPackageStartupMessages({
   library(reshape)
   library(stargazer)
   library(ggExtra)
+  library(plotly)
 })
 
 ```
