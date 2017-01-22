@@ -114,7 +114,7 @@ Np <- density(data = peces, location = comunidad)
 
 p <- mpa_plot3(Np, reserve = reserva, control = control, y.lab = "Densidad (org / m^2)")
 
-ggplotly(p)
+p
 
 ```
 
@@ -137,7 +137,7 @@ p <- ggplot(socioeco, aes(x = Year, y = Landings)) +
   geom_line() +
   theme_bw()
 
-ggplotly(p)
+p
 
 ```
 
