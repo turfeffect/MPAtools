@@ -27,7 +27,6 @@ suppressPackageStartupMessages({
   library(reshape)
   library(stargazer)
   library(ggExtra)
-  library(plotly)
 })
 
 ```
@@ -112,9 +111,7 @@ Soc    | Arribos de Langosta     | `r knitr::include_graphics(summary$Soc$L)`
 
 Np <- density(data = peces, location = comunidad)
 
-p <- mpa_plot3(Np, reserve = reserva, control = control, y.lab = "Densidad (org / m^2)")
-
-ggplotly(p)
+mpa_plot3(Np, reserve = reserva, control = control, y.lab = "Densidad (org / m^2)")
 
 ```
 
@@ -132,12 +129,10 @@ stargazer(turfeffect(Np, reserve = reserva, control = control), dep.var.labels =
 
 ```{r}
 
-p <- ggplot(socioeco, aes(x = Year, y = Landings)) +
+ggplot(socioeco, aes(x = Year, y = Landings)) +
   geom_point(color = "red") +
   geom_line() +
   theme_bw()
-
-ggplotly(p)
 
 ```
 
