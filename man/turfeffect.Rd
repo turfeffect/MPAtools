@@ -12,6 +12,8 @@ turfeffect(data, reserve = NULL, control = NULL, type = NULL)
 \item{reserve}{A string}
 
 \item{control}{A string}
+
+\item{type}{A string}
 }
 \value{
 An object of class "lm"

@@ -33,8 +33,8 @@ soc_results <- function(values, data) {
 
     results$e[1] <- TidyModel$estimate
     results$p[1] <- TidyModel$p.value
-    results$string[1] <- valueBoxString(model)
-    results$color[1] <- bio_score(model)
+    results$string[1] <- valueBoxString(model, "soc")
+    results$color[1] <- soc_score(model)
     results$model[[1]] <- model
   }
 
@@ -48,8 +48,8 @@ soc_results <- function(values, data) {
 
     results$e[2] <- TidyModel$estimate
     results$p[2] <- TidyModel$p.value
-    results$string[2] <- valueBoxString(model)
-    results$color[2] <- bio_score(model)
+    results$string[2] <- valueBoxString(model, "soc")
+    results$color[2] <- soc_score(model)
     results$model[[2]] <- model
   }
 
