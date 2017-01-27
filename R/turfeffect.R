@@ -8,29 +8,24 @@
 #'
 #' @export
 
-turfeffect <- function (data, reserve, control){
+turfeffect <- function (data, reserve = NULL, control = NULL, type = NULL){
 
-  library(dplyr)
-  library(tidyr)
+  library(tidyverse)
 
-  columnas <- c("Ano", "Zonificacion", "Sitio", "Transecto", "Indicador", "Temperatura", "Visibilidad", "Profundidad")
+  if (type == "bio"){
 
-  colnames(data) <- columnas
+    colnames(data) <- c("Ano", "Zona", "Sitio", "Transecto", "Indicador", "Temperatura", "Visibilidad", "Profundidad")
 
-  data <- filter(data, Sitio == reserve | Sitio == control)
+      data <- filter(data, Sitio == reserve | Sitio == control)
 
-  dummy.data <- data.frame(Ano = data$Ano,
-                           Zona = NA,
-                           Sitio = data$Sitio,
-                           Indicador = data$Indicador,
-                           Temperatura = data$Temperatura,
-                           Profundidad = data$Profundidad,
-                           Visibilidad = data$Visibilidad)
+      model <- lm(Indicador ~ Ano * Zona + Temperatura + Visibilidad + Profundidad, data)
 
-  dummy.data$Zona[data$Zonificacion == "Reserva"] <- 0
-  dummy.data$Zona[data$Zonificacion == "Control"] <- 1
+  } else if (type == "soc"){
 
-  model <- lm(Indicador ~ Ano * Zona + Temperatura + Visibilidad + Profundidad, data = dummy.data)
+    colnames(data) <- c("Ano", "Indicador")
+
+      model <- lm(Indicador ~ Ano, data = data)
+  }
 
   return(model)
 }
