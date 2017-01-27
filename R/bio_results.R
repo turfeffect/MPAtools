@@ -109,7 +109,7 @@ bio_results <- function(values, data, res, con) {
   # }
 #
 #   ####
-#   if ("Nivel trófico" %in% values$indB) {
+#   if ("Nivel trofico" %in% values$indB) {
 #     model <- trophic(data, values$comunidad) %>%
 #       turfeffect(res, con)
 #
