@@ -34,7 +34,7 @@ bio_results <- function(values, data, res, con) {
 
   ####
   if ("Índice de diversidad de Shannon" %in% values$indB) {
-    model <- shannon(data, values$comunidad) %>%
+    model <- MPAtools::shannon(data, values$comunidad) %>%
       turfeffect(res, con)
 
     TidyModel <- tidy(model) %>%
@@ -106,36 +106,36 @@ bio_results <- function(values, data, res, con) {
   #   results$color <- score(model)
   #   results$model[[5]] <- model
   # }
+#
+#   ####
+#   if ("Nivel trófico" %in% values$indB) {
+#     model <- trophic(data, values$comunidad) %>%
+#       turfeffect(res, con)
+#
+#     TidyModel <- tidy(model) %>%
+#       filter(term == "Ano:Zona")
+#
+#     results$e <- TidyModel$estimate
+#     results$p <- TidyModel$p.value
+#     results$string <- valueBoxString(model)
+#     results$color <- score(model)
+#     results$model[[6]] <- model
+#   }
 
-  ####
-  if ("Nivel trófico" %in% values$indB) {
-    model <- trophic(data, values$comunidad) %>%
-      turfeffect(res, con)
-
-    TidyModel <- tidy(model) %>%
-      filter(term == "Ano:Zona")
-
-    results$e <- TidyModel$estimate
-    results$p <- TidyModel$p.value
-    results$string <- valueBoxString(model)
-    results$color <- score(model)
-    results$model[[6]] <- model
-  }
-
-  ####
-  if ("Biomasa" %in% values$indB) {
-    model <- fish_biomass(data, values$comunidad) %>%
-      turfeffect(res, con)
-
-    TidyModel <- tidy(model) %>%
-      filter(term == "Ano:Zona")
-
-    results$e <- TidyModel$estimate
-    results$p <- TidyModel$p.value
-    results$string <- valueBoxString(model)
-    results$color <- score(model)
-    results$model[[7]] <- model
-  }
+  # ####
+  # if ("Biomasa" %in% values$indB) {
+  #   model <- fish_biomass(data, values$comunidad) %>%
+  #     turfeffect(res, con)
+  #
+  #   TidyModel <- tidy(model) %>%
+  #     filter(term == "Ano:Zona")
+  #
+  #   results$e <- TidyModel$estimate
+  #   results$p <- TidyModel$p.value
+  #   results$string <- valueBoxString(model)
+  #   results$color <- score(model)
+  #   results$model[[7]] <- model
+  # }
 
   #   ####
   #   if ("Biomasa de especies objetivo" %in% input$indB) {
