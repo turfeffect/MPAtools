@@ -41,10 +41,10 @@ bio_results <- function(values, data, res, con) {
     TidyModel <- tidy(model) %>%
       filter(term == "Ano:Zona")
 
-    results$e <- TidyModel$estimate
-    results$p <- TidyModel$p.value
-    results$string <- valueBoxString(model)
-    results$color <- score(model)
+    results$e[1] <- TidyModel$estimate
+    results$p[1] <- TidyModel$p.value
+    results$string[1] <- valueBoxString(model)
+    results$color[1] <- score(model)
     results$model[[1]] <- model
   }
 
@@ -56,10 +56,10 @@ bio_results <- function(values, data, res, con) {
     TidyModel <- tidy(model) %>%
       filter(term == "Ano:Zona")
 
-    results$e <- TidyModel$estimate
-    results$p <- TidyModel$p.value
-    results$string <- valueBoxString(model)
-    results$color <- score(model)
+    results$e[2] <- TidyModel$estimate
+    results$p[2] <- TidyModel$p.value
+    results$string[2] <- valueBoxString(model)
+    results$color[2] <- score(model)
     results$model[[2]] <- model
   }
 
@@ -71,10 +71,10 @@ bio_results <- function(values, data, res, con) {
   #   TidyModel <- tidy(model) %>%
   #     filter(term == "Ano:Zona")
   #
-  #   results$e <- TidyModel$estimate
-  #   results$p <- TidyModel$p.value
-  #   results$string <- valueBoxString(model)
-  #   results$color <- score(model)
+  #   results$e[3] <- TidyModel$estimate
+  #   results$p[3] <- TidyModel$p.value
+  #   results$string[3] <- valueBoxString(model)
+  #   results$color[3] <- score(model)
   #   results$model[[3]] <- model
   # }
 
@@ -86,10 +86,10 @@ bio_results <- function(values, data, res, con) {
     TidyModel <- tidy(model) %>%
       filter(term == "Ano:Zona")
 
-    results$e <- TidyModel$estimate
-    results$p <- TidyModel$p.value
-    results$string <- valueBoxString(model)
-    results$color <- score(model)
+    results$e[4] <- TidyModel$estimate
+    results$p[4] <- TidyModel$p.value
+    results$string[4] <- valueBoxString(model)
+    results$color[4] <- score(model)
     results$model[[4]] <- model
   }
 
@@ -101,10 +101,10 @@ bio_results <- function(values, data, res, con) {
   #   TidyModel <- tidy(model) %>%
   #     filter(term == "Ano:Zona")
   #
-  #   results$e <- TidyModel$estimate
-  #   results$p <- TidyModel$p.value
-  #   results$string <- valueBoxString(model)
-  #   results$color <- score(model)
+  #   results$e[5] <- TidyModel$estimate
+  #   results$p[5] <- TidyModel$p.value
+  #   results$string[5] <- valueBoxString(model)
+  #   results$color[5] <- score(model)
   #   results$model[[5]] <- model
   # }
 #
@@ -116,10 +116,10 @@ bio_results <- function(values, data, res, con) {
 #     TidyModel <- tidy(model) %>%
 #       filter(term == "Ano:Zona")
 #
-#     results$e <- TidyModel$estimate
-#     results$p <- TidyModel$p.value
-#     results$string <- valueBoxString(model)
-#     results$color <- score(model)
+#     results$e[6] <- TidyModel$estimate
+#     results$p[6] <- TidyModel$p.value
+#     results$string[6] <- valueBoxString(model)
+#     results$color[6] <- score(model)
 #     results$model[[6]] <- model
 #   }
 
@@ -131,10 +131,10 @@ bio_results <- function(values, data, res, con) {
   #   TidyModel <- tidy(model) %>%
   #     filter(term == "Ano:Zona")
   #
-  #   results$e <- TidyModel$estimate
-  #   results$p <- TidyModel$p.value
-  #   results$string <- valueBoxString(model)
-  #   results$color <- score(model)
+  #   results$e[7] <- TidyModel$estimate
+  #   results$p[7] <- TidyModel$p.value
+  #   results$string[7] <- valueBoxString(model)
+  #   results$color[7] <- score(model)
   #   results$model[[7]] <- model
   # }
 
@@ -146,10 +146,10 @@ bio_results <- function(values, data, res, con) {
   #     TidyModel <- tidy(model) %>%
   #       filter(term == "Ano:Zona")
   #
-  #     results$e <- TidyModel$estimate
-  #     results$p <- TidyModel$p.value
-  #     results$string <- valueBoxString(model)
-  #     results$color <- score(model)
+  #     results$e[8] <- TidyModel$estimate
+  #     results$p[8] <- TidyModel$p.value
+  #     results$string[8] <- valueBoxString(model)
+  #     results$color[8] <- score(model)
   #     results$model[[8]] <- model
   #   }
 
