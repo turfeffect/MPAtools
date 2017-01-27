@@ -7,7 +7,7 @@
 fish_biomass(data, location, species = NULL)
 }
 \arguments{
-\item{data}{A dataframe that contains at least columns of Ano, Zonificacion (e.g. "Zona de pesca" or "Zona de no pesca"), Sitio, Transecto, GeneroEspecie. Columns for a and b parameters are optional, though heavily suggested to avoid errors in calculations (this package might not have all parameters for all species).}
+\item{data}{A dataframe that contains at least columns of Ano, Zona (e.g. "Zona de pesca" or "Zona de no pesca"), Sitio, Transecto, GeneroEspecie. Columns for a and b parameters are optional, though heavily suggested to avoid errors in calculations (this package might not have all parameters for all species).}
 
 \item{location}{A quoted string that indicates the location.}
 
@@ -16,7 +16,7 @@ fish_biomass(data, location, species = NULL)
 \item{ab}{An optional dataframe that contains the a and b allometric parameters for each species. Dataframe must have three columns: GeneroEspecie, a, b}
 }
 \value{
-size A dataframe with columns for Ano, Zonificacion, Sitio, Transecto, GeneroEspecie, and fish biomass (B; in grams).
+size A dataframe with columns for Ano, Zona, Sitio, Transecto, GeneroEspecie, and fish biomass (B; in grams).
 }
 \description{
 Calulates biomass for a selected species or the entire dataset, by year, site, and transect, for a given location.

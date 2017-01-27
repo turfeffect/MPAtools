@@ -7,12 +7,12 @@
 richness(data, location)
 }
 \arguments{
-\item{data}{A dataframe that contains at least columns of Ano, Zonificacion (e.g. "Zona de pesca" or "Zona de no pesca"), Sitio, Transecto, GeneroEspecie.}
+\item{data}{A dataframe that contains at least columns of Ano, Zona (e.g. "Zona de pesca" or "Zona de no pesca"), Sitio, Transecto, GeneroEspecie.}
 
 \item{location}{A quoted string that indicates the location.}
 }
 \value{
-S A dataframe with columns for Ano, Zonificacion, Sitio, Transecto, and Species richness (S; number of species).
+S A dataframe with columns for Ano, Zona, Sitio, Transecto, and Species richness (S; number of species).
 }
 \description{
 Calculates species richness, by year, site, and transect, for a specific location.

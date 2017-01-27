@@ -7,14 +7,14 @@
 trophic(data, location)
 }
 \arguments{
-\item{data}{A dataframe that contains at least columns of Ano, Zonificacion (e.g. "Zona de pesca" or "Zona de no pesca"), Sitio, Transecto, GeneroEspecie, and Abundancia. A column for trophic level is optional, though heavily suggested to avoid errors in calculations (this package might not have trophic level information for all species).}
+\item{data}{A dataframe that contains at least columns of Ano, Zona (e.g. "Zona de pesca" or "Zona de no pesca"), Sitio, Transecto, GeneroEspecie, and Abundancia. A column for trophic level is optional, though heavily suggested to avoid errors in calculations (this package might not have trophic level information for all species).}
 
 \item{location}{A quoted string that indicates the location.}
 
 \item{tl}{An optional dataframe with a column for each species (called GenusSpecies) and a column for the trophic level of each species (called TL).}
 }
 \value{
-size A dataframe with columns for Ano, Zonificacion, Sitio, Transecto, GeneroEspecie, and mean trophic level (TL).
+size A dataframe with columns for Ano, Zona, Sitio, Transecto, GeneroEspecie, and mean trophic level (TL).
 }
 \description{
 Calulates mean trophic level, by year, site, and transect, for a given location.

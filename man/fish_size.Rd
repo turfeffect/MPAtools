@@ -7,7 +7,7 @@
 fish_size(data, location, stat = "mean", species = "")
 }
 \arguments{
-\item{data}{A dataframe that contains at least columns of Ano, Zonificacion (e.g. "Zona de pesca" or "Zona de no pesca"), Sitio, Transecto, GeneroEspecie, Abundancia.}
+\item{data}{A dataframe that contains at least columns of Ano, Zona (e.g. "Zona de pesca" or "Zona de no pesca"), Sitio, Transecto, GeneroEspecie, Abundancia.}
 
 \item{location}{A quoted string that indicates the location.}
 
@@ -16,7 +16,7 @@ fish_size(data, location, stat = "mean", species = "")
 \item{species}{A quoted string that indicates a species for which the size statistic should be calulated.}
 }
 \value{
-size A dataframe with columns for Ano, Zonificacion, Sitio, Transecto, GeneroEspecie, and the statistic required.
+size A dataframe with columns for Ano, Zona, Sitio, Transecto, GeneroEspecie, and the statistic required.
 }
 \description{
 Calulates mean, median, maximum, or minimum size (cm) for a list of species (or selected species, as indicated by parameter species) by year, site, and transect, for a speciic location.

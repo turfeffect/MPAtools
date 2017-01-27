@@ -7,14 +7,14 @@
 density(data, location, species = NULL)
 }
 \arguments{
-\item{data}{A dataframe that contains at least columns of Ano, Zonificacion (e.g. "Zona de pesca" or "Zona de no pesca"), Sitio, Transecto, GeneroEspecie, Abundancia.}
+\item{data}{A dataframe that contains at least columns of Ano, Zona (e.g. "Zona de pesca" or "Zona de no pesca"), Sitio, Transecto, GeneroEspecie, Abundancia.}
 
 \item{location}{A quoted string that indicates the location.}
 
 \item{species}{A quoted string that indicates a species for which density should be calulated.}
 }
 \value{
-D A dataframe with columns for Ano, Zonificacion, Sitio, Transecto, GeneroEspecie, and D (density; org/m2).
+D A dataframe with columns for Ano, Zona, Sitio, Transecto, GeneroEspecie, and D (density; org/m2).
 }
 \description{
 Calculates species density (organisms / transect), by year, site, and transect, for a specific location.

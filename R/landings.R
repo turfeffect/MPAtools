@@ -1,11 +1,11 @@
 #' Title
 #'
-#' @param data
-#' @param location
-#' @param type
-#' @param species
+#' @param data A data.frame with landings and income data
+#' @param location The community of interest
+#' @param type Specify if the function must calculate "price" for income or "kg" for landings
+#' @param species An OPTIONAL species of interest
 #'
-#' @return
+#' @return A data.frame with the Landings or Income per year
 #' @export
 #'
 #'
