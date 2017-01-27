@@ -2,12 +2,12 @@
 #'
 #' @description Calulates biomass for a selected species or the entire dataset, by year, site, and transect, for a given location.
 #'
-#' @param data A dataframe that contains at least columns of Ano, Zonificacion (e.g. "Zona de pesca" or "Zona de no pesca"), Sitio, Transecto, GeneroEspecie. Columns for a and b parameters are optional, though heavily suggested to avoid errors in calculations (this package might not have all parameters for all species).
+#' @param data A dataframe that contains at least columns of Ano, Zona (e.g. "Zona de pesca" or "Zona de no pesca"), Sitio, Transecto, GeneroEspecie. Columns for a and b parameters are optional, though heavily suggested to avoid errors in calculations (this package might not have all parameters for all species).
 #' @param ab An optional dataframe that contains the a and b allometric parameters for each species. Dataframe must have three columns: GeneroEspecie, a, b
 #' @param location A quoted string that indicates the location.
 #' @param species A quoted string that indicates a species for which density should be calulated.
 #'
-#' @return size A dataframe with columns for Ano, Zonificacion, Sitio, Transecto, GeneroEspecie, and fish biomass (B; in grams).
+#' @return size A dataframe with columns for Ano, Zona, Sitio, Transecto, GeneroEspecie, and fish biomass (B; in grams).
 #'
 #' @export
 
@@ -24,7 +24,7 @@ fish_biomass <- function(data, location, species = NULL){
     B <- data %>% #Set b equals to data
       filter(Comunidad == location) %>%                #Filter by location
       group_by(Ano,
-               Zonificacion,
+               Zona,
                Sitio,
                Transecto) %>%         #Group by year, zone, site, transect number, and species
       summarize(B = sum(W, na.rm = T)/60, #Create a sum of the weight for selected species
@@ -36,7 +36,7 @@ fish_biomass <- function(data, location, species = NULL){
       filter(Comunidad == location) %>%               #Filter by side
       filter(GeneroEspecie == species) %>%   #Filter by species
       group_by(Ano,
-               Zonificacion,
+               Zona,
                Sitio,
                Transecto,
                GeneroEspecie) %>%         #Group by year, zone, site, transect number, and species

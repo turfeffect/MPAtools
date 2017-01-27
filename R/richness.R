@@ -2,10 +2,10 @@
 #'
 #' @description Calculates species richness, by year, site, and transect, for a specific location.
 #'
-#' @param data A dataframe that contains at least columns of Ano, Zonificacion (e.g. "Zona de pesca" or "Zona de no pesca"), Sitio, Transecto, GeneroEspecie.
+#' @param data A dataframe that contains at least columns of Ano, Zona (e.g. "Zona de pesca" or "Zona de no pesca"), Sitio, Transecto, GeneroEspecie.
 #' @param location A quoted string that indicates the location.
 #'
-#'@return S A dataframe with columns for Ano, Zonificacion, Sitio, Transecto, and Species richness (S; number of species).
+#'@return S A dataframe with columns for Ano, Zona, Sitio, Transecto, and Species richness (S; number of species).
 #'
 #'@export
 
@@ -17,7 +17,7 @@ richness <- function(data, location){
     filter(Comunidad == location) %>% #Filter by location
     filter(Abundancia > 0) %>%
     group_by(Ano,
-             Zonificacion,
+             Zona,
              Sitio,
              Transecto,
              GeneroEspecie) %>%
@@ -26,7 +26,7 @@ richness <- function(data, location){
               Visibilidad = mean(Visibilidad, na.rm = T),
               Profundidad = mean(ProfundidadInicial, na.rm = T)) %>%
     group_by(Ano,
-             Zonificacion,
+             Zona,
              Sitio,
              Transecto) %>%
     summarize(S = n(),

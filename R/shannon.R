@@ -17,7 +17,7 @@ shannon <- function(data, location){
     filter(Comunidad == location) %>%
     filter(Abundancia > 0) %>%
     group_by(Ano,
-             Zonificacion,
+             Zona,
              Sitio,
              Transecto) %>%
     summarize(N = sum(Abundancia),
@@ -25,24 +25,24 @@ shannon <- function(data, location){
               Visibilidad = mean(Visibilidad, na.rm = T),
               Profundidad = mean(ProfundidadInicial, na.rm = T)) %>%
     ungroup() %>%
-    mutate(ID = paste(Ano, Zonificacion, Sitio, Transecto)) %>%
+    mutate(ID = paste(Ano, Zona, Sitio, Transecto)) %>%
     select(ID, N, Temperatura, Visibilidad, Profundidad)
 
   H <- data %>%
     filter(Comunidad == location) %>%
     filter(Abundancia > 0) %>%
     group_by(Ano,
-             Zonificacion,
+             Zona,
              Sitio,
              Transecto,
              GeneroEspecie) %>%
     summarize(ni = sum(Abundancia)) %>%
     ungroup() %>%
-    mutate(ID = paste(Ano, Zonificacion, Sitio, Transecto)) %>%
+    mutate(ID = paste(Ano, Zona, Sitio, Transecto)) %>%
     left_join(N, by = "ID") %>%
     mutate(pi = ni/N) %>%
     group_by(Ano,
-             Zonificacion,
+             Zona,
              Sitio,
              Transecto) %>%
     summarize(H = -1*sum(pi*log2(pi)),

@@ -2,12 +2,12 @@
 #'
 #' @description Calulates mean, median, maximum, or minimum size (cm) for a list of species (or selected species, as indicated by parameter species) by year, site, and transect, for a speciic location.
 #'
-#' @param data A dataframe that contains at least columns of Ano, Zonificacion (e.g. "Zona de pesca" or "Zona de no pesca"), Sitio, Transecto, GeneroEspecie, Abundancia.
+#' @param data A dataframe that contains at least columns of Ano, Zona (e.g. "Zona de pesca" or "Zona de no pesca"), Sitio, Transecto, GeneroEspecie, Abundancia.
 #' @param location A quoted string that indicates the location.
 #' @param stat A quoted string that indicates which statistic should be calculated. Options include "max", "min", "mean", and "median". User can also use "all" to calculate all of the above.
 #' @param species A quoted string that indicates a species for which the size statistic should be calulated.
 #'
-#' @return size A dataframe with columns for Ano, Zonificacion, Sitio, Transecto, GeneroEspecie, and the statistic required.
+#' @return size A dataframe with columns for Ano, Zona, Sitio, Transecto, GeneroEspecie, and the statistic required.
 #'
 #' @export
 
@@ -26,7 +26,7 @@ fish_size <- function(data, location, stat="mean", species=""){
       filter(Comunidad == location) %>%
       filter(GeneroEspecie == species) %>%
       group_by(Ano,
-               Zonificacion,
+               Zona,
                Sitio,
                Transecto)
 
