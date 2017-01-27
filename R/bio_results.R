@@ -34,7 +34,7 @@ bio_results <- function(values, data, res, con) {
   )
 
   ####
-  if ("Índice de diversidad de Shannon" %in% values$indB) {
+  if ("Indice de diversidad de Shannon" %in% values$indB) {
     model <- MPAtools::shannon(data, values$comunidad) %>%
       turfeffect(res, con)
 
