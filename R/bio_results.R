@@ -36,7 +36,8 @@ bio_results <- function(values, data, res, con) {
   ####
   if ("Indice de diversidad de Shannon" %in% values$indB) {
     model <- MPAtools::shannon(data, values$comunidad) %>%
-      turfeffect(res, con)
+      turfeffect(res, con,
+                 type = "bio")
 
     TidyModel <- tidy(model) %>%
       filter(term == "Ano:Zona")
@@ -51,7 +52,8 @@ bio_results <- function(values, data, res, con) {
   ####
   if ("Riqueza" %in% values$indB) {
     model <- richness(data, values$comunidad) %>%
-      turfeffect(res, con)
+      turfeffect(res, con,
+                 type = "bio")
 
     TidyModel <- tidy(model) %>%
       filter(term == "Ano:Zona")
@@ -81,7 +83,8 @@ bio_results <- function(values, data, res, con) {
   ####
   if ("Densidad" %in% values$indB) {
     model <- density(data, values$comunidad) %>%
-      turfeffect(res, con)
+      turfeffect(res, con,
+                 type = "bio")
 
     TidyModel <- tidy(model) %>%
       filter(term == "Ano:Zona")
@@ -111,7 +114,8 @@ bio_results <- function(values, data, res, con) {
   #   ####
   #   if ("Nivel trofico" %in% values$indB) {
   #     model <- trophic(data, values$comunidad) %>%
-  #       turfeffect(res, con)
+  #       turfeffect(res, con,
+  # type = "bio")
   #
   #     TidyModel <- tidy(model) %>%
   #       filter(term == "Ano:Zona")
@@ -126,7 +130,8 @@ bio_results <- function(values, data, res, con) {
   # ####
   # if ("Biomasa" %in% values$indB) {
   #   model <- fish_biomass(data, values$comunidad) %>%
-  #     turfeffect(res, con)
+  #     turfeffect(res, con,
+  # type = "bio")
   #
   #   TidyModel <- tidy(model) %>%
   #     filter(term == "Ano:Zona")

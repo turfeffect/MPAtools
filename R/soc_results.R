@@ -26,7 +26,7 @@ soc_results <- function(values, data) {
   #### For Landings
   if ("Arribos" %in% values$indS) {
     model <- MPAtools::landings(data, values$comunidad, "kg") %>%
-      turfeffect()
+      turfeffect(type = "soc")
 
     TidyModel <- tidy(model) %>%
       filter(term == "Ano")
@@ -41,7 +41,7 @@ soc_results <- function(values, data) {
   #### For Income
   if ("Ingresos por arribos" %in% values$indS) {
     model <- MPAtools::landings(data, values$comunidad, "price") %>%
-      turfeffect(res, con)
+      turfeffect(type = "soc")
 
     TidyModel <- tidy(model) %>%
       filter(term == "Ano")
