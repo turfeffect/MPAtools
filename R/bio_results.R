@@ -13,7 +13,6 @@
 #'
 
 bio_results <- function(values, data, res, con) {
-  library(broom)
   # Establish a dataframe where to store all values
   results <- tibble::tibble(
     Ind = c(
