@@ -10,21 +10,19 @@
 #'
 
 
-valueBoxValues <- function(model) {
-  x <- data.frame(est = coefficients(model)[7],
-                  p = coefficients(model)[28])
+valueBoxString <- function(model) {
 
-  color <- score(x)
+  model <- summary(model)
 
-  x <-
-    paste(
+  est = coefficients(model)[7]
+  p = coefficients(model)[28]
+
+  x <- paste(
       "Estimate = ",
-      formatC(x$est, digits = 2, format = "f"),
+      formatC(est, digits = 2, format = "f"),
       "; p = ",
-      formatC(x$p, digits = 2, format = "f")
+      formatC(p, digits = 2, format = "f")
     )
-
-  x <- list(x=x, color=color)
 
   return(x)
 }
