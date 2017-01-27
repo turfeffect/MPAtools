@@ -4,7 +4,7 @@
 "Organismos > LT_50",1,1,1,1,1,1,1
 "Densidad",0,0,1,1,0,1,1
 "Densidad de especies objetivo",1,1,1,1,1,0,0
-"Perturbación natural",1,1,1,1,1,1,1
-"Nivel trófico",0,0,0,1,0,1,1
+"Perturbacion natural",1,1,1,1,1,1,1
+"Nivel trofico",0,0,0,1,0,1,1
 "Biomasa",0,0,1,1,0,1,1
 "Biomasa de especies objetivo",1,1,1,1,1,0,0
