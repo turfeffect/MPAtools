@@ -1,11 +1,11 @@
 #' Results
 #'
-#' @description Analyzes all the required indicators at once
+#' @description Analyzes all the required biophysical indicators at once
 #'
-#' @param input The input list from a Shiny application
 #' @param data The data to be analyzed
 #' @param res The name of the reserve
 #' @param con The name of the control site
+#' @param values A list, created within the Shiny app, that contains the list of indicators selected and the community
 #'
 #' @return results, a tibble containing the name of the indicator as well as DiD estimates, p values, a string to be used as input for valueBox, the color of the valueBox, and the lm object fit to the indicator extracted from the data
 #' @export
@@ -44,7 +44,7 @@ bio_results <- function(values, data, res, con) {
     results$e[1] <- TidyModel$estimate
     results$p[1] <- TidyModel$p.value
     results$string[1] <- valueBoxString(model)
-    results$color[1] <- score(model)
+    results$color[1] <- bio_score(model)
     results$model[[1]] <- model
   }
 
@@ -59,7 +59,7 @@ bio_results <- function(values, data, res, con) {
     results$e[2] <- TidyModel$estimate
     results$p[2] <- TidyModel$p.value
     results$string[2] <- valueBoxString(model)
-    results$color[2] <- score(model)
+    results$color[2] <- bio_score(model)
     results$model[[2]] <- model
   }
 
@@ -89,7 +89,7 @@ bio_results <- function(values, data, res, con) {
     results$e[4] <- TidyModel$estimate
     results$p[4] <- TidyModel$p.value
     results$string[4] <- valueBoxString(model)
-    results$color[4] <- score(model)
+    results$color[4] <- bio_score(model)
     results$model[[4]] <- model
   }
 
@@ -107,21 +107,21 @@ bio_results <- function(values, data, res, con) {
   #   results$color[5] <- score(model)
   #   results$model[[5]] <- model
   # }
-#
-#   ####
-#   if ("Nivel trofico" %in% values$indB) {
-#     model <- trophic(data, values$comunidad) %>%
-#       turfeffect(res, con)
-#
-#     TidyModel <- tidy(model) %>%
-#       filter(term == "Ano:Zona")
-#
-#     results$e[6] <- TidyModel$estimate
-#     results$p[6] <- TidyModel$p.value
-#     results$string[6] <- valueBoxString(model)
-#     results$color[6] <- score(model)
-#     results$model[[6]] <- model
-#   }
+  #
+  #   ####
+  #   if ("Nivel trofico" %in% values$indB) {
+  #     model <- trophic(data, values$comunidad) %>%
+  #       turfeffect(res, con)
+  #
+  #     TidyModel <- tidy(model) %>%
+  #       filter(term == "Ano:Zona")
+  #
+  #     results$e[6] <- TidyModel$estimate
+  #     results$p[6] <- TidyModel$p.value
+  #     results$string[6] <- valueBoxString(model)
+  #     results$color[6] <- score(model)
+  #     results$model[[6]] <- model
+  #   }
 
   # ####
   # if ("Biomasa" %in% values$indB) {
