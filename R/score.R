@@ -6,9 +6,12 @@
 #' @export
 #'
 
-score <- function(x){
-  est = x$est
-  p = x$p
+score <- function(model){
+
+  model <- summary(model)
+
+  est = coefficients(model)[7]
+  p = coefficients(model)[28]
 
   if (est > 0 & p < 0.05) {
     score = "olive"

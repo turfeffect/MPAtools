@@ -4,7 +4,7 @@
 \alias{score}
 \title{Scoring system}
 \usage{
-score(x)
+score(model)
 }
 \arguments{
 \item{x}{}
