@@ -14,6 +14,8 @@ Imports: ggplot2,
     reshape,
     ggplot2,
     knitr,
-    rmarkdown
+    rmarkdown,
+    broom,
+    tidyverse
 Suggests: devtools
 VignetteBuilder: knitr
