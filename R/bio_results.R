@@ -40,7 +40,7 @@ bio_results <- function(values, data, res, con) {
                  type = "bio")
 
     TidyModel <- tidy(model) %>%
-      filter(term == "Ano:Zona")
+      filter(term == "Ano:ZonaReserva")
 
     results$e[1] <- TidyModel$estimate
     results$p[1] <- TidyModel$p.value
@@ -56,7 +56,7 @@ bio_results <- function(values, data, res, con) {
                  type = "bio")
 
     TidyModel <- tidy(model) %>%
-      filter(term == "Ano:Zona")
+      filter(term == "Ano:ZonaReserva")
 
     results$e[2] <- TidyModel$estimate
     results$p[2] <- TidyModel$p.value
@@ -71,7 +71,7 @@ bio_results <- function(values, data, res, con) {
   #     turfeffect()
   #
   #   TidyModel <- tidy(model) %>%
-  #     filter(term == "Ano:Zona")
+  #     filter(term == "Ano:ZonaReserva)
   #
   #   results$e[3] <- TidyModel$estimate
   #   results$p[3] <- TidyModel$p.value
@@ -87,7 +87,7 @@ bio_results <- function(values, data, res, con) {
                  type = "bio")
 
     TidyModel <- tidy(model) %>%
-      filter(term == "Ano:Zona")
+      filter(term == "Ano:ZonaReserva")
 
     results$e[4] <- TidyModel$estimate
     results$p[4] <- TidyModel$p.value
@@ -102,7 +102,7 @@ bio_results <- function(values, data, res, con) {
   #     turfeffect()
   #
   #   TidyModel <- tidy(model) %>%
-  #     filter(term == "Ano:Zona")
+  #     filter(term == "Ano:ZonaReserva)
   #
   #   results$e[5] <- TidyModel$estimate
   #   results$p[5] <- TidyModel$p.value
@@ -118,7 +118,7 @@ bio_results <- function(values, data, res, con) {
   # type = "bio")
   #
   #     TidyModel <- tidy(model) %>%
-  #       filter(term == "Ano:Zona")
+  #       filter(term == "Ano:ZonaReserva)
   #
   #     results$e[6] <- TidyModel$estimate
   #     results$p[6] <- TidyModel$p.value
@@ -134,7 +134,7 @@ bio_results <- function(values, data, res, con) {
   # type = "bio")
   #
   #   TidyModel <- tidy(model) %>%
-  #     filter(term == "Ano:Zona")
+  #     filter(term == "Ano:ZonaReserva)
   #
   #   results$e[7] <- TidyModel$estimate
   #   results$p[7] <- TidyModel$p.value
@@ -149,7 +149,7 @@ bio_results <- function(values, data, res, con) {
   #       turfeffect()
   #
   #     TidyModel <- tidy(model) %>%
-  #       filter(term == "Ano:Zona")
+  #       filter(term == "Ano:ZonaReserva)
   #
   #     results$e[8] <- TidyModel$estimate
   #     results$p[8] <- TidyModel$p.value
