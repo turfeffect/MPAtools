@@ -20,7 +20,8 @@ soc_results <- function(values, data) {
     p = NA,
     string = NA,
     color = NA,
-    model = list(NA)
+    model = list(NA),
+    plot = list(NA)
   )
 
   #### For Landings

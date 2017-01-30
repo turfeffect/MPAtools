@@ -30,7 +30,8 @@ bio_results <- function(values, data, res, con) {
     p = NA,
     string = NA,
     color = NA,
-    model = list(NA)
+    model = list(NA),
+    plot = list(NA)
   )
 
   ####
@@ -47,6 +48,7 @@ bio_results <- function(values, data, res, con) {
     results$string[1] <- valueBoxString(model, "bio")
     results$color[1] <- bio_score(model)
     results$model[[1]] <- model
+    results$plot[[1]] <- mpa_plot4(model, y.lab = "Shannon (H'/Transecto)")
   }
 
   ####
@@ -63,6 +65,7 @@ bio_results <- function(values, data, res, con) {
     results$string[2] <- valueBoxString(model, "bio")
     results$color[2] <- bio_score(model)
     results$model[[2]] <- model
+    results$plot[[2]] <- mpa_plot4(model, y.lab = "Riqueza (Especies/Transecto)")
   }
 
   ####
@@ -78,6 +81,7 @@ bio_results <- function(values, data, res, con) {
   #   results$string[3] <- valueBoxString(model, "bio")
   #   results$color[3] <- score(model)
   #   results$model[[3]] <- model
+  # results$plot[[3]] <- mpa_plot4(model, y.lab = "Densidad (Organismos/Transecto)")
   # }
 
   ####
@@ -94,6 +98,7 @@ bio_results <- function(values, data, res, con) {
     results$string[4] <- valueBoxString(model, "bio")
     results$color[4] <- bio_score(model)
     results$model[[4]] <- model
+    results$plot[[4]] <- mpa_plot4(model, y.lab = "Densidad (Organismos/Transecto)")
   }
 
   ####
@@ -109,6 +114,7 @@ bio_results <- function(values, data, res, con) {
   #   results$string[5] <- valueBoxString(model, "bio")
   #   results$color[5] <- score(model)
   #   results$model[[5]] <- model
+  # results$plot[[5]] <- mpa_plot4(model, y.lab = "Densidad (Organismos/Transecto)")
   # }
   #
   #   ####
@@ -125,6 +131,7 @@ bio_results <- function(values, data, res, con) {
   #     results$string[6] <- valueBoxString(model, "bio")
   #     results$color[6] <- score(model)
   #     results$model[[6]] <- model
+  # results$plot[[6]] <- mpa_plot4(model, y.lab = "Nivel trofico (NT/Transecto)")
   #   }
 
   # ####
@@ -141,6 +148,7 @@ bio_results <- function(values, data, res, con) {
   #   results$string[7] <- valueBoxString(model, "bio")
   #   results$color[7] <- score(model)
   #   results$model[[7]] <- model
+  # results$plot[[7]] <- mpa_plot4(model, y.lab = "Biomasa (Kg/Transecto)")
   # }
 
   #   ####
@@ -156,6 +164,7 @@ bio_results <- function(values, data, res, con) {
   #     results$string[8] <- valueBoxString(model, "bio")
   #     results$color[8] <- score(model)
   #     results$model[[8]] <- model
+  # results$plot[[8]] <- mpa_plot4(model, y.lab = "Biomasa (Kg/Transecto))
   #   }
 
   return(results)
