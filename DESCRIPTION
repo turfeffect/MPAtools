@@ -15,7 +15,6 @@ Imports: ggplot2,
     ggplot2,
     knitr,
     rmarkdown,
-    broom,
-    tidyverse
+    broom
 Suggests: devtools
 VignetteBuilder: knitr
