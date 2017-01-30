@@ -8,6 +8,10 @@
 
 mpa_plot4 <- function(model, y.lab = NULL) {
 
+  library(ggplot2)
+  library(dplyr)
+  library(tidyr)
+
   p <- model$model %>%
     ggplot(aes(x = Ano, y = Indicador, color = Zona, fill = Zona)) +
     geom_jitter(width = 0.1, size = 1) +
