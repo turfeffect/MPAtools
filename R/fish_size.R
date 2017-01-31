@@ -23,7 +23,6 @@ fish_size <- function(data, location, species = NULL){
 
   if (!any(columns == "LT50")){
     data("abnt")
-    abnt$LT50 <- 45
     data <- left_join(data, abnt, by = "GeneroEspecie")
   }
 
