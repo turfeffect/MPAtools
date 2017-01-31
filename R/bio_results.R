@@ -87,8 +87,7 @@ bio_results <- function(values, data, res, con) {
   ####
   if ("Densidad" %in% values$indB) {
     model <- density(data, values$comunidad) %>%
-      turfeffect(res, con,
-                 type = "bio")
+      turfeffect(res, con, type = "bio")
 
     TidyModel <- tidy(model) %>%
       filter(term == "Ano:ZonaReserva")
@@ -107,7 +106,7 @@ bio_results <- function(values, data, res, con) {
   #     turfeffect()
   #
   #   TidyModel <- tidy(model) %>%
-  #     filter(term == "Ano:ZonaReserva)
+  #     filter(term == "Ano:ZonaReserva")
   #
   #   results$e[5] <- TidyModel$estimate
   #   results$p[5] <- TidyModel$p.value
@@ -124,7 +123,7 @@ bio_results <- function(values, data, res, con) {
   # type = "bio")
   #
   #     TidyModel <- tidy(model) %>%
-  #       filter(term == "Ano:ZonaReserva)
+  #       filter(term == "Ano:ZonaReserva")
   #
   #     results$e[6] <- TidyModel$estimate
   #     results$p[6] <- TidyModel$p.value
@@ -134,22 +133,21 @@ bio_results <- function(values, data, res, con) {
   # results$plot[[6]] <- mpa_plot4(model, y.lab = "Nivel trofico (NT/Transecto)")
   #   }
 
-  # ####
-  # if ("Biomasa" %in% values$indB) {
-  #   model <- fish_biomass(data, values$comunidad) %>%
-  #     turfeffect(res, con,
-  # type = "bio")
-  #
-  #   TidyModel <- tidy(model) %>%
-  #     filter(term == "Ano:ZonaReserva)
-  #
-  #   results$e[7] <- TidyModel$estimate
-  #   results$p[7] <- TidyModel$p.value
-  #   results$string[7] <- valueBoxString(model, "bio")
-  #   results$color[7] <- score(model)
-  #   results$model[[7]] <- model
-  # results$plot[[7]] <- mpa_plot4(model, y.lab = "Biomasa (Kg/Transecto)")
-  # }
+  ####
+  if ("Biomasa" %in% values$indB) {
+    model <- fish_biomass(data, values$comunidad) %>%
+      turfeffect(res, con, type = "bio")
+
+    TidyModel <- tidy(model) %>%
+      filter(term == "Ano:ZonaReserva")
+
+    results$e[7] <- TidyModel$estimate
+    results$p[7] <- TidyModel$p.value
+    results$string[7] <- valueBoxString(model, "bio")
+    results$color[7] <- bio_score(model)
+    results$model[[7]] <- model
+  results$plot[[7]] <- mpa_plot4(model, y.lab = "Biomasa (Kg/Transecto)")
+  }
 
   #   ####
   #   if ("Biomasa de especies objetivo" %in% input$indB) {
@@ -157,7 +155,7 @@ bio_results <- function(values, data, res, con) {
   #       turfeffect()
   #
   #     TidyModel <- tidy(model) %>%
-  #       filter(term == "Ano:ZonaReserva)
+  #       filter(term == "Ano:ZonaReserva")
   #
   #     results$e[8] <- TidyModel$estimate
   #     results$p[8] <- TidyModel$p.value
