@@ -17,6 +17,13 @@ fish_biomass <- function(data, location, species = NULL){
 
   #If no ab database is passed, checks to see if the data passed has it within the columns or loads default ab database
 
+  columns <- colnames(data)
+
+  if (!any(columns == "a") & !any(columns == "b")){
+    data("abnt")
+    data <- left_join(data, abnt, by = "GeneroEspecie")
+  }
+
   data <- data %>%   #Join data with the database that has a and b parameters
     mutate(W = Abundancia*a*(Talla^b)/1000)                 #Create Weight variable
 
