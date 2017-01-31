@@ -13,7 +13,11 @@
 trophic <- function(data, location){
   library(dplyr)
   library(tidyr)
-  library(reshape)
+
+  if (!any(columns == "TL")){
+    data("abnt")
+    data <- left_join(data, abnt, by = "GeneroEspecie")
+  }
 
   data <- filter(data, Comunidad == location) %>%
     group_by(Ano,
