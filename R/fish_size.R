@@ -11,40 +11,36 @@
 #'
 #' @export
 
-fish_size <- function(data, location, stat="mean", species=""){
+fish_size <- function(data, location, species = NULL){
   library(dplyr)
   library(tidyr)
-  library(reshape)
 
-  if (species == ""){
-    stop("Pleae specify a species")
+  if (is.null(species)){
+    stop("Pleae specify an objective species")
   }
 
-  data <- untable(df = data, num = data$Abundancia)
+  densidad_todos <- MPAtools::density(data, location, species)
 
-    size <- data %>%
-      filter(Comunidad == location) %>%
-      filter(GeneroEspecie == species) %>%
-      group_by(Ano,
-               Zona,
-               Sitio,
-               Transecto)
+  if (!any(columns == "LT50")){
+    data("abnt")
+    abnt$LT50 <- 45
+    data <- left_join(data, abnt, by = "GeneroEspecie")
+  }
 
-    if (stat == "mean"){
-      size <- summarize(size, stat = mean(Talla))
-    } else if (stat == "median"){
-      size <- summarize(size, stat = median(Talla))
-    } else if (stat == "max"){
-      size <- summarize(size, stat = max(Talla))
-    } else if (stat == "min"){
-      size <- summarize(size, stat = min(Talla))
-    } else {
-      size <- summarize(size,
-                     mean = mean(Talla),
-                     median = median(Talla),
-                     max = max(Talla),
-                     min = min(Talla))
-    }
+  data <- filter(data, GeneroEspecie == species,
+                 Comunidad == location,
+                 Talla > LT50) %>%
+  group_by(Ano,
+           Zona,
+           Sitio,
+           Transecto) %>%
+    summarize(DLT50 = sum(Abundancia, na.rm = T)) %>%
+    right_join(densidad_todos, by = c("Ano", "Zona", "Sitio", "Transecto")) %>%
+    mutate(Ni = DLT50/D*100) %>%
+    select(Ano, Zona, Sitio, Transecto, Ni, Temperatura, Visibilidad, Profundidad)
 
-    return(as.data.frame(size))
+  data$Ni[is.na(data$Ni)] <- 0
+
+  return(data)
+
 }
