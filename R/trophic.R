@@ -14,6 +14,8 @@ trophic <- function(data, location){
   library(dplyr)
   library(tidyr)
 
+  columns <- colnames(data)
+
   if (!any(columns == "NT")){
     data("abnt")
     data <- left_join(data, abnt, by = "GeneroEspecie")
