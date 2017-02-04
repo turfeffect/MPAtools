@@ -30,21 +30,31 @@ landings <- function(data, location, type, species = NULL) {
 
     }
   }
-  if (type == "price") # Falta corregir por CPI
-  {
+
+  if (type == "price") {
+
+    latest_year <- max(data$Ano)
+    latest_cpi <- data$CPI[data$Ano == latest_year]
+
+    data <- mutate(data,
+                    CPI_Adj = CPI/latest_cpi,
+                    Ingresos = Ingresos * CPI_Adj)
+
     if (is.null(species)) {
       D = data %>%
         filter(Comunidad == location) %>%
         group_by(Ano) %>%
-        summarise(Precio = sum(Ingresos))
+        summarise(Ingresos = sum(Ingresos))
     }
     else {
       D = data %>%
         filter(Comunidad == location) %>%
         filter(GeneroEspecie == species) %>%
         group_by(Ano, GeneroEspecie) %>%
-        summarise(Precio = sum(Ingresos))
+        summarise(Ingresos = sum(Ingresos))
     }
+
+    D$Ingresos[D$Ingresos == 0] <- NA
   }
 
   return(D)
