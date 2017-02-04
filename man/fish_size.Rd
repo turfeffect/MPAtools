@@ -4,14 +4,12 @@
 \alias{fish_size}
 \title{Calculate a descriptor for fish size}
 \usage{
-fish_size(data, location, stat = "mean", species = "")
+fish_size(data, location, species = NULL)
 }
 \arguments{
 \item{data}{A dataframe that contains at least columns of Ano, Zona (e.g. "Zona de pesca" or "Zona de no pesca"), Sitio, Transecto, GeneroEspecie, Abundancia.}
 
 \item{location}{A quoted string that indicates the location.}
-
-\item{stat}{A quoted string that indicates which statistic should be calculated. Options include "max", "min", "mean", and "median". User can also use "all" to calculate all of the above.}
 
 \item{species}{A quoted string that indicates a species for which the size statistic should be calulated.}
 }

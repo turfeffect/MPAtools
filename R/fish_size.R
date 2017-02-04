@@ -4,7 +4,6 @@
 #'
 #' @param data A dataframe that contains at least columns of Ano, Zona (e.g. "Zona de pesca" or "Zona de no pesca"), Sitio, Transecto, GeneroEspecie, Abundancia.
 #' @param location A quoted string that indicates the location.
-#' @param stat A quoted string that indicates which statistic should be calculated. Options include "max", "min", "mean", and "median". User can also use "all" to calculate all of the above.
 #' @param species A quoted string that indicates a species for which the size statistic should be calulated.
 #'
 #' @return size A dataframe with columns for Ano, Zona, Sitio, Transecto, GeneroEspecie, and the statistic required.
