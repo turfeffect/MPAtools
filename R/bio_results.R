@@ -116,22 +116,21 @@ bio_results <- function(values, data, res, con) {
   # results$plot[[5]] <- mpa_plot4(model, y.lab = "Densidad (Organismos/Transecto)")
   # }
   #
-  #   ####
-  #   if ("Nivel trofico" %in% values$indB) {
-  #     model <- trophic(data, values$comunidad) %>%
-  #       turfeffect(res, con,
-  # type = "bio")
-  #
-  #     TidyModel <- tidy(model) %>%
-  #       filter(term == "Ano:ZonaReserva")
-  #
-  #     results$e[6] <- TidyModel$estimate
-  #     results$p[6] <- TidyModel$p.value
-  #     results$string[6] <- valueBoxString(model, "bio")
-  #     results$color[6] <- score(model)
-  #     results$model[[6]] <- model
-  # results$plot[[6]] <- mpa_plot4(model, y.lab = "Nivel trofico (NT/Transecto)")
-  #   }
+    ####
+    if ("Nivel trofico" %in% values$indB) {
+      model <- trophic(data, values$comunidad) %>%
+        turfeffect(res, con, type = "bio")
+
+      TidyModel <- tidy(model) %>%
+        filter(term == "Ano:ZonaReserva")
+
+      results$e[6] <- TidyModel$estimate
+      results$p[6] <- TidyModel$p.value
+      results$string[6] <- valueBoxString(model, "bio")
+      results$color[6] <- bio_score(model)
+      results$model[[6]] <- model
+  results$plot[[6]] <- mpa_plot4(model, y.lab = "Nivel trofico")
+    }
 
   ####
   if ("Biomasa" %in% values$indB) {
@@ -162,7 +161,7 @@ bio_results <- function(values, data, res, con) {
   #     results$string[8] <- valueBoxString(model, "bio")
   #     results$color[8] <- score(model)
   #     results$model[[8]] <- model
-  # results$plot[[8]] <- mpa_plot4(model, y.lab = "Biomasa (Kg/Transecto))
+  # results$plot[[8]] <- mpa_plot4(model, y.lab = "Biomasa (Kg/Transecto)")
   #   }
 
   return(results)
