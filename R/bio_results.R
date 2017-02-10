@@ -16,16 +16,7 @@ bio_results <- function(values, data, res, con) {
   library(broom)
   # Establish a dataframe where to store all values
   results <- tibble::tibble(
-    Ind = c(
-      "Shannon",
-      "Riqueza",
-      "OrganismosLT50",
-      "Densidad",
-      "DensidadObj",
-      "NivelTrofico",
-      "Biomasa",
-      "BiomasaObj"
-    ),
+    Ind = c("Shannon", "Riqueza", "OrganismosLT50", "Densidad", "DensidadObj", "NivelTrofico", "Biomasa", "BiomasaObj"),
     e = NA,
     p = NA,
     string = NA,
