@@ -60,20 +60,21 @@ bio_results <- function(values, data, res, con) {
   }
 
   ####
-  # if ("Organismos > LT_50" %in% input$indB) {
-  #   model <- shannon(datasetInput(), input$comunidad, res.fun(), con.fun()) %>%
-  #     turfeffect()
-  #
-  #   TidyModel <- tidy(model) %>%
-  #     filter(term == "Ano:ZonaReserva)
-  #
-  #   results$e[3] <- TidyModel$estimate
-  #   results$p[3] <- TidyModel$p.value
-  #   results$string[3] <- valueBoxString(model, "bio")
-  #   results$color[3] <- score(model)
-  #   results$model[[3]] <- model
-  # results$plot[[3]] <- mpa_plot4(model, y.lab = "Densidad (Organismos/Transecto)")
-  # }
+  if ("Organismos > LT_50" %in% values$indB) {
+    model <- fish_size(data, values$comunidad, values$objsp) %>%
+      turfeffect(res, con,
+                 type = "bio")
+
+    TidyModel <- tidy(model) %>%
+      filter(term == "Ano:ZonaReserva")
+
+    results$e[3] <- TidyModel$estimate
+    results$p[3] <- TidyModel$p.value
+    results$string[3] <- valueBoxString(model, "bio")
+    results$color[3] <- bio_score(model)
+    results$model[[3]] <- model
+    results$plot[[3]] <- mpa_plot4(model, y.lab = "Densidad relativa\n(Org > LT_50/TotOrg Transecto)")
+  }
 
   ####
   if ("Densidad" %in% values$indB) {
