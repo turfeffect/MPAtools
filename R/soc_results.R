@@ -37,6 +37,7 @@ soc_results <- function(values, data) {
     results$string[1] <- valueBoxString(model, "soc")
     results$color[1] <- soc_score(model)
     results$model[[1]] <- model
+    results$plot[[1]] <- soc_plot(model, y.lab = "Arribos (Kg / Ano)")
   }
 
   #### For Income
@@ -52,6 +53,7 @@ soc_results <- function(values, data) {
     results$string[2] <- valueBoxString(model, "soc")
     results$color[2] <- soc_score(model)
     results$model[[2]] <- model
+    results$plot[[2]] <- soc_plot(model, y.lab = "Ingresos por arribos (Pesos / Ano)")
   }
 
   return(results)
