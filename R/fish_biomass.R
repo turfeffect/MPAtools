@@ -45,8 +45,7 @@ fish_biomass <- function(data, location, species = NULL){
       group_by(Ano,
                Zona,
                Sitio,
-               Transecto,
-               GeneroEspecie) %>%         #Group by year, zone, site, transect number, and species
+               Transecto) %>%         #Group by year, zone, site, transect number, and species
       summarize(B = sum(W, na.rm = T)/60, #Create a sum of the weight for selected species
                 Temperatura = mean(Temperatura, na.rm = T),
                 Visibilidad = mean(Visibilidad, na.rm = T),
