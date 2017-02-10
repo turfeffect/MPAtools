@@ -100,11 +100,11 @@ bio_results <- function(values, data, res, con) {
       filter(term == "Ano:ZonaReserva")
 
     results$e[5] <- TidyModel$estimate
-    results$p[6] <- TidyModel$p.value
-    results$string[6] <- valueBoxString(model, "bio")
-    results$color[6] <- bio_score(model)
-    results$model[[6]] <- model
-    results$plot[[6]] <- mpa_plot4(model, y.lab = "Densidad (Organismos/Transecto)")
+    results$p[5] <- TidyModel$p.value
+    results$string[5] <- valueBoxString(model, "bio")
+    results$color[5] <- bio_score(model)
+    results$model[[5]] <- model
+    results$plot[[5]] <- mpa_plot4(model, y.lab = "Densidad (Organismos/Transecto)")
   }
 
     ####
