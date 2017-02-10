@@ -20,6 +20,8 @@ fish_size <- function(data, location, species = NULL){
 
   densidad_todos <- MPAtools::density(data, location, species)
 
+  columns <- colnames(data)
+
   if (!any(columns == "LT50")){
     data("abnt")
     data <- left_join(data, abnt, by = "GeneroEspecie")
