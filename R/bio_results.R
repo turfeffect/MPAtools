@@ -139,21 +139,21 @@ bio_results <- function(values, data, res, con) {
   results$plot[[7]] <- mpa_plot4(model, y.lab = "Biomasa (Kg/Transecto)")
   }
 
-  #   ####
-  #   if ("Biomasa de especies objetivo" %in% input$indB) {
-  #     model <- shannon(datasetInput(), input$comunidad, res.fun(), con.fun()) %>%
-  #       turfeffect()
-  #
-  #     TidyModel <- tidy(model) %>%
-  #       filter(term == "Ano:ZonaReserva")
-  #
-  #     results$e[8] <- TidyModel$estimate
-  #     results$p[8] <- TidyModel$p.value
-  #     results$string[8] <- valueBoxString(model, "bio")
-  #     results$color[8] <- score(model)
-  #     results$model[[8]] <- model
-  # results$plot[[8]] <- mpa_plot4(model, y.lab = "Biomasa (Kg/Transecto)")
-  #   }
+  ####
+  if ("Biomasa de especies objetivo" %in% values$indB) {
+    model <- fish_biomass(data = data, location = values$comunidad, species = values$objsp) %>%
+      turfeffect(res, con, type = "bio")
+
+    TidyModel <- tidy(model) %>%
+      filter(term == "Ano:ZonaReserva")
+
+    results$e[8] <- TidyModel$estimate
+    results$p[8] <- TidyModel$p.value
+    results$string[8] <- valueBoxString(model, "bio")
+    results$color[8] <- bio_score(model)
+    results$model[[8]] <- model
+    results$plot[[8]] <- mpa_plot4(model, y.lab = "Biomasa (Kg/Transecto)")
+  }
 
   return(results)
 }
