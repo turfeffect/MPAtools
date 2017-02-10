@@ -15,7 +15,7 @@ mpa_plot4 <- function(model, y.lab = NULL) {
 
   p <- model$model %>%
     ggplot(aes(x = Ano, y = Indicador, color = Zona, fill = Zona)) +
-    geom_jitter(width = 0.1, size = 1) +
+    geom_jitter(height = 0, width = 0.1, size = 1) +
     stat_summary(geom = "point", fun.y = mean, color = "black", size = 2, alpha = 0.5) +
     stat_summary(geom = "line", fun.y = mean, color = "black", alpha = 0.5) +
     stat_summary(fun.data = mean_se, geom = "ribbon", alpha = 0.5) +
