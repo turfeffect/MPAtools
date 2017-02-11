@@ -33,8 +33,7 @@ bio_results_i <- function(values, data, res, con) {
   ####
   if ("Indice de diversidad de Shannon" %in% values$indB) {
     model <- MPAtools::shannon(data, values$comunidad) %>%
-      turfeffect(res, con,
-                 type = "bio")
+      turfeffect(res, con, type = "bio")
 
     TidyModel <- tidy(model) %>%
       filter(term == "Ano:ZonaReserva")
@@ -50,8 +49,7 @@ bio_results_i <- function(values, data, res, con) {
   ####
   if ("Riqueza" %in% values$indB) {
     model <- richness(data, values$comunidad) %>%
-      turfeffect(res, con,
-                 type = "bio")
+      turfeffect(res, con, type = "bio")
 
     TidyModel <- tidy(model) %>%
       filter(term == "Ano:ZonaReserva")
