@@ -16,12 +16,7 @@ bio_results_i <- function(values, data, res, con) {
   library(broom)
   # Establish a dataframe where to store all values
   results <- tibble::tibble(
-    Ind = c(
-      "Shannon",
-      "Riqueza",
-      "Densidad",
-      "DensidadObj"
-    ),
+    Ind = c("Shannon", "Riqueza", "Densidad", "DensidadObj"),
     e = NA,
     p = NA,
     string = NA,
