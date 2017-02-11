@@ -1,4 +1,4 @@
-#' Results
+#' Biophysical Results
 #'
 #' @description Analyzes all the required biophysical indicators at once
 #'

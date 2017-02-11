@@ -2,7 +2,7 @@
 % Please edit documentation in R/bio_results_i.R
 \name{bio_results_i}
 \alias{bio_results_i}
-\title{Results}
+\title{Biophysical Results}
 \usage{
 bio_results_i(values, data, res, con)
 }
