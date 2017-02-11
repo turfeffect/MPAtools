@@ -17,7 +17,7 @@ turfeffect <- function (data, reserve = NULL, control = NULL, type = NULL){
 
     colnames(data) <- c("Ano", "Zona", "Sitio", "Transecto", "Indicador", "Temperatura", "Visibilidad", "Profundidad")
 
-      data <- filter(data, Sitio == reserve | Sitio == control)
+      data <- filter(data, Sitio %in% reserve | Sitio %in% control)
 
       model <- lm(Indicador ~ Ano * Zona + Temperatura + Visibilidad + Profundidad, data)
 
