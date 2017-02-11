@@ -17,15 +17,16 @@ turfeffect <- function (data, reserve = NULL, control = NULL, type = NULL){
 
     colnames(data) <- c("Ano", "Zona", "Sitio", "Transecto", "Indicador", "Temperatura", "Visibilidad", "Profundidad")
 
-      data <- filter(data, Sitio %in% reserve | Sitio %in% control)
+    data <- filter(data, Sitio %in% reserve | Sitio %in% control) %>%
+      fix_na()
 
-      model <- lm(Indicador ~ Ano * Zona + Temperatura + Visibilidad + Profundidad, data)
+    model <- lm(Indicador ~ Ano * Zona + Temperatura + Visibilidad + Profundidad, data)
 
   } else if (type == "soc"){
 
     colnames(data) <- c("Ano", "Indicador")
 
-      model <- lm(Indicador ~ Ano, data = data)
+    model <- lm(Indicador ~ Ano, data = data)
   }
 
   return(model)
