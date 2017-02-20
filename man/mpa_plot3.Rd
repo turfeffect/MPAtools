@@ -24,4 +24,3 @@ Plots results from the functions used to calculate biophysical indicators like: 
 \author{
 Villasenor-Derbez, J.C.
 }
-

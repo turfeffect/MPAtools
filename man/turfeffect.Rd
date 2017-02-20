@@ -21,4 +21,3 @@ An object of class "lm"
 \description{
 turfeffect
 }
-

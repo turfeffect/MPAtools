@@ -17,4 +17,3 @@ results, a tibble containing the name of the indicator as well as DiD estimates,
 \description{
 Analyzes all the required biophysical indicators at once
 }
-

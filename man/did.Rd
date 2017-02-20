@@ -19,4 +19,3 @@ Returns an objet of class "lm", where the value of the interactive term between 
 \description{
 Performs a difference-in-difference analysis on a series of data and compares the effect of the reserve. It is based on a linear model, where the variable of interest is regressed on dummy variables composed by Ano and Zonificacion, and an interaction term between both. The model is OutcomeVariable = b0 + b1*Ano + b2*Zonificacion + b3(Ano*Zonificacion). Here, Ano indicates pre and post implementation of the reserve. Zonificacion serves as a a way to compare a trend and allows to compare between the reserve and control sites. The DD value is indicated by the coefficient of the interaction term b3.
 }
-

@@ -19,4 +19,3 @@ size A dataframe with columns for Ano, Zona, Sitio, Transecto, GeneroEspecie, an
 \description{
 Calulates mean, median, maximum, or minimum size (cm) for a list of species (or selected species, as indicated by parameter species) by year, site, and transect, for a speciic location.
 }
-

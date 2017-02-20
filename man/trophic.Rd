@@ -19,4 +19,3 @@ size A dataframe with columns for Ano, Zona, Sitio, Transecto, GeneroEspecie, an
 \description{
 Calulates mean trophic level, by year, site, and transect, for a given location.
 }
-

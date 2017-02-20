@@ -19,4 +19,3 @@ results, a tibble containing the name of the indicator as well as DiD estimates,
 \description{
 Analyzes all the required governance indicators at once
 }
-

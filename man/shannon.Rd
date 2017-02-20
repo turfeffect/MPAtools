@@ -17,4 +17,3 @@ H A data.frame
 \description{
 Shannon-Wiener Diversity Index
 }
-

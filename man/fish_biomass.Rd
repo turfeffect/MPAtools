@@ -21,4 +21,3 @@ size A dataframe with columns for Ano, Zona, Sitio, Transecto, GeneroEspecie, an
 \description{
 Calulates biomass for a selected species or the entire dataset, by year, site, and transect, for a given location.
 }
-

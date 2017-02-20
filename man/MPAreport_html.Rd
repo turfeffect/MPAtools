@@ -21,4 +21,3 @@ MPAreport_html(peces, invertebrados, pesca, gov, coop, comunidad, reserva,
 \description{
 Produces an html document with the analysis of 5 biophysical indicators performed for the given reserve/control site pair
 }
-

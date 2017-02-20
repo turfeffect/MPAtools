@@ -17,4 +17,3 @@ S A dataframe with columns for Ano, Zona, Sitio, Transecto, and Species richness
 \description{
 Calculates species richness, by year, site, and transect, for a specific location.
 }
-

@@ -18,4 +18,3 @@ a An object of class data.frame with the format a (one column for each size inte
 \author{
 Villaseñor-Derbez, J.C. <juancarlos.villader@gmail.com>
 }
-

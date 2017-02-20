@@ -11,12 +11,11 @@ mpa_plot(data, type = "io", in.col = "blue", in.type = "b",
 \description{
 Plots results of mpa_sim
 }
-\author{
-Villasenor-Derbez, J.C.
-}
 \seealso{
 mpa_sim
 
 mpa_compare
 }
-
+\author{
+Villasenor-Derbez, J.C.
+}

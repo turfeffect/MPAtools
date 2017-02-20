@@ -9,4 +9,3 @@ mpa_xls2Rdata(a = 1)
 \description{
 Convertes xls data to R data
 }
-

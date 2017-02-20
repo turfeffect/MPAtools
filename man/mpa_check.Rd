@@ -30,4 +30,3 @@ Validates the inputs passed to mpa_2D().
 \author{
 Villasenor-Derbez, J.C.
 }
-

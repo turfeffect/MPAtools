@@ -15,4 +15,3 @@ a color
 \description{
 According to the percentage of indicators that are positive, return a color based on a red - orange - yellow - green - olive scale, define by 20% intervals
 }
-

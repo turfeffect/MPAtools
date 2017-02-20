@@ -20,4 +20,3 @@ Evaluates if a passed data.frame has a specified format
 \author{
 Villaseñor-Derbez, J.C. <juancarlos.villader@gmail.com>
 }
-

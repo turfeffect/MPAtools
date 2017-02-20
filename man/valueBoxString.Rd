@@ -17,4 +17,3 @@ x, a list with the first element (x$x) containing the string of slope and p valu
 \description{
 Calculate color and string needed in the ShinyApp valueBoxOutput based on a turfeffect model output
 }
-

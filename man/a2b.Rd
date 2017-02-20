@@ -18,4 +18,3 @@ Convert fish transect data from format a to format b
 \author{
 Villaseñor-Derbez, J.C. <juancarlos.villader@gmail.com>
 }
-

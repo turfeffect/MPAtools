@@ -35,4 +35,3 @@ Simulates MPA and surrounding fishing grounds. Growth is modeled with a discrete
 \author{
 Villasenor-Derbez, J.C.
 }
-

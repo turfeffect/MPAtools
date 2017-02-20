@@ -22,4 +22,3 @@ Calculates species density (organisms / transect), by year, site, and transect, 
 \author{
 Villaseñor-Derbez, J.C. <juancarlos.villader@gmail.com>
 }
-

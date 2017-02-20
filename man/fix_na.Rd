@@ -15,4 +15,3 @@ a data.frame where all-na variables (i.e. the entire column had NA) are replaced
 \description{
 Removes all na-variables (see value) to avoid errors when performing the linear model
 }
-

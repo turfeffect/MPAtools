@@ -29,4 +29,3 @@ Generates the area matrix that will be simulated, based on size of the area, siz
 \author{
 Villasenor-Derbez, J.C.
 }
-

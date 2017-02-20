@@ -7,7 +7,7 @@ Maintainer: Villasenor-Derbez, J.C. <jvillasenor@bren.ucsb.edu>
 Description: Provides a set of functions used to analyze monitoring data of MarineProtected Areas. It also provides with some functions that model MPAs.
 License:
 LazyData: TRUE
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1
 Imports: ggplot2,
     dplyr,
     tidyr,

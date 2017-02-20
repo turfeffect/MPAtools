@@ -21,4 +21,3 @@ A data.frame with the Landings or Income per year
 \description{
 Title
 }
-

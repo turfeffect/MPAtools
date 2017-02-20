@@ -17,4 +17,3 @@ an object og class ggplot2
 \description{
 Plot a turfeffect object for socioeconomic indicators
 }
-

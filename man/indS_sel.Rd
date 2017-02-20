@@ -18,4 +18,3 @@ Socioeconomical indicators selection function
 \author{
 Caio Faro
 }
-
