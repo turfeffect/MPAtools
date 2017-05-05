@@ -18,9 +18,10 @@ turfeffect <- function (data, reserve = NULL, control = NULL, type = NULL){
     colnames(data) <- c("Ano", "Zona", "Sitio", "Transecto", "Indicador", "Temperatura", "Visibilidad", "Profundidad")
 
     data <- filter(data, Sitio %in% reserve | Sitio %in% control) %>%
+      mutate(Post = ifelse(Ano <= min(Ano), 0, 1)) %>%
       fix_na()
 
-    model <- lm(Indicador ~ Ano * Zona + Temperatura + Visibilidad + Profundidad, data)
+    model <- lm(Indicador ~ Ano + Zona+ Post * Zona + Temperatura + Visibilidad + Profundidad, data)
 
   } else if (type == "soc"){
 
