@@ -19,14 +19,14 @@ landings <- function(data, location, type, species = NULL) {
       D = data %>%
         filter(Comunidad == location) %>%
         group_by(Ano) %>%
-        summarise(Arribos = sum(Arribos))
+        summarise(Indicador = sum(Arribos))
     }
     else {
       D = data %>%
         filter(Comunidad == location) %>%
         filter(GeneroEspecie == species) %>%
         group_by(Ano, GeneroEspecie) %>%
-        summarise(Arribos = sum(Arribos))
+        summarise(Indicador = sum(Arribos))
 
     }
   }
@@ -44,14 +44,14 @@ landings <- function(data, location, type, species = NULL) {
       D = data %>%
         filter(Comunidad == location) %>%
         group_by(Ano) %>%
-        summarise(Ingresos = sum(Ingresos))
+        summarise(Indicador = sum(Ingresos))
     }
     else {
       D = data %>%
         filter(Comunidad == location) %>%
         filter(GeneroEspecie == species) %>%
         group_by(Ano, GeneroEspecie) %>%
-        summarise(Ingresos = sum(Ingresos))
+        summarise(Indicador = sum(Ingresos))
     }
 
     D$Ingresos[D$Ingresos == 0] <- NA
