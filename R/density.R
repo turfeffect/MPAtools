@@ -22,11 +22,13 @@ density <- function(data, location, species = NULL){
       group_by(Ano,
                Zona,
                Sitio,
-               Transecto) %>% #Group by year, zone, transect number and species
-      summarize(D = sum(Abundancia, na.rm = T),
-                Temperatura = mean(Temperatura, na.rm = T),
-                Visibilidad = mean(Visibilidad, na.rm = T),
-                Profundidad = mean(ProfundidadInicial, na.rm = T))       #Calculate abundance by species by transect
+               Transecto,
+               Temperatura,
+               Visibilidad,
+               ProfundidadInicial) %>% #Group by year, zone, transect number and species
+      summarize(D = sum(Abundancia, na.rm = T)) %>%        #Calculate abundance by species by transect
+      select(Ano, Zona, Sitio, Transecto, Indicador = D, Temperatura, Visibilidad, Profundidad = ProfundidadInicial)
+
   } else { #Else indicates that a single species has been selected
     D <- data %>%                    #Set D equal to data
       filter(Comunidad == location) %>%      #Filter by location
@@ -34,11 +36,12 @@ density <- function(data, location, species = NULL){
       group_by(Ano,
                Zona,
                Sitio,
-               Transecto) %>% #Group by year, zone, transect number and species
-      summarize(D = sum(Abundancia, na.rm = T),
-                Temperatura = mean(Temperatura, na.rm = T),
-                Visibilidad = mean(Visibilidad, na.rm = T),
-                Profundidad = mean(ProfundidadInicial, na.rm = T))
+               Transecto,
+               Temperatura,
+               Visibilidad,
+               ProfundidadInicial) %>% #Group by year, zone, transect number and species
+      summarize(D = sum(Abundancia, na.rm = T)) %>%
+      select(Ano, Zona, Sitio, Transecto, Indicador = D, Temperatura, Visibilidad, Profundidad = ProfundidadInicial)
   }
 
   return(as.data.frame(D))                       #Return D

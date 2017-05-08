@@ -25,11 +25,12 @@ trophic <- function(data, location){
     group_by(Ano,
              Zona,
              Sitio,
-             Transecto) %>%
-    summarize(NT = mean(NT, na.rm=TRUE),
-              Temperatura = mean(Temperatura, na.rm = T),
-              Visibilidad = mean(Visibilidad, na.rm = T),
-              Profundidad = mean(ProfundidadInicial, na.rm = T))
+             Transecto,
+             Temperatura,
+             Visibilidad,
+             ProfundidadInicial) %>%
+    summarize(NT = mean(NT, na.rm=TRUE)) %>%
+    select(Ano, Zona, Sitio, Transecto, Indicador = NT, Temperatura, Visibilidad, Profundidad = ProfundidadInicial)
 
 
   return(as.data.frame(data))

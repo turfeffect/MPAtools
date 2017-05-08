@@ -22,14 +22,14 @@ fish_size <- function(data, location, species = NULL){
 
   columns <- colnames(data)
 
-  if (!any(columns == "LT50")){
+  if (!any(columns == "Lm")){
     data("abnt")
     data <- left_join(data, abnt, by = "GeneroEspecie")
   }
 
   data <- filter(data, GeneroEspecie == species,
                  Comunidad == location,
-                 Talla > LT50) %>%
+                 Talla > Lm) %>%
   group_by(Ano,
            Zona,
            Sitio,
@@ -37,7 +37,7 @@ fish_size <- function(data, location, species = NULL){
     summarize(DLT50 = sum(Abundancia, na.rm = T)) %>%
     right_join(densidad_todos, by = c("Ano", "Zona", "Sitio", "Transecto")) %>%
     mutate(Ni = DLT50/D*100) %>%
-    select(Ano, Zona, Sitio, Transecto, Ni, Temperatura, Visibilidad, Profundidad)
+    select(Ano, Zona, Sitio, Transecto, Indicador = Ni, Temperatura, Visibilidad, Profundidad)
 
   data$Ni[is.na(data$Ni)] <- 0
 

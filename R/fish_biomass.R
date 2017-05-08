@@ -33,11 +33,14 @@ fish_biomass <- function(data, location, species = NULL){
       group_by(Ano,
                Zona,
                Sitio,
-               Transecto) %>%         #Group by year, zone, site, transect number, and species
-      summarize(B = sum(W, na.rm = T)/60, #Create a sum of the weight for selected species
-                Temperatura = mean(Temperatura, na.rm = T),
-                Visibilidad = mean(Visibilidad, na.rm = T),
-                Profundidad = mean(ProfundidadInicial, na.rm = T))
+               Transecto,
+               Temperatura,
+               Visibilidad,
+               ProfundidadInicial) %>%         #Group by year, zone, site, transect number, and species
+      summarize(B = sum(W, na.rm = T)/60) %>%
+      ungroup() %>%
+      select(Ano, Zona, Sitio, Transecto, Indicador = B, Temperatura, Visibilidad, Profundidad = ProfundidadInicial)
+
   } else {                                 #If a species is selected
     B <- data %>%                             #Set B equals to data
       filter(Comunidad == location) %>%               #Filter by side
@@ -46,10 +49,9 @@ fish_biomass <- function(data, location, species = NULL){
                Zona,
                Sitio,
                Transecto) %>%         #Group by year, zone, site, transect number, and species
-      summarize(B = sum(W, na.rm = T)/60, #Create a sum of the weight for selected species
-                Temperatura = mean(Temperatura, na.rm = T),
-                Visibilidad = mean(Visibilidad, na.rm = T),
-                Profundidad = mean(ProfundidadInicial, na.rm = T))
+      summarize(B = sum(W, na.rm = T)/60) %>%
+      ungroup() %>%
+      select(Ano, Zona, Sitio, Transecto, Indicador = B, Temperatura, Visibilidad, Profundidad = ProfundidadInicial)
   }
 
   return(as.data.frame(B))                               #Return B
