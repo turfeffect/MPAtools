@@ -5,7 +5,7 @@ Version: 0.1.0
 Author: Villasenor-Derbez, J.C.
 Maintainer: Villasenor-Derbez, J.C. <jvillasenor@bren.ucsb.edu>
 Description: Provides a set of functions used to analyze monitoring data of MarineProtected Areas. It also provides with some functions that model MPAs.
-License:
+License: MIT License
 LazyData: TRUE
 RoxygenNote: 6.0.1
 Imports: ggplot2,
@@ -15,6 +15,9 @@ Imports: ggplot2,
     ggplot2,
     knitr,
     rmarkdown,
-    broom
+    broom,
+    lmtest,
+    sandwich,
+    tibble
 Suggests: devtools
 VignetteBuilder: knitr
