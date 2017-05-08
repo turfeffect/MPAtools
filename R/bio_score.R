@@ -7,10 +7,9 @@
 #'
 
 bio_score <- function(model) {
-  model <- summary(model)
 
-  est = coefficients(model)[7]
-  p = coefficients(model)[28]
+  est = model$estimate
+  p = model$p
 
   score = "yellow"
 

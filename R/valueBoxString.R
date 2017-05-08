@@ -12,29 +12,12 @@
 
 
 valueBoxString <- function(model, type = NULL) {
-  model <- summary(model)
 
-  if (type == "bio") {
-    est = coefficients(model)[7]
-    p = coefficients(model)[28]
+  est = model$estimate
+  p = model$p
 
-    x <- paste(
-      "Estimate = ",
-      formatC(est, digits = 2, format = "f"),
-      "; p = ",
-      formatC(p, digits = 2, format = "f")
-    )
-  } else if (type == "soc") {
-    est = coefficients(model)[2]
-    p = coefficients(model)[7]
-
-    x <- paste(
-      "Estimate = ",
-      formatC(est, digits = 2, format = "f"),
-      "; p = ",
-      formatC(p, digits = 2, format = "f")
-    )
-  }
+  x <- paste("Efecto = ", formatC(est, digits = 2, format = "f"), "; p = ", formatC(p, digits = 2, format = "f")
+  )
 
   return(x)
 }
