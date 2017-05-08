@@ -9,7 +9,7 @@
 #'
 #' @export
 
-turfeffect <- function (data, reserve = NULL, control = NULL, type = NULL){
+turfeffect <- function (data, reserve = NULL, control = NULL, type = NULL, year.imp = NULL){
 
   library(tidyverse)
 
