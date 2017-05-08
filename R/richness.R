@@ -20,19 +20,21 @@ richness <- function(data, location){
              Zona,
              Sitio,
              Transecto,
+             Temperatura,
+             Visibilidad,
+             ProfundidadInicial,
              GeneroEspecie) %>%
-    summarize(N = n(),
-              Temperatura = mean(Temperatura, na.rm = T),
-              Visibilidad = mean(Visibilidad, na.rm = T),
-              Profundidad = mean(ProfundidadInicial, na.rm = T)) %>%
+    summarize(N = n()) %>%
     group_by(Ano,
              Zona,
              Sitio,
-             Transecto) %>%
-    summarize(S = n(),
-              Temperatura = mean(Temperatura, na.rm = T),
-              Visibilidad = mean(Visibilidad, na.rm = T),
-              Profundidad = mean(Profundidad, na.rm = T))
+             Transecto,
+             Temperatura,
+             Visibilidad,
+             ProfundidadInicial) %>%
+    summarize(S = n()) %>%
+    ungroup() %>%
+    select(Ano, Zona, Sitio, Transecto, Temperatura, Visibilidad, Profundidad = ProfundidadInicial, Indicador = S)
 
   return(as.data.frame(S))
 }
