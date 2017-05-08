@@ -14,6 +14,7 @@ mpa_plot4 <- function(model, y.lab = NULL) {
   library(tidyr)
 
   p <- model$model %>%
+    mutate(Ano = as.numeric(as.character(Ano))) %>%
     ggplot(aes(x = Ano, y = Indicador, color = Zona, fill = Zona)) +
     geom_jitter(height = 0, width = 0.1, size = 1) +
     stat_summary(geom = "point", fun.y = mean, color = "black", size = 2, alpha = 0.5) +
