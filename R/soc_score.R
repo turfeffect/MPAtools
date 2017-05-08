@@ -7,10 +7,9 @@
 #'
 
 soc_score <- function(model) {
-  model <- summary(model)
 
-  est = coefficients(model)[2]
-  p = coefficients(model)[7]
+  est = model$estimate
+  p = model$p
 
   if (est > 0 & p < 0.05) {
     score = "olive"
