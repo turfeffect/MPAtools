@@ -48,7 +48,10 @@ fish_biomass <- function(data, location, species = NULL){
       group_by(Ano,
                Zona,
                Sitio,
-               Transecto) %>%         #Group by year, zone, site, transect number, and species
+               Transecto,
+               Temperatura,
+               Visibilidad,
+               ProfundidadInicial) %>%         #Group by year, zone, site, transect number, and species
       summarize(B = sum(W, na.rm = T)/60) %>%
       ungroup() %>%
       select(Ano, Zona, Sitio, Transecto, Indicador = B, Temperatura, Visibilidad, Profundidad = ProfundidadInicial)
