@@ -13,7 +13,9 @@ turfeffect <- function (data, reserve = NULL, control = NULL, type = NULL, year.
 
   library(tidyverse)
 
-  if (type == "bio"){
+  data <- data %>%
+    mutate(Post = as.factor(ifelse(Ano <= year.imp, 0, 1)),
+           Ano = as.factor(Ano))
 
     colnames(data) <- c("Ano", "Zona", "Sitio", "Transecto", "Indicador", "Temperatura", "Visibilidad", "Profundidad")
 
