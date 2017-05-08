@@ -17,18 +17,20 @@ turfeffect <- function (data, reserve = NULL, control = NULL, type = NULL, year.
     mutate(Post = as.factor(ifelse(Ano <= year.imp, 0, 1)),
            Ano = as.factor(Ano))
 
+  if (type == "bio"){
 
-    data <- filter(data, Sitio %in% reserve | Sitio %in% control) %>%
-      mutate(Post = ifelse(Ano <= min(Ano), 0, 1)) %>%
-      fix_na()
-
-    model <- lm(Indicador ~ Ano + Zona+ Post * Zona + Temperatura + Visibilidad + Profundidad, data)
+    model <- filter(data, Sitio %in% reserve | Sitio %in% control) %>%
+      bio_model(covars = define_covars(.)) %>%
+      lmtest::coeftest(vcov = sandwich::vcovHC(.), type = "HC1") %>%
+      broom::tidy()
 
   } else if (type == "soc"){
 
     colnames(data) <- c("Ano", "Indicador")
 
-    model <- lm(Indicador ~ Ano, data = data)
+    model <- lm(Indicador ~ Post, data = data) %>%
+      lmtest::coeftest(vcov = sandwich::vcovHC(.), type = "HC1") %>%
+      broom::tidy()
   }
 
   return(model)
