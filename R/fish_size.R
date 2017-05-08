@@ -18,7 +18,7 @@ fish_size <- function(data, location, species = NULL){
     stop("Pleae specify an objective species")
   }
 
-  densidad_todos <- MPAtools::density(data, location, species)
+  densidad_todos <- density(data, location, species)
 
   columns <- colnames(data)
 
@@ -27,19 +27,21 @@ fish_size <- function(data, location, species = NULL){
     data <- left_join(data, abnt, by = "GeneroEspecie")
   }
 
-  data <- filter(data, GeneroEspecie == species,
-                 Comunidad == location,
-                 Talla > Lm) %>%
-  group_by(Ano,
-           Zona,
-           Sitio,
-           Transecto) %>%
+  data <- data %>%
+    filter(GeneroEspecie == species,
+           Comunidad == location,
+           Talla > Lm) %>%
+    group_by(Ano,
+             Zona,
+             Sitio,
+             Transecto) %>%
     summarize(DLT50 = sum(Abundancia, na.rm = T)) %>%
+    ungroup() %>%
     right_join(densidad_todos, by = c("Ano", "Zona", "Sitio", "Transecto")) %>%
-    mutate(Ni = DLT50/D*100) %>%
-    select(Ano, Zona, Sitio, Transecto, Indicador = Ni, Temperatura, Visibilidad, Profundidad)
+    mutate(Ni = DLT50/Indicador*100) %>%
+    dplyr::select(Ano, Zona, Sitio, Transecto, Indicador = Ni, Temperatura, Visibilidad, Profundidad)
 
-  data$Ni[is.na(data$Ni)] <- 0
+  data$Indicador[is.na(data$Indicador)] <- 0
 
   return(data)
 
