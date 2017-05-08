@@ -3,7 +3,7 @@
 #' @description Calulates biomass for a selected species or the entire dataset, by year, site, and transect, for a given location.
 #'
 #' @param data A dataframe that contains at least columns of Ano, Zona (e.g. "Zona de pesca" or "Zona de no pesca"), Sitio, Transecto, GeneroEspecie. Columns for a and b parameters are optional, though heavily suggested to avoid errors in calculations (this package might not have all parameters for all species).
-#' @param ab An optional dataframe that contains the a and b allometric parameters for each species. Dataframe must have three columns: GeneroEspecie, a, b
+#' @param a,b An optional dataframe that contains the a and b allometric parameters for each species. Dataframe must have three columns: GeneroEspecie, a, b
 #' @param location A quoted string that indicates the location.
 #' @param species A quoted string that indicates a species for which density should be calulated.
 #'

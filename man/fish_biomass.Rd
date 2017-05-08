@@ -13,7 +13,7 @@ fish_biomass(data, location, species = NULL)
 
 \item{species}{A quoted string that indicates a species for which density should be calulated.}
 
-\item{ab}{An optional dataframe that contains the a and b allometric parameters for each species. Dataframe must have three columns: GeneroEspecie, a, b}
+\item{a, b}{An optional dataframe that contains the a and b allometric parameters for each species. Dataframe must have three columns: GeneroEspecie, a, b}
 }
 \value{
 size A dataframe with columns for Ano, Zona, Sitio, Transecto, GeneroEspecie, and fish biomass (B; in grams).
