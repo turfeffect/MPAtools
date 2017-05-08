@@ -17,7 +17,6 @@ turfeffect <- function (data, reserve = NULL, control = NULL, type = NULL, year.
     mutate(Post = as.factor(ifelse(Ano <= year.imp, 0, 1)),
            Ano = as.factor(Ano))
 
-    colnames(data) <- c("Ano", "Zona", "Sitio", "Transecto", "Indicador", "Temperatura", "Visibilidad", "Profundidad")
 
     data <- filter(data, Sitio %in% reserve | Sitio %in% control) %>%
       mutate(Post = ifelse(Ano <= min(Ano), 0, 1)) %>%
