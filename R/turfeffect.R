@@ -20,7 +20,9 @@ turfeffect <- function (data, reserve = NULL, control = NULL, type = NULL, year.
   if (type == "bio"){
 
     model <- filter(data, Sitio %in% reserve | Sitio %in% control) %>%
-      bio_model(covars = define_covars(.)) %>%
+      bio_model(covars = define_covars(.))
+
+    TidyModel <- model%>%
       lmtest::coeftest(vcov = sandwich::vcovHC(.), type = "HC1") %>%
       broom::tidy()
 
@@ -28,10 +30,12 @@ turfeffect <- function (data, reserve = NULL, control = NULL, type = NULL, year.
 
     colnames(data) <- c("Ano", "Indicador")
 
-    model <- lm(Indicador ~ Post, data = data) %>%
+    model <- lm(Indicador ~ Post, data = data)
+
+    TidyModel <- model %>%
       lmtest::coeftest(vcov = sandwich::vcovHC(.), type = "HC1") %>%
       broom::tidy()
   }
 
-  return(model)
+  return(list(TidyModel = TidyModel, model = model))
 }
