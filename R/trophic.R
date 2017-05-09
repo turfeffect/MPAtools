@@ -17,8 +17,8 @@ trophic <- function(data, location){
   columns <- colnames(data)
 
   if (!any(columns == "NT")){
-    data("abnt")
-    data <- left_join(data, abnt, by = "GeneroEspecie")
+    data("species_bio")
+    data <- left_join(data, species_bio, by = "GeneroEspecie")
   }
 
   data <- filter(data, Comunidad == location) %>%

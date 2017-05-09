@@ -23,8 +23,8 @@ fish_size <- function(data, location, species = NULL){
   columns <- colnames(data)
 
   if (!any(columns == "Lm")){
-    data("abnt")
-    data <- left_join(data, abnt, by = "GeneroEspecie")
+    data("species_bio")
+    data <- left_join(data, species_bio, by = "GeneroEspecie")
   }
 
   data <- data %>%
