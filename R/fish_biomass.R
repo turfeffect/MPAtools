@@ -37,7 +37,7 @@ fish_biomass <- function(data, location, species = NULL){
                Temperatura,
                Visibilidad,
                ProfundidadInicial) %>%         #Group by year, zone, site, transect number, and species
-      summarize(B = sum(W, na.rm = T)/60) %>%
+      summarize(B = sum(W, na.rm = T)) %>%
       ungroup() %>%
       select(Ano, Zona, Sitio, Transecto, Indicador = B, Temperatura, Visibilidad, Profundidad = ProfundidadInicial)
 
@@ -52,7 +52,7 @@ fish_biomass <- function(data, location, species = NULL){
                Temperatura,
                Visibilidad,
                ProfundidadInicial) %>%         #Group by year, zone, site, transect number, and species
-      summarize(B = sum(W, na.rm = T)/60) %>%
+      summarize(B = sum(W, na.rm = T)) %>%
       ungroup() %>%
       select(Ano, Zona, Sitio, Transecto, Indicador = B, Temperatura, Visibilidad, Profundidad = ProfundidadInicial)
   }
