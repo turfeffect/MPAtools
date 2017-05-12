@@ -8,7 +8,7 @@ bio_model <- function(data, covars){
 
   # for only one variable
 
-  if(length(covars) == 1 & !covars == "None"){
+  if(length(covars) == 1 & !"None" %in% covars){
 
     # using only T
 
@@ -56,7 +56,7 @@ bio_model <- function(data, covars){
 
   # dropping all covariates
 
-  if (covars == "None"){
+  if ("None" %in% covars){
     model <- lm(formula = Indicador ~ Ano + Zona + Post * Zona, data = data)
   }
 
