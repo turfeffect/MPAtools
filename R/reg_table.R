@@ -1,3 +1,5 @@
+#' @export
+
 reg_table <- function(model, title, dep.var.labels){
 
   TidyModel <- model%>%
