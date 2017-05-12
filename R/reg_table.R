@@ -19,8 +19,6 @@ reg_table <- function(model, title, dep.var.labels){
     gsub(pattern = "ZonaReserva:Post1", replacement = "**Efecto**") %>%
     gsub(pattern = "Intercept", replacement = "Constante")
 
-  print(robust_se)
-
   # Adjust F statistic
   # wald_results <- waldtest(output, vcov = cov1
 
