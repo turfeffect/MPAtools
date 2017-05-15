@@ -28,8 +28,6 @@ turfeffect <- function (data, reserve = NULL, control = NULL, type = NULL, year.
 
   } else if (type == "soc"){
 
-    colnames(data) <- c("Ano", "Indicador")
-
     model <- lm(Indicador ~ Post, data = data)
 
     TidyModel <- model %>%
