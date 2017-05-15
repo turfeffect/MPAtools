@@ -14,8 +14,7 @@ soc_results <- function(values, data) {
   library(broom)
   # Establish a dataframe where to store all values
   results <- tibble::tibble(
-    Ind = c("Arribos",
-            "Ingresos"),
+    Ind = c("Arribos", "Ingresos"),
     e = NA,
     p = NA,
     string = NA,
@@ -26,11 +25,11 @@ soc_results <- function(values, data) {
 
   #### For Landings
   if ("Arribos" %in% values$indS) {
-    model <- MPAtools::landings(data, values$comunidad, "kg") %>%
-      turfeffect(type = "soc")
+    model <- landings(data, values$comunidad, "kg") %>%
+      turfeffect(type = "soc", year.imp = values$ano.imp)
 
     TidyModel <- model$TidyModel %>%
-      filter(term == "Post")
+      filter(term == "Post1")
 
     model <- model$model
 
@@ -44,11 +43,11 @@ soc_results <- function(values, data) {
 
   #### For Income
   if ("Ingresos por arribos" %in% values$indS) {
-    model <- MPAtools::landings(data, values$comunidad, "price") %>%
-      turfeffect(type = "soc")
+    model <- landings(data, values$comunidad, "price") %>%
+      turfeffect(type = "soc", year.imp = values$ano.imp)
 
     TidyModel <- model$TidyModel %>%
-      filter(term == "Post")
+      filter(term == "Post1")
 
     model <- model$model
 
