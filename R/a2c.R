@@ -1,20 +1,31 @@
 #' Convert data format
 #'
-#' @description Convert fish transect data from format a to c
+#' @description Convert fish transect data from format a to format c; See details. Convierte datos de transectos de peces del formato a al formato c; Ver detalles
 #'
-#' @param a An object of class data.frame with the format a (one column for each size interval).
+#' @param a A data.frame with the format a. Un data.frame en formato a
 #'
-#' @return c An object of class data.frame with the format c (one column for size and one row for each occurrence).
+#' @return A data.frame wih the format c. Un data.frame en formato c
 #'
 #' @export
 #'
-#' @author Villaseñor-Derbez, J.C. <juancarlos.villader@gmail.com>
+#' @author Villaseñor-Derbez, J.C. <jvillasenor@turfeffect.org>
 #'
+#' @examples
+#' #library(MPAtools)
+#'
+#' #load an "a" sample dataset
+#' data("a")
+#'
+#' #convert a to b format
+#' c <- a2c(a)
+#' c
+#'
+#' @importFrom magrittr %>%
 
-a2c=function(a){
+a2c <- function(a){
 
-  b=a2b(a) #we use the pre-existing function a2b to convert a format to b format
-  c=b2c(b) #We use the pre-existing function b2c to convert b format to c format
+  c <- a2b(a) %>%
+    b2c()
 
   return(c) #Return a data.frame
 

@@ -1,79 +1,33 @@
 #' Convert data format
 #'
-#' @description
+#' @description Convert fish transect data from format c to format b; See details. Convierte datos de transectos de peces del formato c al formato b; Ver detalles
 #'
-#' @param c An object of class data.frame wih the format c (One column for sizes and one for abundance).
+#' @param a A data.frame with the format c. Un data.frame en formato c
 #'
-#' @return b An object of class data.frame with the format b (one column for each size interval).
+#' @return A data.frame wih the format b. Un data.frame en formato b
 #'
 #' @export
 #'
-#' @author Villaseñor-Derbez, J.C. <juancarlos.villader@gmail.com>
+#' @author Villaseñor-Derbez, J.C. <jvillasenor@turfeffect.org>
+#'
+#' @examples
+#' #library(MPAtools)
+#'
+#' #load an "c" sample dataset
+#' data("c")
+#'
+#' #convert c to a format
+#' b <- c2b(c)
+#' b
+#'
+#' @importFrom magrittr %>%
 #'
 
-c2b=function(c){
-  library(reshape)
-  library(dplyr)
-  library(tidyr)
+c2b <- function(c){
 
-  colnames(c)=c('Dia', #Set proper column names to avoid weird characters
-                'Mes',
-                'Ano',
-                'Estado',
-                'Comunidad',
-                'Sitio',
-                'Latitud',
-                'Longitud',
-                'Habitat',
-                'Zonificacion',
-                'TipoDeProteccion',
-                'ANP',
-                'BuzoMonitor',
-                'HoraInicialBuceo',
-                'HoraFinalBuceo',
-                'ProfundidadInicial_m',
-                'ProfundidadFinal_m',
-                'Temperatura_C',
-                'Visibilidad_m',
-                'Corriente',
-                'Transecto',
-                'Genero',
-                'Especie',
-                'GeneroEspecie',
-                'Sexo',
-                'Talla',
-                'PromedioDeTalla',
-                'Abundancia')
-
-  b=c %>% #Set b equal to c
-    group_by(Dia, #Group by all columns except for Abundancia
-             Mes,
-             Ano,
-             Estado,
-             Comunidad,
-             Sitio,
-             Latitud,
-             Longitud,
-             Habitat,
-             Zonificacion,
-             TipoDeProteccion,
-             ANP,
-             BuzoMonitor,
-             HoraInicialBuceo,
-             HoraFinalBuceo,
-             ProfundidadInicial_m,
-             ProfundidadFinal_m,
-             Temperatura_C,
-             Visibilidad_m,
-             Corriente,
-             Transecto,
-             Genero,
-             Especie,
-             GeneroEspecie,
-             Sexo,
-             Talla,
-             PromedioDeTalla) %>%
-    summarize(Abundancia=sum(Abundancia)) #Sum the column Abundania to gather ell records into a single row
+  b <- c %>% #Set b equal to c
+    group_by(Dia, Mes, Ano, Estado, Comunidad, Sitio, Latitud, Longitud, Habitat, Zonificacion, TipoDeProteccion, ANP, BuzoMonitor, HoraInicialBuceo, HoraFinalBuceo, ProfundidadInicial, ProfundidadFinal, Temperatura, Visibilidad, Corriente, Transecto, Genero, Especie, GeneroEspecie, Sexo, Talla, PromedioDeTalla) %>%
+    dplyr::summarize(Abundancia=sum(Abundancia, na.rm = T))
 
   return(b) #return a data.frame
 

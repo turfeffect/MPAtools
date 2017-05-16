@@ -1,65 +1,42 @@
 #' Convert data format
 #'
-#' @description Convert fish transect data from format a to c
+#' @description Convert fish transect data from format b to format c; See details. Convierte datos de transectos de peces del formato b al formato c; Ver detalles
 #'
-#' @param b An object of class data.frame with the format a (one column for each size interval).
+#' @param a A data.frame with the format b. Un data.frame en formato b
 #'
-#' @return c An object of class data.frame with the format c (one column for size and one row for each occurrence).
+#' @return A data.frame wih the format c. Un data.frame en formato c
 #'
 #' @export
 #'
-#' @author Villaseñor-Derbez, J.C. <juancarlos.villader@gmail.com>
+#' @author Villaseñor-Derbez, J.C. <jvillasenor@turfeffect.org>
+#'
+#' @examples
+#' #library(MPAtools)
+#'
+#' #load a "b" sample dataset
+#' data("b")
+#'
+#' #convert a to b format
+#' c <- b2c(b)
+#' c
+#'
+#' @importFrom magrittr %>%
 #'
 
-b2c=function(b){
-
-  library(dplyr)  # Load dplyr
-  library(tidyr)  # Load tidyr
-  library(reshape) #load reshape
-
-
-  colnames(b)=c('Dia', #Set proper column names to avoid werid characters
-                'Mes',
-                'Ano',
-                'Estado',
-                'Comunidad',
-                'Sitio',
-                'Latitud',
-                'Longitud',
-                'Habitat',
-                'Zonificacion',
-                'TipoDeProteccion',
-                'ANP',
-                'BuzoMonitor',
-                'HoraInicialBuceo',
-                'HoraFinalBuceo',
-                'ProfundidadInicial_m',
-                'ProfundidadFinal_m',
-                'Temperatura_C',
-                'Visibilidad_m',
-                'Corriente',
-                'Transecto',
-                'Genero',
-                'Especie',
-                'GeneroEspecie',
-                'Sexo',
-                'Talla',
-                'PromedioDeTalla',
-                'Abundancia')
+b2c <- function(b){
 
   #Set proper names to cells in Talla based on the size indicated by PromedioDeTalla
 
-  b$Talla[b$PromedioDeTalla<=5]="0a5"
-  b$Talla[b$PromedioDeTalla>5]="6a10"
-  b$Talla[b$PromedioDeTalla>10]="11a20"
-  b$Talla[b$PromedioDeTalla>20]="21a30"
-  b$Talla[b$PromedioDeTalla>30]="31a40"
-  b$Talla[b$PromedioDeTalla>40]=">40"
+  b$Talla[b$PromedioDeTalla<=5] <- "0a5"
+  b$Talla[b$PromedioDeTalla>5] <- "6a10"
+  b$Talla[b$PromedioDeTalla>10] <- "11a20"
+  b$Talla[b$PromedioDeTalla>20] <- "21a30"
+  b$Talla[b$PromedioDeTalla>30] <- "31a40"
+  b$Talla[b$PromedioDeTalla>40] <- ">40"
 
-  c=untable(df=b, num=b$Abundancia) #Untable b to convert to c
+  c <- untable(df = b, num = b$Abundancia) #Untable b to convert to c
 
-  c$Abundancia=1                    #Set abundances = to one
-
+  c$Abundancia <- 1                    #Set abundances = to one
 
   return(c) #return a data.frame
 
