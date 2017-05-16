@@ -7,14 +7,25 @@
 a2b(a)
 }
 \arguments{
-\item{a}{An object of class data.frame with the format a (one column for each size interval).}
+\item{a}{A data.frame with the format a. Un data.frame en formato a}
 }
 \value{
-b An object of class data.frame wih the format b (One column for sizes and one for abundance).
+A data.frame wih the format b. Un data.frame en formato b
 }
 \description{
-Convert fish transect data from format a to format b
+Convert fish transect data from format a to format b; See details. Convierte datos de transectos de peces del formato a al formato b; Ver detalles
+}
+\examples{
+#library(MPAtools)
+
+#load an "a" sample dataset
+data("a")
+
+#convert a to b format
+b <- a2b(a)
+b
+
 }
 \author{
-Villaseñor-Derbez, J.C. <juancarlos.villader@gmail.com>
+Villaseñor-Derbez, J.C. <jvillasenor@turfeffect.org>
 }

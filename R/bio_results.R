@@ -1,16 +1,18 @@
-#' Results
+#' Biophysical Results
 #'
 #' @description Analyzes all the required biophysical indicators at once
 #'
-#' @param data The data to be analyzed
-#' @param res The name of the reserve
-#' @param con The name of the control site
-#' @param values A list, created within the Shiny app, that contains the list of indicators selected and the community
+#' @param values A list, created within the Shiny app, that contains the list of indicators selected, the community, any objective species, and the year of implementation of the reserve
+#' @param data A data.frame containing the raw data to be analyzed
+#' @param res A string specifying the name of the reserve site(s)
+#' @param con A string specifying the name of the control site(s)
 #'
 #' @return results, a tibble containing the name of the indicator as well as DiD estimates, p values, a string to be used as input for valueBox, the color of the valueBox, and the lm object fit to the indicator extracted from the data
 #' @export
 #'
+#' @author Villaseñor-Derbez, J.C. <jvillasenor@turfeffect.org>
 #'
+#' @importFrom magrittr %>%
 
 bio_results <- function(values, data, res, con) {
   library(broom)

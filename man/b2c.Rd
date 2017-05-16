@@ -7,14 +7,25 @@
 b2c(b)
 }
 \arguments{
-\item{b}{An object of class data.frame with the format a (one column for each size interval).}
+\item{a}{A data.frame with the format b. Un data.frame en formato b}
 }
 \value{
-c An object of class data.frame with the format c (one column for size and one row for each occurrence).
+A data.frame wih the format c. Un data.frame en formato c
 }
 \description{
-Convert fish transect data from format a to c
+Convert fish transect data from format b to format c; See details. Convierte datos de transectos de peces del formato b al formato c; Ver detalles
+}
+\examples{
+#library(MPAtools)
+
+#load a "b" sample dataset
+data("b")
+
+#convert a to b format
+c <- b2c(b)
+c
+
 }
 \author{
-Villaseñor-Derbez, J.C. <juancarlos.villader@gmail.com>
+Villaseñor-Derbez, J.C. <jvillasenor@turfeffect.org>
 }

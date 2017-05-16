@@ -7,14 +7,25 @@
 c2a(c)
 }
 \arguments{
-\item{c}{An object of class data.frame wih the format c (One column for sizes and one for abundance).}
+\item{a}{A data.frame with the format c. Un data.frame en formato c}
 }
 \value{
-a An object of class data.frame with the format a (one column for each size interval).
+A data.frame wih the format a. Un data.frame en formato a
 }
 \description{
+Convert fish transect data from format c to format a; See details. Convierte datos de transectos de peces del formato c al formato a; Ver detalles
+}
+\examples{
+#library(MPAtools)
+
+#load an "c" sample dataset
+data("c")
+
+#convert c to a format
+a <- c2a(c)
+a
 
 }
 \author{
-Villaseñor-Derbez, J.C. <juancarlos.villader@gmail.com>
+Villaseñor-Derbez, J.C. <jvillasenor@turfeffect.org>
 }
