@@ -18,6 +18,7 @@ Imports: ggplot2,
     broom,
     lmtest,
     sandwich,
-    tibble
+    tibble,
+    tidyverse
 Suggests: devtools
 VignetteBuilder: knitr
