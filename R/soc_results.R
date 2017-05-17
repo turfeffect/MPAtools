@@ -31,6 +31,8 @@ soc_results <- function(values, data) {
     TidyModel <- model$TidyModel %>%
       filter(term == "Post1")
 
+    soc_data <- model$soc_data
+
     model <- model$model
 
     results$e[1] <- TidyModel$estimate
@@ -38,7 +40,7 @@ soc_results <- function(values, data) {
     results$string[1] <- valueBoxString(TidyModel)
     results$color[1] <- soc_score(TidyModel)
     results$model[[1]] <- model
-    results$plot[[1]] <- soc_plot(model, y.lab = "Arribos (Kg / Ano)")
+    results$plot[[1]] <- soc_plot(soc_data, y.lab = "Arribos (Kg / Ano)")
   }
 
   #### For Income
@@ -49,6 +51,8 @@ soc_results <- function(values, data) {
     TidyModel <- model$TidyModel %>%
       filter(term == "Post1")
 
+    soc_data <- model$soc_data
+
     model <- model$model
 
     results$e[2] <- TidyModel$estimate
@@ -56,7 +60,7 @@ soc_results <- function(values, data) {
     results$string[2] <- valueBoxString(TidyModel)
     results$color[2] <- soc_score(TidyModel)
     results$model[[2]] <- model
-    results$plot[[2]] <- soc_plot(model, y.lab = "Ingresos por arribos (Pesos / Ano)")
+    results$plot[[2]] <- soc_plot(soc_data, y.lab = "Ingresos por arribos (Pesos / Ano)")
   }
 
   return(results)

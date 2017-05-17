@@ -7,15 +7,16 @@
 #' @export
 #'
 
-soc_plot <- function(model, y.lab){
+soc_plot <- function(data, y.lab){
   library(ggplot2)
   library(dplyr)
   library(tidyr)
 
-  p <- model$model %>%
+  p <-  data %>%
+    mutate(Ano = as.numeric(as.character(Ano))) %>%
     ggplot(aes(x = Ano, y = Indicador)) +
-    stat_summary(geom = "point", fun.y = mean, color = "black", size = 2) +
-    stat_summary(geom = "line", fun.y = mean, color = "black") +
+    stat_summary(geom = "point", fun.y = mean, size = 2) +
+    stat_summary(geom = "line", fun.y = mean) +
     theme_bw() +
     labs(x = "Ano", y = y.lab)
 
