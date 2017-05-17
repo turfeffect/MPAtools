@@ -53,9 +53,9 @@ landings <- function(data, location, type, species = NULL) {
         group_by(Ano, GeneroEspecie) %>%
         summarise(Indicador = sum(Ingresos))
     }
-
-    D$Ingresos[D$Ingresos == 0] <- NA
   }
+
+  D$Indicador[D$Indicador == 0] <- NA
 
   return(D)
 
