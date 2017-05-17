@@ -13,6 +13,8 @@ turfeffect <- function (data, reserve = NULL, control = NULL, type = NULL, year.
 
   library(tidyverse)
 
+  soc_data <- NULL
+
   data <- data %>%
     mutate(Post = as.factor(ifelse(Ano <= year.imp, 0, 1)),
            Ano = as.factor(Ano))
@@ -33,7 +35,9 @@ turfeffect <- function (data, reserve = NULL, control = NULL, type = NULL, year.
     TidyModel <- model %>%
       lmtest::coeftest(vcov = sandwich::vcovHC(., type = "HC1")) %>%
       broom::tidy()
+
+    soc_data <- data
   }
 
-  return(list(TidyModel = TidyModel, model = model))
+  return(list(TidyModel = TidyModel, model = model, soc_data = soc_data))
 }
