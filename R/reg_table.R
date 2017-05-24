@@ -19,8 +19,9 @@ reg_table <- function(model, title, dep.var.labels){
     gsub(pattern = "ZonaReserva:Post1", replacement = "**Efecto**") %>%
     gsub(pattern = "Intercept", replacement = "Constante")
 
-  # Adjust F statistic
-  # wald_results <- waldtest(output, vcov = cov1
+  # # Adjust F statistic
+  # wald_results <- waldtest(output, vcov = vcovHC(model, type = "HC1")) %>%
+  #   broom::tidy()
 
 
   stargazer::stargazer(model,
@@ -36,5 +37,5 @@ reg_table <- function(model, title, dep.var.labels){
                        single.row = T,
                        intercept.bottom = F,
                        star.cutoffs = c(0.1, 0.05, 0.001),
-                       report = c("vcsp*"))
+                       report = c("vcs*"))
 }
