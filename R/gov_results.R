@@ -13,100 +13,123 @@
 gov_results <- function(values, data, reserva){
   library(tidyverse)
 
-  data <- filter(data, Community == values$comunidad, Q2_Name == reserva)
-
-  pescadores <- select(data, Q10Bef, Q10Aft) %>% list()
-  reconocimiento <- select(data, Q5, Q5_1, Q5_2) %>% list()
-  pesca_ilegal <- select(data, Q13, Q14_11, Q14_12, Q14_21, Q14_22, Q19Bef, Q19Aft, Q20_1, Q20_2, Q20_3) %>% list()
-  procuracion <- select(data, Q4_1, Q4_2, Q4_3, Q8, Q15, Q16, Q17) %>% list()
-  representacion = select(data, Q3, Q12, Q12_1) %>% list()
-
-  # input <- tibble(Acceso = data$Q7,
-  #                 Pescadores = pescadores,
-  #                 Reconocimiento = reconocimiento,
-  #                 Tipo = NA,
-  #                 Pesca_Ilegal = pesca_ilegal,
-  #                 Plan_manejo = data$Q6,
-  #                 Procuracion = procuracion,
-  #                 Tamano = NA,
-  #                 Razonamiento = data$Q2_Reason,
-  #                 Org_pesquera = data$Q1,
-  #                 Representacion = representacion,
-  #                 Reglas_internas = data$Q9,
-  #                 Effectividad = data$Q23
-  # )
+  gov <- data %>%
+    filter(Community == values$comunidad, Q2_Name %in% c(reserva, NA))
 
   results <- tibble(Ind = c("Acceso a la pesqueria",
+                            "Numero de pescadores",
                             "Reconocimiento legal de la reserva",
+                            "Tipo de reserva",
                             "Grado de pesca ilegal",
                             "Plan de manejo",
                             "Procuracion de la reserva",
+                            "Tamano de la reserva",
                             "Tipo de organizacion pesquera",
-                            "Representacion",
                             "Reglamentacion interna",
                             "Efectividad percibida"),
                     e = NA,
-                    p = NA,
-                    string = NA,
                     color = NA,
-                    model = list(NA),
-                    plot = list(NA))
+                    string = NA)
 
   ####
   if ("Acceso a la pesqueria" %in% values$indG) {
-    results$e[1] <- 1
-    results$string[1] <- c("Bien! Tu concesion promueve la extraccion sustentable de tus recursos.")
-    results$color[1] <- c("olive")
+    results$e[1] <- ifelse(any(gov$Q7 == "Open Access", na.rm = T), 0, 1)
+    results$color[1] <- ifelse(any(gov$Q7 == "Open Access", na.rm = T), "red", "olive")
+    results$string[1] <- ifelse(any(gov$Q7 == "Open Access", na.rm = T), "La pesqueria no tiene restricciones. Esto puede causar efectos negativos a largo plazo.", "Bien!")
+  }
+
+  if ("Numero de pescadores" %in% values$indG) {
+    results$e[2] <- ifelse(mean(gov$Q10Aft - gov$Q10Bef, na.rm = T) > 0, 0, 1)
+    results$color[2] <- ifelse(mean(gov$Q10Aft - gov$Q10Bef, na.rm = T) > 0, "red", "olive")
+    results$string[2] <- ifelse(mean(gov$Q10Aft - gov$Q10Bef, na.rm = T) > 0, "Si el esfuerzo pesquero incrementa, la abundancia de tus productos puede reducirse.", "Bien!")
   }
 
   if ("Reconocimiento legal de la reserva" %in% values$indG) {
-    results$e[2] <- 0
-    results$string[2] <- c("Es bueno que esten en proceso. Reconocer su reserva legalmente es importante para fortalecer su procuracion.")
-    results$color[2] <- c("yellow")
+    results$e[3] <- ifelse(any(gov$Q5 == "No", na.rm = T), 0, 1)
+    results$color[3] <- ifelse(any(gov$Q5 == "No", na.rm = T), "red", "olive")
+    results$string[3] <- ifelse(any(gov$Q5 == "No", na.rm = T), "Reconocer su reserva legalmente es importante para fortalecer su procuracion.", "Bien!")
   }
 
+  # if ("Tipo de reserva" %in% values$indG) {
+  #   results$e[4]
+  #   results$color[4]
+  #   results$string[4]
+  # }
+
   if ("Grado de pesca ilegal" %in% values$indG) {
-    results$e[3] <- 1
-    results$string[3] <- c("La pesca ilegal suele disminuir las abundancias y biomasas de tus recursos.")
-    results$color[3] <- c("green")
+    levels <- data.frame(levels = c("Very High", "High", "Moderate", "Restricted", "Low", "NULL"),
+                         values = c(5, 4, 3, 2, 1, 0), stringsAsFactors = F)
+    change <- gov %>%
+      select(Interviewee, contains("Q19")) %>%
+      gather(question, levels, -Interviewee) %>%
+      left_join(levels, by = "levels") %>%
+      select(-levels) %>%
+      spread(question, values) %>%
+      mutate(change = Q19Aft - Q19Bef) %>%
+      {.$change} %>%
+      mean(na.rm = T)
+
+    results$e[5] <- ifelse(change >= 0, 0, 1)
+    results$color[5] <- ifelse(change >= 0, "red", "olive")
+    results$string[5] <- ifelse(change >= 0, "La pesca ilegal suele disminuir las abundancias y biomasas de tus recursos.", "Bien!")
   }
 
   if ("Plan de manejo" %in% values$indG) {
-    results$e[4] <- 0
-    results$string[4] <- c("Tienes un Estudio Tecnico Justificativo, pero seria mejor tener todas las reglas por escrito en un solo lugar.")
-    results$color[4] <- c("yellow")
+
+    answer <- gov %>%
+      group_by(Q6) %>%
+      count() %>%
+      filter(n == max(n), !is.na(Q6)) %>%
+      {.$Q6}
+
+    results$e[6] <- ifelse(answer == "No", 0, 1)
+    results$color[6] <- ifelse(answer == "No", "red", "green")
+    results$string[6] <- ifelse(answer == "No", "Puede que los usuarios no esten al tanto de las reglas. Es mejor tener las reglas por escrito.", "Puede que los usuarios conozcan las reglas y por lo tanto las obedezcan.")
   }
 
-  if ("Procuracion de la reserva" %in% values$indG) {
-    results$e[5] <- 1
-    results$string[5] <- c("Bien! La vigilancia comunitaria ayuda a mantener fuera a los piratas.")
-    results$color[5] <- c("olive")
-  }
+  # if ("Procuracion de la reserva" %in% values$indG) {
+  #   results$e[7]
+  #   results$color[7]
+  #   results$string[7]
+  # }
 
-  if ("Tipo de organizacion pesquera" %in% values$indG) {
-    results$e[6] <- 1
-    results$string[6] <- c("Bien! Las cooperativas promueven el dialogo entre pescadores y la extraccion sustentable de tus recursos.")
-    results$color[6] <- c("olive")
-  }
+  # if ("Tamano de la reserva" %in% values$indG) {
+  #   results$e[8]
+  #   results$color[8]
+  #   results$string[8]
+  # }
 
-  if ("Representacion" %in% values$indG) {
-    results$e[7] <- 1
-    results$string[7] <- c("Bien! Al tener alta representacion durante el diseno dela reserva, te aseguras de que mas gente este enterada del proceso.")
-    results$color[7] <- c("olive")
-  }
+  # if ("Tipo de organizacion pesquera" %in% values$indG) {
+  #   results$e[9]
+  #   results$color[9]
+  #   results$string[9]
+  # }
 
   if ("Reglamentacion interna" %in% values$indG) {
-    results$e[8] <- 1
-    results$string[8] <- c("Bien! Las reglas internas de tu organizacion pesquera evitan malos comportamientos y sobreexplotacion de recursos.")
-    results$color[8] <- c("olive")
+
+    answer <- gov %>%
+      group_by(Q9) %>%
+      count() %>%
+      filter(n == max(n), !is.na(Q9)) %>%
+      {.$Q9}
+
+    results$e[10] <- ifelse(answer == "No", 0, 1)
+    results$color[10] <- ifelse(answer == "No", "red", "green")
+    results$string[10] <- ifelse(answer == "No", "Las regulaciones formales por lo general no son suficiente. Considera implementar reglas internas", "Bien!")
   }
 
   if ("Efectividad percibida" %in% values$indG) {
-    results$e[9] <- 1
-    results$string[9] <- c("Bien! Es bueno saber que la mayoria considera que la reserva funciona.")
-    results$color[9] <- c("olive")
-  }
 
+    answer <- gov %>%
+      group_by(Q23) %>%
+      count() %>%
+      filter(n == max(n), !is.na(Q23)) %>%
+      {.$Q23}
+
+    results$e[11] <- ifelse(answer == "No", 0, 1)
+    results$color[11] <- ifelse(answer == "No", "red", "green")
+    results$string[11] <- ifelse(answer == "No", "Si los usuarios no creen que la reserva funciona, es importante escuchar su opinion para encontrar posibles areas de mejora.", "Bien! Mientras la percepcion y la realidad sean similares.")
+  }
 
   return(results)
 }
