@@ -7,7 +7,7 @@
 #' @export
 #'
 
-soc_plot <- function(data, y.lab){
+soc_plot <- function(data, y.lab = "Value"){
   library(ggplot2)
   library(dplyr)
   library(tidyr)
@@ -15,10 +15,11 @@ soc_plot <- function(data, y.lab){
   p <-  data %>%
     mutate(Ano = as.numeric(as.character(Ano))) %>%
     ggplot(aes(x = Ano, y = Indicador)) +
-    stat_summary(geom = "point", fun.y = mean, size = 2) +
     stat_summary(geom = "line", fun.y = mean) +
+    stat_summary(geom = "point", fun.y = mean, size = 3, aes(color = Post)) +
     theme_bw() +
-    labs(x = "Ano", y = y.lab)
+    labs(x = "Ano", y = y.lab) +
+    scale_color_brewer(palette = "Set1")
 
   return(p)
 }
