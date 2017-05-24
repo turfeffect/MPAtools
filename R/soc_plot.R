@@ -19,7 +19,7 @@ soc_plot <- function(data, y.lab = "Value"){
     stat_summary(geom = "point", fun.y = mean, size = 3, aes(color = Post)) +
     theme_bw() +
     labs(x = "Ano", y = y.lab) +
-    scale_color_brewer(palette = "Set1")
+    scale_color_brewer(palette = "Set1", direction = -1)
 
   return(p)
 }
