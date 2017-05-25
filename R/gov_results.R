@@ -77,13 +77,14 @@ gov_results <- function(values, data, reserva){
   if ("Plan de manejo" %in% values$indG) {
 
     answer <- gov %>%
+      filter(!is.na(Q6)) %>%
       group_by(Q6) %>%
       count() %>%
       filter(n == max(n), !is.na(Q6)) %>%
       {.$Q6}
 
     results$e[6] <- ifelse(answer == "No", 0, 1)
-    results$color[6] <- ifelse(answer == "No", "red", "green")
+    results$color[6] <- ifelse(answer == "No", "red", "olive")
     results$string[6] <- ifelse(answer == "No", "Puede que los usuarios no esten al tanto de las reglas. Es mejor tener las reglas por escrito.", "Puede que los usuarios conozcan las reglas y por lo tanto las obedezcan.")
   }
 
@@ -108,26 +109,28 @@ gov_results <- function(values, data, reserva){
   if ("Reglamentacion interna" %in% values$indG) {
 
     answer <- gov %>%
+      filter(!is.na(Q9)) %>%
       group_by(Q9) %>%
       count() %>%
       filter(n == max(n), !is.na(Q9)) %>%
       {.$Q9}
 
     results$e[10] <- ifelse(answer == "No", 0, 1)
-    results$color[10] <- ifelse(answer == "No", "red", "green")
+    results$color[10] <- ifelse(answer == "No", "red", "olive")
     results$string[10] <- ifelse(answer == "No", "Las regulaciones formales por lo general no son suficiente. Considera implementar reglas internas", "Bien!")
   }
 
   if ("Efectividad percibida" %in% values$indG) {
 
     answer <- gov %>%
+      filter(!is.na(Q23)) %>%
       group_by(Q23) %>%
       count() %>%
       filter(n == max(n), !is.na(Q23)) %>%
       {.$Q23}
 
     results$e[11] <- ifelse(answer == "No", 0, 1)
-    results$color[11] <- ifelse(answer == "No", "red", "green")
+    results$color[11] <- ifelse(answer == "No", "red", "olive")
     results$string[11] <- ifelse(answer == "No", "Si los usuarios no creen que la reserva funciona, es importante escuchar su opinion para encontrar posibles areas de mejora.", "Bien! Mientras la percepcion y la realidad sean similares.")
   }
 
