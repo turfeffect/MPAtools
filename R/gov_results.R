@@ -28,8 +28,8 @@ gov_results <- function(values, data, reserva){
                             "Reglamentacion interna",
                             "Efectividad percibida"),
                     e = NA,
-                    color = NA,
-                    string = NA)
+                    color = "yellow",
+                    string = "No disponible")
 
   ####
   if ("Acceso a la pesqueria" %in% values$indG) {
