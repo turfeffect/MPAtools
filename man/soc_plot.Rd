@@ -4,7 +4,7 @@
 \alias{soc_plot}
 \title{Plot a turfeffect object for socioeconomic indicators}
 \usage{
-soc_plot(data, y.lab)
+soc_plot(data, y.lab = "Value")
 }
 \arguments{
 \item{y.lab}{A character that specifies the y label}
