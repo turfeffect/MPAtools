@@ -41,7 +41,7 @@ gov_results <- function(values, data, reserva){
   if ("Numero de pescadores" %in% values$indG) {
     results$e[2] <- ifelse(mean(gov$Q10Aft - gov$Q10Bef, na.rm = T) > 0, 0, 1)
     results$color[2] <- ifelse(mean(gov$Q10Aft - gov$Q10Bef, na.rm = T) > 0, "red", "olive")
-    results$string[2] <- ifelse(mean(gov$Q10Aft - gov$Q10Bef, na.rm = T) > 0, "Si el esfuerzo pesquero incrementa, la abundancia de tus productos puede reducirse.", "Bien!")
+    results$string[2] <- ifelse(mean(gov$Q10Aft - gov$Q10Bef, na.rm = T) > 0, "Si el esfuerzo pesquero incrementa, la abundancia de tus productos puede reducir.", "Bien!")
   }
 
   if ("Reconocimiento legal de la reserva" %in% values$indG) {
