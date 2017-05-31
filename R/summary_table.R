@@ -18,7 +18,7 @@ summary_table <- function(results_bio, results_bio_i, results_soc, results_gov){
     {.$Puntaje}
 
   results_gov <- results_gov %>%
-    dplyr::filter(!is.na(color)) %>%
+    dplyr::filter(!is.na(e)) %>%
     dplyr::mutate(Puntaje = paste0(Ind, " ![](",color, ".gif)")) %>%
     {.$Puntaje}
 
