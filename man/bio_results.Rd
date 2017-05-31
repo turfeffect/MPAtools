@@ -22,5 +22,5 @@ results, a tibble containing the name of the indicator as well as DiD estimates,
 Analyzes all the required biophysical indicators at once
 }
 \author{
-Villaseñor-Derbez, J.C. <jvillasenor@turfeffect.org>
+Villasenor-Derbez, J.C. <jvillasenor@turfeffect.org>
 }
