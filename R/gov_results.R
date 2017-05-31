@@ -117,7 +117,7 @@ gov_results <- function(values, data, reserva){
 
     results$e[10] <- ifelse(answer == "No", 0, 1)
     results$color[10] <- ifelse(answer == "No", "red", "olive")
-    results$string[10] <- ifelse(answer == "No", "Las regulaciones formales por lo general no son suficiente. Considera implementar reglas internas", "Bien!")
+    results$string[10] <- ifelse(answer == "No", "Las regulaciones formales por lo general no son suficiente. Considera implementar reglas internas.", "Bien!")
   }
 
   if ("Efectividad percibida" %in% values$indG) {
