@@ -10,7 +10,7 @@
 #' @return results, a tibble containing the name of the indicator as well as DiD estimates, p values, a string to be used as input for valueBox, the color of the valueBox, and the lm object fit to the indicator extracted from the data
 #' @export
 #'
-#' @author Villaseñor-Derbez, J.C. <jvillasenor@turfeffect.org>
+#' @author Villasenor-Derbez, J.C. <jvillasenor@turfeffect.org>
 #'
 #' @importFrom magrittr %>%
 
@@ -18,7 +18,7 @@ bio_results_i <- function(values, data, res, con) {
   library(broom)
   # Establish a dataframe where to store all values
   results <- tibble::tibble(
-    Ind = c("Shannon", "Riqueza", "Densidad"),
+    Ind = c("Shannon", "Riqueza", "Densidad", "DensidadObj1", "DensidadObj2", "DensidadObj3", "DensidadObj4", "DensidadObj5", "DensidadObj6", "DensidadObj7", "DensidadObj8"),
     e = NA,
     p = NA,
     string = NA,
@@ -79,6 +79,163 @@ bio_results_i <- function(values, data, res, con) {
     results$color[3] <- bio_score(TidyModel)
     results$model[[3]] <- model
     results$plot[[3]] <- mpa_plot4(model, y.lab = "Densidad (Organismos/Transecto)")
+  }
+  
+  if ("Densidad de especies objetivo" %in% values$indB & length(values$objsp$sp) > 0) {
+    model <- density(data = data, location = values$comunidad, species = values$objsp$sp[1]) %>%
+      turfeffect(res, con, type = "bio", year.imp = values$ano.imp)
+    
+    TidyModel <- model$TidyModel %>%
+      filter(term == "ZonaReserva:Post1")
+    
+    model <- model$model
+    
+    n_obj <- 4
+    
+    results$e[n_obj] <- TidyModel$estimate
+    results$p[n_obj] <- TidyModel$p.value
+    results$string[n_obj] <- valueBoxString(TidyModel)
+    results$color[n_obj] <- bio_score(TidyModel)
+    results$model[[n_obj]] <- model
+    results$plot[[n_obj]] <- mpa_plot4(model, y.lab = "Densidad (Organismos/Transecto)")
+  }
+  
+  if ("Densidad de especies objetivo" %in% values$indB & length(values$objsp$sp) > 1) {
+    model <- density(data = data, location = values$comunidad, species = values$objsp$sp[2]) %>%
+      turfeffect(res, con, type = "bio", year.imp = values$ano.imp)
+    
+    TidyModel <- model$TidyModel %>%
+      filter(term == "ZonaReserva:Post1")
+    
+    model <- model$model
+    
+    n_obj <- 5
+    
+    results$e[n_obj] <- TidyModel$estimate
+    results$p[n_obj] <- TidyModel$p.value
+    results$string[n_obj] <- valueBoxString(TidyModel)
+    results$color[n_obj] <- bio_score(TidyModel)
+    results$model[[n_obj]] <- model
+    results$plot[[n_obj]] <- mpa_plot4(model, y.lab = "Densidad (Organismos/Transecto)")
+  }
+  
+  if ("Densidad de especies objetivo" %in% values$indB & length(values$objsp$sp) > 2) {
+    model <- density(data = data, location = values$comunidad, species = values$objsp$sp[3]) %>%
+      turfeffect(res, con, type = "bio", year.imp = values$ano.imp)
+    
+    TidyModel <- model$TidyModel %>%
+      filter(term == "ZonaReserva:Post1")
+    
+    model <- model$model
+    
+    n_obj <- 6
+    
+    results$e[n_obj] <- TidyModel$estimate
+    results$p[n_obj] <- TidyModel$p.value
+    results$string[n_obj] <- valueBoxString(TidyModel)
+    results$color[n_obj] <- bio_score(TidyModel)
+    results$model[[n_obj]] <- model
+    results$plot[[n_obj]] <- mpa_plot4(model, y.lab = "Densidad (Organismos/Transecto)")
+  }
+  
+  
+  if ("Densidad de especies objetivo" %in% values$indB & length(values$objsp$sp) > 3) {
+    model <- density(data = data, location = values$comunidad, species = values$objsp$sp[4]) %>%
+      turfeffect(res, con, type = "bio", year.imp = values$ano.imp)
+    
+    TidyModel <- model$TidyModel %>%
+      filter(term == "ZonaReserva:Post1")
+    
+    model <- model$model
+    
+    n_obj <- 7
+    
+    results$e[n_obj] <- TidyModel$estimate
+    results$p[n_obj] <- TidyModel$p.value
+    results$string[n_obj] <- valueBoxString(TidyModel)
+    results$color[n_obj] <- bio_score(TidyModel)
+    results$model[[n_obj]] <- model
+    results$plot[[n_obj]] <- mpa_plot4(model, y.lab = "Densidad (Organismos/Transecto)")
+  }
+  
+  
+  if ("Densidad de especies objetivo" %in% values$indB & length(values$objsp$sp) > 4) {
+    model <- density(data = data, location = values$comunidad, species = values$objsp$sp[5]) %>%
+      turfeffect(res, con, type = "bio", year.imp = values$ano.imp)
+    
+    TidyModel <- model$TidyModel %>%
+      filter(term == "ZonaReserva:Post1")
+    
+    model <- model$model
+    
+    n_obj <- 8
+    
+    results$e[n_obj] <- TidyModel$estimate
+    results$p[n_obj] <- TidyModel$p.value
+    results$string[n_obj] <- valueBoxString(TidyModel)
+    results$color[n_obj] <- bio_score(TidyModel)
+    results$model[[n_obj]] <- model
+    results$plot[[n_obj]] <- mpa_plot4(model, y.lab = "Densidad (Organismos/Transecto)")
+  }
+  
+  
+  if ("Densidad de especies objetivo" %in% values$indB & length(values$objsp$sp) > 5) {
+    model <- density(data = data, location = values$comunidad, species = values$objsp$sp[6]) %>%
+      turfeffect(res, con, type = "bio", year.imp = values$ano.imp)
+    
+    TidyModel <- model$TidyModel %>%
+      filter(term == "ZonaReserva:Post1")
+    
+    model <- model$model
+    
+    n_obj <- 9
+    
+    results$e[n_obj] <- TidyModel$estimate
+    results$p[n_obj] <- TidyModel$p.value
+    results$string[n_obj] <- valueBoxString(TidyModel)
+    results$color[n_obj] <- bio_score(TidyModel)
+    results$model[[n_obj]] <- model
+    results$plot[[n_obj]] <- mpa_plot4(model, y.lab = "Densidad (Organismos/Transecto)")
+  }
+  
+  
+  if ("Densidad de especies objetivo" %in% values$indB & length(values$objsp$sp) > 6) {
+    model <- density(data = data, location = values$comunidad, species = values$objsp$sp[7]) %>%
+      turfeffect(res, con, type = "bio", year.imp = values$ano.imp)
+    
+    TidyModel <- model$TidyModel %>%
+      filter(term == "ZonaReserva:Post1")
+    
+    model <- model$model
+    
+    n_obj <- 10
+    
+    results$e[n_obj] <- TidyModel$estimate
+    results$p[n_obj] <- TidyModel$p.value
+    results$string[n_obj] <- valueBoxString(TidyModel)
+    results$color[n_obj] <- bio_score(TidyModel)
+    results$model[[n_obj]] <- model
+    results$plot[[n_obj]] <- mpa_plot4(model, y.lab = "Densidad (Organismos/Transecto)")
+  }
+  
+  
+  if ("Densidad de especies objetivo" %in% values$indB & length(values$objsp$sp) > 7) {
+    model <- density(data = data, location = values$comunidad, species = values$objsp$sp[8]) %>%
+      turfeffect(res, con, type = "bio", year.imp = values$ano.imp)
+    
+    TidyModel <- model$TidyModel %>%
+      filter(term == "ZonaReserva:Post1")
+    
+    model <- model$model
+    
+    n_obj <- 11
+    
+    results$e[n_obj] <- TidyModel$estimate
+    results$p[n_obj] <- TidyModel$p.value
+    results$string[n_obj] <- valueBoxString(TidyModel)
+    results$color[n_obj] <- bio_score(TidyModel)
+    results$model[[n_obj]] <- model
+    results$plot[[n_obj]] <- mpa_plot4(model, y.lab = "Densidad (Organismos/Transecto)")
   }
 
   return(results)
