@@ -7,11 +7,10 @@
 sp_list(fish, invert, rc)
 }
 \arguments{
-\item{fish}{}
-
-\item{invert}{}
-
 \item{rc}{}
+}
+\value{
+sp_list
 }
 \description{
 Title
