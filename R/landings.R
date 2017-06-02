@@ -19,13 +19,15 @@ landings <- function(data, location, type, species = NULL) {
       D = data %>%
         filter(Comunidad == location) %>%
         group_by(Ano) %>%
-        summarise(Indicador = sum(Arribos))
+        summarise(Indicador = sum(Arribos)) %>% 
+        ungroup()
     } else {
       D = data %>%
         filter(Comunidad == location) %>%
         filter(GeneroEspecie == species) %>%
         group_by(Ano, GeneroEspecie) %>%
-        summarise(Indicador = sum(Arribos))
+        summarise(Indicador = sum(Arribos)) %>% 
+        ungroup()
     }
   }
 
@@ -42,13 +44,15 @@ landings <- function(data, location, type, species = NULL) {
       D = data %>%
         filter(Comunidad == location) %>%
         group_by(Ano) %>%
-        summarise(Indicador = sum(Ingresos))
+        summarise(Indicador = sum(Ingresos)) %>% 
+        ungroup()
     } else {
       D = data %>%
         filter(Comunidad == location) %>%
         filter(GeneroEspecie == species) %>%
         group_by(Ano, GeneroEspecie) %>%
-        summarise(Indicador = sum(Ingresos))
+        summarise(Indicador = sum(Ingresos)) %>% 
+        ungroup()
     }
   }
   
