@@ -11,12 +11,12 @@ reg_table <- function(model, title, dep.var.labels){
 
   tnum <- seq(1:length(robust_se))[names(robust_se) == "ZonaReserva"]
 
-  robust_se <- c(robust_se[1:tnum], Post1 = NA, robust_se[(tnum+1):(length(robust_se)-1)], `**Efect**` = robust_se[length(robust_se)])
+  robust_se <- c(robust_se[1:tnum], Post1 = NA, robust_se[(tnum+2):(length(robust_se)-1)], Efect = tail(robust_se, 1))
 
   covariate.labels <- model %>%
     coefficients() %>%
     names() %>%
-    gsub(pattern = "ZonaReserva:Post1", replacement = "**Efecto**") %>%
+    gsub(pattern = "ZonaReserva:Post1", replacement = "Efecto") %>%
     gsub(pattern = "Intercept", replacement = "Constante")
 
   # # Adjust F statistic
