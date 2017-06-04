@@ -7,7 +7,11 @@
 sp_list(fish, invert, rc)
 }
 \arguments{
-\item{rc}{}
+\item{fish}{a fish database}
+
+\item{invert}{an invert database}
+
+\item{rc}{the reserve - control pair}
 }
 \value{
 sp_list
