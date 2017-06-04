@@ -1,13 +1,15 @@
 #' Title
 #'
-#' @param fish
-#' @param invert
-#' @param rc
+#' @param fish a fish database
+#' @param invert an invert database
+#' @param rc the reserve - control pair
 #'
 #' @return sp_list
 #' @export
 #'
 #' @examples
+#'
+#' @importFrom magrittr %>%
 #'
 sp_list <- function(fish, invert, rc) {
 
