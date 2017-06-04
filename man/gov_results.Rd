@@ -2,7 +2,7 @@
 % Please edit documentation in R/gov_results.R
 \name{gov_results}
 \alias{gov_results}
-\title{GOvernance Results}
+\title{Governance Results}
 \usage{
 gov_results(values, data, reserva)
 }

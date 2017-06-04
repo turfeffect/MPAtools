@@ -1,4 +1,4 @@
-#' GOvernance Results
+#' Governance Results
 #'
 #' @description Analyzes all the required governance indicators at once
 #'
