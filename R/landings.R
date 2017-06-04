@@ -34,7 +34,7 @@ landings <- function(data, location, type, species = NULL) {
   if (type == "price") {
 
     latest_year <- max(data$Ano)
-    latest_cpi <- data$CPI[data$Ano == latest_year]
+    latest_cpi <- data$CPI[data$Ano == latest_year][1]
 
     data <- mutate(data,
                     CPI_Adj = CPI/latest_cpi,
