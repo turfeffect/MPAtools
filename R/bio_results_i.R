@@ -97,7 +97,7 @@ bio_results_i <- function(values, data, res, con) {
     results$string[n_obj] <- valueBoxString(TidyModel)
     results$color[n_obj] <- bio_score(TidyModel)
     results$model[[n_obj]] <- model
-    results$plot[[n_obj]] <- mpa_plot4(model, y.lab = "Densidad (Organismos/Transecto)")
+    results$plot[[n_obj]] <- mpa_plot4(model, y.lab = paste("Densidad",values$objsp$sp[1], "\n(Organismos/Transecto)"))
   }
   
   if ("Densidad de especies objetivo" %in% values$indB & length(values$objsp$sp) > 1) {
@@ -116,7 +116,7 @@ bio_results_i <- function(values, data, res, con) {
     results$string[n_obj] <- valueBoxString(TidyModel)
     results$color[n_obj] <- bio_score(TidyModel)
     results$model[[n_obj]] <- model
-    results$plot[[n_obj]] <- mpa_plot4(model, y.lab = "Densidad (Organismos/Transecto)")
+    results$plot[[n_obj]] <- mpa_plot4(model, y.lab = paste("Densidad",values$objsp$sp[2], "\n(Organismos/Transecto)"))
   }
   
   if ("Densidad de especies objetivo" %in% values$indB & length(values$objsp$sp) > 2) {
@@ -135,7 +135,7 @@ bio_results_i <- function(values, data, res, con) {
     results$string[n_obj] <- valueBoxString(TidyModel)
     results$color[n_obj] <- bio_score(TidyModel)
     results$model[[n_obj]] <- model
-    results$plot[[n_obj]] <- mpa_plot4(model, y.lab = "Densidad (Organismos/Transecto)")
+    results$plot[[n_obj]] <- mpa_plot4(model, y.lab = paste("Densidad",values$objsp$sp[3], "\n(Organismos/Transecto)"))
   }
   
   
@@ -155,7 +155,7 @@ bio_results_i <- function(values, data, res, con) {
     results$string[n_obj] <- valueBoxString(TidyModel)
     results$color[n_obj] <- bio_score(TidyModel)
     results$model[[n_obj]] <- model
-    results$plot[[n_obj]] <- mpa_plot4(model, y.lab = "Densidad (Organismos/Transecto)")
+    results$plot[[n_obj]] <- mpa_plot4(model, y.lab = paste("Densidad",values$objsp$sp[4], "\n(Organismos/Transecto)"))
   }
   
   
@@ -175,7 +175,7 @@ bio_results_i <- function(values, data, res, con) {
     results$string[n_obj] <- valueBoxString(TidyModel)
     results$color[n_obj] <- bio_score(TidyModel)
     results$model[[n_obj]] <- model
-    results$plot[[n_obj]] <- mpa_plot4(model, y.lab = "Densidad (Organismos/Transecto)")
+    results$plot[[n_obj]] <- mpa_plot4(model, y.lab = paste("Densidad",values$objsp$sp[5], "\n(Organismos/Transecto)"))
   }
   
   
@@ -195,7 +195,7 @@ bio_results_i <- function(values, data, res, con) {
     results$string[n_obj] <- valueBoxString(TidyModel)
     results$color[n_obj] <- bio_score(TidyModel)
     results$model[[n_obj]] <- model
-    results$plot[[n_obj]] <- mpa_plot4(model, y.lab = "Densidad (Organismos/Transecto)")
+    results$plot[[n_obj]] <- mpa_plot4(model, y.lab = paste("Densidad",values$objsp$sp[6], "\n(Organismos/Transecto)"))
   }
   
   
@@ -215,7 +215,7 @@ bio_results_i <- function(values, data, res, con) {
     results$string[n_obj] <- valueBoxString(TidyModel)
     results$color[n_obj] <- bio_score(TidyModel)
     results$model[[n_obj]] <- model
-    results$plot[[n_obj]] <- mpa_plot4(model, y.lab = "Densidad (Organismos/Transecto)")
+    results$plot[[n_obj]] <- mpa_plot4(model, y.lab = paste("Densidad",values$objsp$sp[7], "\n(Organismos/Transecto)"))
   }
   
   
@@ -235,7 +235,7 @@ bio_results_i <- function(values, data, res, con) {
     results$string[n_obj] <- valueBoxString(TidyModel)
     results$color[n_obj] <- bio_score(TidyModel)
     results$model[[n_obj]] <- model
-    results$plot[[n_obj]] <- mpa_plot4(model, y.lab = "Densidad (Organismos/Transecto)")
+    results$plot[[n_obj]] <- mpa_plot4(model, y.lab = paste("Densidad",values$objsp$sp[8], "\n(Organismos/Transecto)"))
   }
 
   return(results)
