@@ -4,7 +4,7 @@
 \alias{sp_list}
 \title{Title}
 \usage{
-sp_list(fish, invert, rc)
+sp_list(fish, invert = NULL, rc)
 }
 \arguments{
 \item{fish}{a fish database}

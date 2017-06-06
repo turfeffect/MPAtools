@@ -11,26 +11,116 @@
 #'
 #' @importFrom magrittr %>%
 #'
-sp_list <- function(fish, invert, rc) {
+sp_list <- function(fish, invert = NULL, rc) {
 
-  sp_list <- fish %>%
-    filter(!is.na(Abundancia), RC %in% rc)  %>%
-    {.$GeneroEspecie}%>%
+  year_min_fish <- min(fish$Ano[fish$RC %in% rc])
+
+  fish_sp_before_reserve <- fish %>%
+    filter(Ano <= year_min_fish,
+           !is.na(Abundancia),
+           RC %in% rc,
+           Zona == "Reserva") %>%
+           {.$GeneroEspecie}%>%
     unique() %>%
-    sort() %>%
-    data.frame() %>%
-    mutate(class = "fish") %>%
-    magrittr::set_colnames(value = c("sp", "class"))
+    data.frame(stringsAsFactors = F) %>%
+    mutate(who1 = "before_reserve") %>%
+    magrittr::set_colnames(value = c("sp", "who"))
+
+  fish_sp_before_control <- fish %>%
+    filter(Ano <= year_min_fish,
+           !is.na(Abundancia),
+           RC %in% rc,
+           Zona == "Control") %>%
+           {.$GeneroEspecie}%>%
+    unique() %>%
+    data.frame(stringsAsFactors = F) %>%
+    mutate(who2 = "before_control") %>%
+    magrittr::set_colnames(value = c("sp", "who"))
+
+  fish_sp_after_reserve <- fish %>%
+    filter(Ano > year_min_fish,
+           !is.na(Abundancia),
+           RC %in% rc,
+           Zona == "Reserva") %>%
+           {.$GeneroEspecie}%>%
+    unique() %>%
+    data.frame(stringsAsFactors = F) %>%
+    mutate(who3 = "after_reserve") %>%
+    magrittr::set_colnames(value = c("sp", "who"))
+
+  fish_sp_after_control <- fish %>%
+    filter(Ano > year_min_fish,
+           !is.na(Abundancia),
+           RC %in% rc,
+           Zona == "Control") %>%
+           {.$GeneroEspecie}%>%
+    unique() %>%
+    data.frame(stringsAsFactors = F) %>%
+    mutate(who4 = "after_control") %>%
+    magrittr::set_colnames(value = c("sp", "who"))
+
+  sp_list <- inner_join(fish_sp_before_reserve, fish_sp_before_control, by = "sp") %>%
+    inner_join(fish_sp_after_reserve, by = "sp") %>%
+    inner_join(fish_sp_after_control, by = "sp") %>%
+    select(sp) %>%
+    arrange(sp) %>%
+    mutate(class = "fish")
+
 
   if (!is.null(invert)) {
-    invert <- invert %>%
-      filter(!is.na(Abundancia), RC %in% rc) %>%
-      {.$GeneroEspecie}%>%
+
+    year_min_invert <- min(invert$Ano[invert$RC %in% rc])
+
+    invert_sp_before_reserve <- invert %>%
+      filter(Ano <= year_min_invert,
+             !is.na(Abundancia),
+             RC %in% rc,
+             Zona == "Reserva") %>%
+             {.$GeneroEspecie}%>%
       unique() %>%
-      sort() %>%
-      data.frame() %>%
-      mutate(class = "invert") %>%
-      magrittr::set_colnames(value = c("sp", "class"))
+      data.frame(stringsAsFactors = F) %>%
+      mutate(who1 = "before_reserve") %>%
+      magrittr::set_colnames(value = c("sp", "who"))
+
+    invert_sp_before_control <- invert %>%
+      filter(Ano <= year_min_invert,
+             !is.na(Abundancia),
+             RC %in% rc,
+             Zona == "Control") %>%
+             {.$GeneroEspecie}%>%
+      unique() %>%
+      data.frame(stringsAsFactors = F) %>%
+      mutate(who2 = "before_control") %>%
+      magrittr::set_colnames(value = c("sp", "who"))
+
+    invert_sp_after_reserve <- invert %>%
+      filter(Ano > year_min_invert,
+             !is.na(Abundancia),
+             RC %in% rc,
+             Zona == "Reserva") %>%
+             {.$GeneroEspecie}%>%
+      unique() %>%
+      data.frame(stringsAsFactors = F) %>%
+      mutate(who3 = "after_reserve") %>%
+      magrittr::set_colnames(value = c("sp", "who"))
+
+    invert_sp_after_control <- invert %>%
+      filter(Ano > year_min_invert,
+             !is.na(Abundancia),
+             RC %in% rc,
+             Zona == "Control") %>%
+             {.$GeneroEspecie}%>%
+      unique() %>%
+      data.frame(stringsAsFactors = F) %>%
+      mutate(who4 = "after_control") %>%
+      magrittr::set_colnames(value = c("sp", "who"))
+
+    invert <- inner_join(invert_sp_before_reserve, invert_sp_before_control, by = "sp") %>%
+      inner_join(invert_sp_after_reserve, by = "sp") %>%
+      inner_join(invert_sp_after_control, by = "sp") %>%
+      select(sp) %>%
+      arrange(sp) %>%
+      mutate(class = "invert")
 
     sp_list <- rbind(sp_list, invert)
   }
