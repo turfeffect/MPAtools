@@ -29,7 +29,8 @@ gov_results <- function(values, data, reserva){
                             "Efectividad percibida"),
                     e = NA,
                     color = "yellow",
-                    string = "No disponible")
+                    string = "No disponible",
+                    plot = NA)
 
   ####
   if ("Acceso a la pesqueria" %in% values$indG) {
@@ -94,11 +95,15 @@ gov_results <- function(values, data, reserva){
   #   results$string[7]
   # }
 
-  # if ("Tamano de la reserva" %in% values$indG) {
-  #   results$e[8]
-  #   results$color[8]
-  #   results$string[8]
-  # }
+  if ("Tamano de la reserva" %in% values$indG) {
+    
+    size <- reserve_size(data = values$fish_data, spp = values$objsp, width = values$res.width, length = values$res.length)
+    
+    results$e[8] <- size$e
+    results$color[8] <- size$color
+    results$string[8] <- size$string
+    results$plot[8] <- size$plot
+  }
 
   # if ("Tipo de organizacion pesquera" %in% values$indG) {
   #   results$e[9]
