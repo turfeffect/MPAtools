@@ -4,7 +4,7 @@
 \alias{reserve_size}
 \title{Title}
 \usage{
-reserve_size(data, spp, length, width)
+reserve_size(data, spp, length = NULL, width = NULL)
 }
 \arguments{
 \item{data}{}
