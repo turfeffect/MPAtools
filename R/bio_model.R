@@ -18,29 +18,24 @@
 bio_model <- function(data, covars = c("Temperatura", "Visibilidad", "Profundidad")){
 
   # using all covariates
-
   if (length(covars) == 3){
     model <- lm(formula = Indicador ~ Ano + Zona + Post * Zona + Temperatura + Visibilidad + Profundidad, data = data)
   }
 
   # for only one variable
-
   if(length(covars) == 1 & !"None" %in% covars){
 
     # using only T
-
     if (covars == c("Temperatura")){
       model <- lm(formula = Indicador ~ Ano + Zona + Post * Zona + Temperatura, data = data)
     }
 
     # using only V
-
     if (covars == c("Visibilidad")){
       model <- lm(formula = Indicador ~ Ano + Zona + Post * Zona + Visibilidad, data = data)
     }
 
     # using only P
-
     if (covars == c("Profundidad")){
       model <- lm(formula = Indicador ~ Ano + Zona + Post * Zona + Profundidad, data = data)
     }
@@ -49,22 +44,17 @@ bio_model <- function(data, covars = c("Temperatura", "Visibilidad", "Profundida
 
   if (length(covars) == 2){
 
-    covars2 = paste(covars[1], covars[2])
-
     # using T and V
-
     if (covars2 == c("Temperatura Visibilidad")){
       model <- lm(formula = Indicador ~ Ano + Zona + Post * Zona + Temperatura + Visibilidad, data = data)
     }
 
     # using T and P
-
     if (covars2 == c("Temperatura Profundidad")){
       model <- lm(formula = Indicador ~ Ano + Zona + Post * Zona + Temperatura + Profundidad, data = data)
     }
 
     # using V and P
-
     if (covars2 == c("Visibilidad Profundidad")){
       model <- lm(formula = Indicador ~ Ano + Zona + Post * Zona + Visibilidad + Profundidad, data = data)
     }
@@ -72,7 +62,6 @@ bio_model <- function(data, covars = c("Temperatura", "Visibilidad", "Profundida
   }
 
   # dropping all covariates
-
   if ("None" %in% covars){
     model <- lm(formula = Indicador ~ Ano + Zona + Post * Zona, data = data)
   }
