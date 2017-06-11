@@ -11,13 +11,13 @@
 #' @examples
 #' 
 
-reserve_size <- function(data, spp, length, width) {
+reserve_size <- function(data, spp, length = NULL, width = NULL) {
   
   list_spp <- spp$sp[spp$class == "fish"]
   
   e = NA
   color = "yellow"
-  string = "No disponible para invertebrados"
+  string = "No disponible para invertebrados."
   plot = NA
   
   if (length(list_spp) > 0) {
