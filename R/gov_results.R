@@ -89,11 +89,19 @@ gov_results <- function(values, data, reserva){
     results$string[6] <- ifelse(answer == "No", "Puede que los usuarios no esten al tanto de las reglas. Es mejor tener las reglas por escrito.", "Puede que los usuarios conozcan las reglas y por lo tanto las obedezcan.")
   }
 
-  # if ("Procuracion de la reserva" %in% values$indG) {
-  #   results$e[7]
-  #   results$color[7]
-  #   results$string[7]
-  # }
+  if ("Procuracion de la reserva" %in% values$indG) {
+    
+    answer <- gov %>%
+      filter(!is.na(Q15)) %>% 
+      group_by(Q15) %>% 
+      count() %>% 
+      filter(n == max(n), !is.na(Q15)) %>% 
+      {.$Q15}
+    
+    results$e[7] <- ifelse(answer == "Increased", 1, 0)
+    results$color[7] <- ifelse(answer == "Increased", "olive", "red")
+    results$string[7] <- ifelse(answer == "Increased", "Bien!", "Puede que incrementar la vigilancia de las reservas ayude a que sean mas efectivas.")
+  }
 
   if ("Tamano de la reserva" %in% values$indG) {
     
@@ -102,7 +110,7 @@ gov_results <- function(values, data, reserva){
     results$e[8] <- size$e
     results$color[8] <- size$color
     results$string[8] <- size$string
-    results$plot[8] <- size$plot
+    results$plot[[8]] <- size$plot
   }
 
   # if ("Tipo de organizacion pesquera" %in% values$indG) {
