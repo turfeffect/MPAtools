@@ -30,7 +30,7 @@ gov_results <- function(values, data, reserva){
                     e = NA,
                     color = "yellow",
                     string = "No disponible",
-                    plot = NA)
+                    plot = list(NA))
 
   ####
   if ("Acceso a la pesqueria" %in% values$indG) {
