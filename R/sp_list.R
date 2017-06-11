@@ -20,7 +20,10 @@ sp_list <- function(fish, invert = NULL, rc) {
            !is.na(Abundancia),
            RC %in% rc,
            Zona == "Reserva") %>%
-           {.$GeneroEspecie}%>%
+    group_by(Ano, Transecto, GeneroEspecie) %>% 
+    count() %>% 
+    filter(n > 1) %>% 
+           {.$GeneroEspecie} %>%
     unique() %>%
     data.frame(stringsAsFactors = F) %>%
     mutate(who1 = "before_reserve") %>%
