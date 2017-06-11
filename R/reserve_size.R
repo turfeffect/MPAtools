@@ -35,8 +35,8 @@ reserve_size <- function(data, spp, length = NULL, width = NULL) {
       max()
     
     e <- ifelse(required_length < min_length, 1, 0)
-    color <- ifelse(required_length < min_length, "olive", "red")
     string <- paste("El tamano minimo es", round(required_length))
+    color <- ifelse(required_length <= min_length, "olive", "red")
     
     plot <- ggplot() +
       geom_col(aes(x = 0, y = min_length), fill = "steelblue", color = "black", size = 1) +
