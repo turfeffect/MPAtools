@@ -65,7 +65,7 @@ soc_results <- function(values, data) {
   
   #### Objective species
   
-  available_sp <- unique(data$GeneroEspecie)
+  available_sp <- unique(data$GeneroEspecie[data$Comunidad == values$comunidad])
   
   #### Landings 1
   if ("Arribos de especies objetivo" %in% values$indS & length(values$objsp$sp) > 0 & values$objsp$sp[1] %in% available_sp) {
