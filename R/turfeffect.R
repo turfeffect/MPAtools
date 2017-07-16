@@ -22,7 +22,7 @@ turfeffect <- function (data, reserve = NULL, control = NULL, type = NULL, year.
   if (type == "bio"){
 
     model <- filter(data, Sitio %in% reserve | Sitio %in% control) %>%
-      bio_model(covars = define_covars(.))
+      bio_model(covars = covars_wrapper(., year.imp = year.imp))
 
     TidyModel <- model%>%
       lmtest::coeftest(vcov = sandwich::vcovHC(., type = "HC1")) %>%
