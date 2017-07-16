@@ -7,8 +7,6 @@
 define_covars(data, cutoff = 0.1)
 }
 \arguments{
-\item{data}{}
-
 \item{cutoff}{}
 }
 \description{
