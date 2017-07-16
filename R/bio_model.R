@@ -43,6 +43,8 @@ bio_model <- function(data, covars = c("Temperatura", "Visibilidad", "Profundida
   }
 
   if (length(covars) == 2){
+  
+  covars2 <- paste(covars[1], covars[2])
 
     # using T and V
     if (covars2 == c("Temperatura Visibilidad")){
