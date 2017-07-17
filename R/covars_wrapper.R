@@ -8,7 +8,8 @@
 #' @return a vector stating which covariates to be used
 #' @export
 #'
-#'
+#' @importFrom magrittr %>%
+#' @importFrom magrittr %$%
 
 covars_wrapper <- function(data, year.imp){
 

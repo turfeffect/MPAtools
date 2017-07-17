@@ -57,7 +57,7 @@ bio_model <- function(data, covars = c("Temperatura", "Visibilidad", "Profundida
     }
 
     # using V and P
-    if (covars2 == c("Visibilidad Profundidad")){
+    if (covars2 == c("Profundidad Visibilidad")){
       model <- lm(formula = Indicador ~ Ano + Zona + Post * Zona + Visibilidad + Profundidad, data = data)
     }
 
