@@ -19,7 +19,6 @@ gov_results <- function(values, data, reserva){
   results <- tibble(Ind = c("Acceso a la pesqueria",
                             "Numero de pescadores",
                             "Reconocimiento legal",
-                            "Tipo de reserva",
                             "Grado de pesca ilegal",
                             "Plan de manejo",
                             "Procuracion",
@@ -51,14 +50,8 @@ gov_results <- function(values, data, reserva){
     results$string[3] <- ifelse(any(gov$Q5 == "No", na.rm = T), "Reconocer su reserva legalmente es importante para fortalecer su procuracion.", "Bien!")
   }
 
-  # if ("Tipo de reserva" %in% values$indG) {
-  #   results$e[4]
-  #   results$color[4]
-  #   results$string[4]
-  # }
-
   if ("Grado de pesca ilegal" %in% values$indG) {
-    levels <- data.frame(levels = c("Very High", "High", "Moderate", "Restricted", "Low", "NULL"),
+    levels <- data.frame(levels = c("Very High", "High", "Moderate", "Restricted", "Low", "Null"),
                          values = c(5, 4, 3, 2, 1, 0), stringsAsFactors = F)
     change <- gov %>%
       select(Interviewee, contains("Q19")) %>%
@@ -70,9 +63,9 @@ gov_results <- function(values, data, reserva){
       {.$change} %>%
       mean(na.rm = T)
 
-    results$e[5] <- ifelse(change >= 0, 0, 1)
-    results$color[5] <- ifelse(change >= 0, "red", "olive")
-    results$string[5] <- ifelse(change >= 0, "La pesca ilegal suele disminuir las abundancias y biomasas de tus recursos.", "Bien!")
+    results$e[4] <- ifelse(change >= 0, 0, 1)
+    results$color[4] <- ifelse(change >= 0, "red", "olive")
+    results$string[4] <- ifelse(change >= 0, "La pesca ilegal suele disminuir las abundancias y biomasas de tus recursos.", "Bien!")
   }
 
   if ("Plan de manejo" %in% values$indG) {
