@@ -77,40 +77,42 @@ gov_results <- function(values, data, reserva){
       filter(n == max(n), !is.na(Q6)) %>%
       {.$Q6}
 
-    results$e[6] <- ifelse(answer == "No", 0, 1)
-    results$color[6] <- ifelse(answer == "No", "red", "olive")
-    results$string[6] <- ifelse(answer == "No", "Puede que los usuarios no esten al tanto de las reglas. Es mejor tener las reglas por escrito.", "Puede que los usuarios conozcan las reglas y por lo tanto las obedezcan.")
+    results$e[5] <- ifelse(answer == "No", 0, 1)
+    results$color[5] <- ifelse(answer == "No", "red", "olive")
+    results$string[5] <- ifelse(answer == "No", "Puede que los usuarios no esten al tanto de las reglas. Es mejor tener las reglas por escrito.", "Puede que los usuarios conozcan las reglas y por lo tanto las obedezcan.")
   }
 
   if ("Procuracion de la reserva" %in% values$indG) {
-    
+
     answer <- gov %>%
-      filter(!is.na(Q15)) %>% 
-      group_by(Q15) %>% 
-      count() %>% 
-      filter(n == max(n), !is.na(Q15)) %>% 
+      filter(!is.na(Q15)) %>%
+      group_by(Q15) %>%
+      count() %>%
+      filter(n == max(n), !is.na(Q15)) %>%
       {.$Q15}
-    
-    results$e[7] <- ifelse(answer == "Increased", 1, 0)
-    results$color[7] <- ifelse(answer == "Increased", "olive", "red")
-    results$string[7] <- ifelse(answer == "Increased", "Bien!", "Puede que incrementar la vigilancia de las reservas ayude a que sean mas efectivas.")
+
+    results$e[6] <- ifelse(answer == "Increased", 1, 0)
+    results$color[6] <- ifelse(answer == "Increased", "olive", "red")
+    results$string[6] <- ifelse(answer == "Increased", "Bien!", "Puede que incrementar la vigilancia de las reservas ayude a que sean mas efectivas.")
   }
 
   if ("Tamano de la reserva" %in% values$indG) {
-    
+
     size <- reserve_size(data = values$fish_data, spp = values$objsp, width = values$res.width, length = values$res.length)
-    
-    results$e[8] <- size$e
-    results$color[8] <- size$color
-    results$string[8] <- size$string
-    results$plot[[8]] <- size$plot
+
+    results$e[7] <- size$e
+    results$color[7] <- size$color
+    results$string[7] <- size$string
+    results$plot[[7]] <- size$plot
   }
 
-  # if ("Tipo de organizacion pesquera" %in% values$indG) {
-  #   results$e[9]
-  #   results$color[9]
-  #   results$string[9]
-  # }
+  if ("Organizacion pesquera" %in% values$indG) {
+    answer <- unique(gov$Q1)
+
+    results$e[8] <- ifelse(any(answer %in% c("Cooperative", "Union", "Association", "Federation")), 1, 0)
+    results$color[8] <- ifelse(any(answer %in% c("Cooperative", "Union", "Association", "Federation")), "olive", "red")
+    results$string[8] <- ifelse(any(answer %in% c("Cooperative", "Union", "Association", "Federation")), "Bien!", "La presencia de organizaciones promueve la comunicacion.")
+  }
 
   if ("Reglamentacion interna" %in% values$indG) {
 
@@ -121,9 +123,9 @@ gov_results <- function(values, data, reserva){
       filter(n == max(n), !is.na(Q9)) %>%
       {.$Q9}
 
-    results$e[10] <- ifelse(answer == "No", 0, 1)
-    results$color[10] <- ifelse(answer == "No", "red", "olive")
-    results$string[10] <- ifelse(answer == "No", "Las regulaciones formales por lo general no son suficiente. Considera implementar reglas internas.", "Bien!")
+    results$e[9] <- ifelse(answer == "No", 0, 1)
+    results$color[9] <- ifelse(answer == "No", "red", "olive")
+    results$string[9] <- ifelse(answer == "No", "Las regulaciones formales por lo general no son suficiente. Considera implementar reglas internas.", "Bien!")
   }
 
   if ("Efectividad percibida" %in% values$indG) {
@@ -135,9 +137,9 @@ gov_results <- function(values, data, reserva){
       filter(n == max(n), !is.na(Q23)) %>%
       {.$Q23}
 
-    results$e[11] <- ifelse(answer == "No", 0, 1)
-    results$color[11] <- ifelse(answer == "No", "red", "olive")
-    results$string[11] <- ifelse(answer == "No", "Si los usuarios no creen que la reserva funciona, es importante escuchar su opinion para encontrar posibles areas de mejora.", "Bien! Mientras la percepcion y la realidad sean similares.")
+    results$e[10] <- ifelse(answer == "No", 0, 1)
+    results$color[10] <- ifelse(answer == "No", "red", "olive")
+    results$string[10] <- ifelse(answer == "No", "Si los usuarios no creen que la reserva funciona, es importante escuchar su opinion para encontrar posibles areas de mejora.", "Bien! Mientras la percepcion y la realidad sean similares.")
   }
 
   return(results)
