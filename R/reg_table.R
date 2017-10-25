@@ -1,41 +1,48 @@
+#' Create a regression table
+#'
+#' @name reg_table
+#'
+#' @param model An object of class lm
+#'
+#' @param title A title for the table
+#' @param dep.var.labels Labels for dependent variables
+#'
 #' @export
+#'
+#' @author Juan Carlos Villasenor
+#'
+#' @importFrom magrittr %>%
 
-reg_table <- function(model, title, dep.var.labels){
+reg_table <- function(model, title = "", dep.var.labels = ""){
 
-  TidyModel <- model%>%
-    lmtest::coeftest(vcov = sandwich::vcovHC(., type = "HC1")) %>%
-    broom::tidy()
+  terms <- length(coef(model))-1
 
-  robust_se <- TidyModel$std.error %>%
-    set_names(TidyModel$term)
+  glance <- broom::glance(model)
 
-  tnum <- seq(1:length(robust_se))[names(robust_se) == "ZonaReserva"]
+  RSE <- paste0(formatC(glance$sigma, digits = 3, format = "f"), " (df = ", glance$df.residual, ")")
 
-  robust_se <- c(robust_se[1:tnum], Post1 = NA, robust_se[(tnum+2):(length(robust_se)-1)], Efect = tail(robust_se, 1))
+  R2 <- formatC(glance$r.squared, digits = 3, format = "f")
 
-  covariate.labels <- model %>%
-    coefficients() %>%
-    names() %>%
-    gsub(pattern = "ZonaReserva:Post1", replacement = "Efecto") %>%
-    gsub(pattern = "Intercept", replacement = "Constante")
+  N <- nobs(model)
 
-  # # Adjust F statistic
-  # wald_results <- waldtest(output, vcov = vcovHC(model, type = "HC1")) %>%
-  #   broom::tidy()
+  descriptors <- data.frame(Variable = c("Obs.", "RSE", "R2"),
+                            Valor = c(N, RSE, R2))
 
-
-  stargazer::stargazer(model,
-                       title = title,
-                       dep.var.caption = "Indicador:",
-                       dep.var.labels = dep.var.labels,
-                       covariate.labels = covariate.labels,
-                       se = list(robust_se),
-                       t.auto = T,
-                       p.auto = T,
-                       header = F,
-                       type = "latex",
-                       single.row = T,
-                       intercept.bottom = F,
-                       star.cutoffs = c(0.1, 0.05, 0.001),
-                       report = c("vcs*"))
+  robust_se(model) %>%
+    rename(Variable = term) %>%
+    mutate(Variable = ifelse(Variable == "(Intercept)", "Constante", Variable),
+           Variable = ifelse(Variable == "ZonaReserva:Post1", "Efecto", Variable),
+           p1 = ifelse(p.value < 0.1, "*", ""),
+           p2 = ifelse(p.value < 0.05, "*", ""),
+           p3 = ifelse(p.value < 0.001, "*", ""),
+           p = paste0(p1, p2, p3),
+           estimate = formatC(estimate, digits = 3, format = "f"),
+           std.error = formatC(std.error, digits = 3, format = "f"),
+           Valor = paste0(estimate, " (", std.error, ")", p)) %>%
+    select(Variable, Valor) %>%
+    rbind(descriptors) %>%
+    knitr::kable(caption = title, col.names = c("", dep.var.labels), format = "latex", booktabs = T) %>%
+    kableExtra::kable_styling() %>%
+    kableExtra::group_rows("Coeficientes", 1, terms) %>%
+    kableExtra::group_rows("Estadisticos", terms+1, terms+3)
 }
