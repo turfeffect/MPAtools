@@ -4,7 +4,7 @@
 \alias{saveMAREA}
 \title{Title}
 \usage{
-saveMAREA(data, comunidad, reserva)
+saveMAREA(data, comunidad, reserva, token)
 }
 \arguments{
 \item{data}{data to store}

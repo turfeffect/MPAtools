@@ -42,7 +42,7 @@ reg_table <- function(model, title = "", dep.var.labels = ""){
     select(Variable, Valor) %>%
     rbind(descriptors) %>%
     knitr::kable(caption = title, col.names = c("", dep.var.labels), format = "latex", booktabs = T) %>%
-    kableExtra::kable_styling() %>%
+    kableExtra::kable_styling(latex_options = "hold_position") %>%
     kableExtra::group_rows("Coeficientes", 1, terms) %>%
     kableExtra::group_rows("Estadisticos", terms+1, terms+3)
 }

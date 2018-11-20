@@ -1,0 +1,35 @@
+---
+title: "Untitled"
+author: "Villaseñor-Derbez, J.C."
+date: "12 de octubre de 2017"
+output: pdf_document
+---
+
+```{r}
+suppressPackageStartupMessages({
+  library(tidyverse)
+  library(magrittr)
+  })
+```
+
+```{r}
+jc <- read.csv("../MAREAmanuscript/Data/natividad_fish.csv") %>%
+  MPAtools::richness(location = "Isla Natividad") %>%
+  mutate(Post = ifelse(Ano <= 2006, 0, 1),
+         Ano = as.factor(Ano)) %>%
+  lm(Indicador ~ Ano + Zona + Zona * Post + Temperatura + Profundidad + Visibilidad, data = .)
+```
+
+```{r}
+source('./R/robust_se.R')
+source("./R/reg_table.R")
+```
+
+
+```{r, results='asis'}
+reg_table(model = jc,
+          title = "Tabla de regresion para riqueza especifica",
+          dep.var.labels = "Riqueza (Spp/transecto)") %>% 
+  cat()
+```
+

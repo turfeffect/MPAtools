@@ -10,14 +10,13 @@
 #' @examples
 #'
 
-saveMAREA <- function(data, comunidad, reserva) {
-  
-  token <- readRDS("./droptoken.rds")
+saveMAREA <- function(data, comunidad, reserva, token) {
+
   # Create a unique file name
-  fileName <- sprintf("%s_%s_%s_%s.RData", as.integer(Sys.time()), comunidad, reserva, digest::digest(data))
+  fileName <- sprintf("%s_%s_%s.RData", as.integer(Sys.time()), comunidad, digest::digest(data))
   # Write the data to a temporary file locally
   filePath <- file.path(tempdir(), fileName)
   save(data, file = filePath)
   # Upload the file to Dropbox
-  drop_upload(file = filePath, dest = "MAREA_Data", overwrite = F, autorename = T, dtoken = token)
+  drop_upload(file = filePath, path = "MAREA_Data", autorename = T, dtoken = token)
 }
