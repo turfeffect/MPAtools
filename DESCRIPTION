@@ -8,18 +8,6 @@ Description: Provides a set of functions used to analyze monitoring data of Mari
 License: MIT License
 LazyData: TRUE
 RoxygenNote: 6.0.1
-Imports: ggplot2,
- dplyr,
- tidyr,
- reshape,
- ggplot2,
- knitr,
- rmarkdown,
- broom,
- lmtest,
- sandwich,
- tibble,
- tidyverse,
- kableExtra
+Imports: ggplot2, dplyr, tidyr, reshape, ggplot2, knitr, rmarkdown, broom, lmtest, sandwich, tibble, tidyverse, kableExtra
 Suggests: devtools
 VignetteBuilder: knitr
